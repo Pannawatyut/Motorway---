@@ -17,10 +17,13 @@ public class PlayerInteraction : MonoBehaviourPun
 
     private void Start()
     {
+    #if !UNITY_ANDROID
         DisableCursor();
+    #endif
         number = 0;
         _soundManager = SoundManager.instance; // Ensure SoundManager is correctly referenced
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
