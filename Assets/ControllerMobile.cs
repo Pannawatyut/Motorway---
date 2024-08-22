@@ -13,6 +13,7 @@ public class ControllerMobile : MonoBehaviourPun
 
     private Joystick _joystick;
 
+#if UNITY_ANDROID
     private void Start()
     {
         // Find the joystick in the scene by name
@@ -53,10 +54,12 @@ public class ControllerMobile : MonoBehaviourPun
             float speed = movement.magnitude;
             _animator.SetFloat("Speed", speed);
         }
-        else
-        {
-            // Optionally, log or handle cases for non-local players
-            // Debug.Log($"{photonView.Owner.NickName}'s character is not controlled by this client.");
-        }
     }
+#else
+    private void Start()
+    {
+        // This is a non-Android platform, so disable this script
+        enabled = false;
+    }
+#endif
 }

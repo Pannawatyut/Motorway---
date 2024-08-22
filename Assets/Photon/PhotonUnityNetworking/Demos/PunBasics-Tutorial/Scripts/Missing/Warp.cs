@@ -51,5 +51,13 @@ public class Warp : MonoBehaviourPunCallbacks
         SceneManager.LoadScene(SceneGame);
     }
 
+    public void OnButtonPressFMobileWarpScene()
+    {
+        if(inside)
+        {
+            PhotonNetwork.LeaveRoom();
+            SceneManager.LoadScene(SceneGame);
+        }
+    }
 
 }

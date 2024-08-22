@@ -38,4 +38,11 @@ public class WarpTrigger : MonoBehaviour
             playerTransform.position = warpLocation.position;
         }
     }
+    public void OnButtonPressFWarpPosition()
+    {
+        if (inside)
+        {
+            playerTransform.position = warpLocation.position;
+        }
+    }
 }
