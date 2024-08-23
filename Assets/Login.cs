@@ -67,16 +67,15 @@ public class LoginManager : MonoBehaviour
                 string vehicle = string.IsNullOrEmpty(loginResponse.data.account.vehicle) ? "-" : loginResponse.data.account.vehicle;
                 string checkpoint = string.IsNullOrEmpty(loginResponse.data.account.checkpoint) ? "-" : loginResponse.data.account.checkpoint;
 
-                Infouser[0].text = "" + loginResponse.data.account.uid;
-                Infouser[1].text = "" + loginResponse.data.account.email;
-                Infouser[2].text = "" + firstName;
-                Infouser[3].text = "" + lastName;
-                Infouser[4].text = "" + gender;
-                Infouser[5].text = "" + age;
-                Infouser[6].text = "" + education;
-                Infouser[7].text = "" + occupation;
-                Infouser[8].text = "" + vehicle;
-                Infouser[9].text = "" + checkpoint;
+                Infouser[0].text = "" + firstName;
+                Infouser[1].text = "" + lastName;
+                Infouser[2].text = "" + loginResponse.data.account.email;
+                Infouser[3].text = "" + gender;
+                Infouser[4].text = "" + age;
+                Infouser[5].text = "" + education;
+                Infouser[6].text = "" + occupation;
+                Infouser[7].text = "" + vehicle;
+                Infouser[8].text = "" + checkpoint;
             }
             else
             {
