@@ -29,8 +29,12 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
     }
 
+
+                          /////////// Save Avatar ////////////////
     public void SaveAvatarData(SelectItem selectItem)
     {
+
+
         AvatarData.Clear();
 
         // Add avatar data from SelectItem
@@ -54,6 +58,8 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         SaveAvatarDataToStorage();
     }
 
+
+                        ///Not Use///
     public void LoadAvatarDataFromAssetCharactor()
     {
         SelectItem selectItem = FindObjectOfType<SelectItem>(); // Find SelectItem in the scene
