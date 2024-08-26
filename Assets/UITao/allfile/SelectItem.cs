@@ -41,7 +41,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public int selectedSkinColor = 0;
     public int selectedSex = 3;
 
-    public int sexcolor;
+    public int sexcolor; // chang to shirt Men & Women This ID Shrit 4
     public SkinnedMeshRenderer shirtRenderer;
     public SkinnedMeshRenderer shoesRenderer;
 
@@ -82,7 +82,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
                 ChangePantsColor(colorIndex);
                 ChangeShoesColor(colorIndex);
             }
-
+        ////////////////////////////// Load Avatar To Script Name AssetCharactor //////////////////////////////////////////////////////////// 
             int hairId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Hair")?.Id ?? selectedHairIndex;
             int hairColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Hair")?.ColorId ?? selectedHairColorIndex;
 
@@ -468,6 +468,10 @@ public class SelectItem : MonoBehaviourPunCallbacks
     }
     public void SaveAvatar()
     {
+
+        //////// Script Name AssetCharactor /////////
+
+
         // Save avatar data to the local list
         AssetCharactor.Instance.SaveAvatarData(this);
 
