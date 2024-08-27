@@ -1,73 +1,67 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
-using Google;
-using System.Threading.Tasks;
-using UnityEngine.Networking;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
+using UnityEngine.SocialPlatforms;
 
-public class playGamesManager : MonoBehaviour
+public class PlayGamesManager : MonoBehaviour
 {
-
-    private GoogleSignInConfiguration configuration;
-    public string webClientId = "819459652226-a9l99jtljkrse17mbmn2lgpcp0ktbcvo.apps.googleusercontent.com";
-
-
-
     void Awake()
     {
-        configuration = new GoogleSignInConfiguration
-        {
-            WebClientId = webClientId,
-            RequestIdToken = true,
-            UseGameSignIn = false,
-            RequestEmail = true
-        };
+        // Configure Google Play Games
+        PlayGamesClientConfiguration config = new PlayGamesClientConfiguration.Builder()
+            .RequestEmail()
+            .Build();
+
+        PlayGamesPlatform.InitializeInstance(config);
+        PlayGamesPlatform.Activate();
+
+        // Sign in at the start
+        SignIn();
     }
 
-    public void OnSignIn()
+    public void SignIn()
     {
-        GoogleSignIn.Configuration = configuration;
-        GoogleSignIn.DefaultInstance.SignIn().ContinueWith(
-            OnAuthenticationFinished, TaskScheduler.Default);
-    }
-
-    internal void OnAuthenticationFinished(Task<GoogleSignInUser> task)
-    {
-        if (task.IsFaulted)
-        {
-            using (IEnumerator<System.Exception> enumerator =
-                task.Exception.InnerExceptions.GetEnumerator())
+        Social.localUser.Authenticate((bool success) => {
+            if (success)
             {
-                if (enumerator.MoveNext())
-                {
-                    GoogleSignIn.SignInException error =
-                        (GoogleSignIn.SignInException)enumerator.Current;
-                    Debug.LogError("Got Error: " + error.Status + " " + error.Message);
-                }
-                else
-                {
-                    Debug.LogError("Got unexpected exception?!?" +  task.Exception);
-                }
+                Debug.Log("Signed in! Welcome " + Social.localUser.userName);
             }
-        }
-        else if (task.IsCanceled)
+            else
+            {
+                Debug.LogError("Failed to sign in.");
+            }
+        });
+    }
+
+    public void SignOut()
+    {
+        PlayGamesPlatform.Instance.SignOut();
+        Debug.Log("User signed out.");
+    }
+
+    public void ShowLeaderboard()
+    {
+        if (Social.localUser.authenticated)
         {
-            Debug.LogError("Cancelled");
+            PlayGamesPlatform.Instance.ShowLeaderboardUI();
         }
         else
         {
+            Debug.LogError("User not authenticated.");
         }
     }
 
- 
-
-    public void OnSignOut()
+    public void ShowAchievements()
     {
-       
-        Debug.Log("Calling SignOut");
-        GoogleSignIn.DefaultInstance.SignOut();
+        if (Social.localUser.authenticated)
+        {
+            PlayGamesPlatform.Instance.ShowAchievementsUI();
+        }
+        else
+        {
+            Debug.LogError("User not authenticated.");
+        }
     }
-
 }

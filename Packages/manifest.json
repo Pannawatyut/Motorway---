@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.google.external-dependency-manager": "https://github.com/google-unity/external-dependency-manager.git#1.2.182",
     "com.nobi.roundedcorners": "https://github.com/kirevdokimov/Unity-UI-Rounded-Corners.git",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.adaptiveperformance": "5.1.0",
