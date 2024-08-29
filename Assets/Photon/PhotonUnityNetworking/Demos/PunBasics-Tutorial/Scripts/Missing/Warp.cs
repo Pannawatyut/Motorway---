@@ -13,24 +13,19 @@ public class Warp : MonoBehaviourPunCallbacks
     public string SceneGame;
     private bool inside = false;
     public GameObject pressF;
-    
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
         {
-            if (other.GetComponent<PhotonView>().IsMine)
-            {
-                inside = true;
-                // Load the game scene
-                //PhotonNetwork.LoadLevel(SceneGame);
-                pressF.gameObject.SetActive(true);
-               
-            }
+            inside = true;
+            pressF.gameObject.SetActive(true);
         }
     }
+
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
         {
             inside = false;
             pressF.gameObject.SetActive(false);
@@ -39,25 +34,43 @@ public class Warp : MonoBehaviourPunCallbacks
 
     private void Update()
     {
-        if(inside && Input.GetKeyDown(KeyCode.F))
+        if (inside && Input.GetKeyDown(KeyCode.F))
         {
-            PhotonNetwork.LeaveRoom();
-            SceneManager.LoadScene(SceneGame);
+            StartCoroutine(LeaveRoomAndLoadScene());
         }
-    }
-
-    public void ChangeScene()
-    {
-        SceneManager.LoadScene(SceneGame);
     }
 
     public void OnButtonPressFMobileWarpScene()
     {
-        if(inside)
+        if (inside)
         {
-            PhotonNetwork.LeaveRoom();
-            SceneManager.LoadScene(SceneGame);
+            StartCoroutine(LeaveRoomAndLoadScene());
         }
     }
 
+    private IEnumerator LeaveRoomAndLoadScene()
+    {
+        if (PhotonNetwork.InRoom)
+        {
+            PhotonNetwork.LeaveRoom(); // Leave the current room
+
+            // Wait until Photon confirms that the player has left the room
+            while (PhotonNetwork.InRoom || PhotonNetwork.IsConnectedAndReady == false)
+            {
+                yield return null;
+            }
+        }
+
+        // Small delay to ensure all Photon operations have completed
+        yield return new WaitForSeconds(0.2f);
+
+        SceneManager.LoadScene(SceneGame); // Now load the scene
+    }
+
+    public override void OnLeftRoom()
+    {
+        // Optionally, you can handle any additional logic here when the room is left.
+        // This will be called automatically when PhotonNetwork.LeaveRoom() completes.
+        Debug.Log("Left the room, now loading scene...");
+    }
 }

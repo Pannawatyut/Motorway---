@@ -2,6 +2,7 @@
 using UnityEngine.SceneManagement;
 using Photon.Realtime;
 using Photon.Pun;
+using Unity.VisualScripting;
 
 namespace Photon.Pun.Demo.PunBasics
 {
@@ -10,6 +11,8 @@ namespace Photon.Pun.Demo.PunBasics
         public static GameManager Instance;
 
         private GameObject instance;
+
+        public LoginManager _LoginManager;
 
         [Tooltip("The male prefab to use for representing the player")]
         [SerializeField]
@@ -49,6 +52,15 @@ namespace Photon.Pun.Demo.PunBasics
 
         void Update()
         {
+            if (_LoginManager == null)
+            {
+                _LoginManager = FindObjectOfType<LoginManager>();
+            }
+            if (PhotonNetwork.InRoom && PlayerManager.LocalPlayerInstance == null)
+            {
+                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
+                InstantiatePlayer();
+            }
             // if (Input.GetKeyDown(KeyCode.Escape))
             // {
             //     QuitApplication();
@@ -66,14 +78,15 @@ namespace Photon.Pun.Demo.PunBasics
         {
             if (PlayerManager.LocalPlayerInstance == null)
             {
+                Debug.Log("Trying to spawn Player");
                 InstantiatePlayer();
             }
         }
 
-        public override void OnPlayerEnteredRoom(Player other)
+        public void OnPlayerEnteredRoom(Player other)
         {
-            Debug.Log("OnPlayerEnteredRoom() " + other.NickName);
-
+            //Debug.Log("OnPlayerEnteredRoom() " + other.NickName);
+            Debug.Log("Player Entered the Room");
             if (PhotonNetwork.IsMasterClient)
             {
                 Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
@@ -81,9 +94,9 @@ namespace Photon.Pun.Demo.PunBasics
             }
         }
 
-        public override void OnPlayerLeftRoom(Player other)
+        public void OnPlayerLeftRoom(Player other)
         {
-            Debug.Log("OnPlayerLeftRoom() " + other.NickName);
+            //Debug.Log("OnPlayerLeftRoom() " + other.NickName);
 
             if (PhotonNetwork.IsMasterClient)
             {
@@ -121,25 +134,26 @@ namespace Photon.Pun.Demo.PunBasics
 
         private void InstantiatePlayer()
         {
-            if (PhotonNetwork.LocalPlayer.CustomProperties.TryGetValue("selectedSex", out object selectedSexObj))
+            if (_LoginManager != null)
             {
-                int selectedSex = (int)selectedSexObj;
-                if (selectedSex == 3)
+                int genderID = _LoginManager._Avatar.gender_id;
+
+                if (genderID == 3)
                 {
                     InstantiateMalePlayer();
                 }
-                else if (selectedSex == 4)
+                else if (genderID == 4)
                 {
                     InstantiateFemalePlayer();
                 }
                 else
                 {
-                    Debug.LogError("Invalid selectedSex value.");
+                    Debug.LogError("Invalid GenderID value.");
                 }
             }
             else
             {
-                Debug.LogError("selectedSex not found in custom properties.");
+                Debug.LogError("LoginManager instance is not available.");
             }
         }
 

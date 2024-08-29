@@ -6,6 +6,7 @@ namespace Photon.Pun.Demo.PunBasics
 {
     public class LaunCherTest1 : MonoBehaviourPunCallbacks
     {
+        public static LaunCherTest1 Instance { get; private set; }
         // Max players per room, configurable via the inspector or here
         [SerializeField] private byte maxPlayersPerRoom = 4;
 
@@ -15,6 +16,14 @@ namespace Photon.Pun.Demo.PunBasics
         void Awake()
         {
             // Automatically sync scene across networked clients
+            if (Instance == null)
+            {
+                Instance = new LaunCherTest1();
+            }
+            else
+            {
+                Destroy(Instance);
+            }
             PhotonNetwork.AutomaticallySyncScene = true;
         }
 
