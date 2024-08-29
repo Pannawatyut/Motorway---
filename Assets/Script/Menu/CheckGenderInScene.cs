@@ -1,41 +1,25 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
 using UnityEngine.Networking;
-public class AssetCharactor : MonoBehaviourPunCallbacks
-{
-    public static AssetCharactor Instance { get; private set; }
 
+public class CheckGenderInScene : MonoBehaviourPunCallbacks
+{
     [SerializeField]
     private List<SelectItem._AvatarData> avatarData = new List<SelectItem._AvatarData>();
 
     public LaunCherTest1 _Launcher;
     public LoginManager _loginManager;
-    public entername _Name;
     public List<SelectItem._AvatarData> AvatarData
     {
         get { return avatarData; }
         private set { avatarData = value; }
     }
 
-    private void Awake()
-    {
-        if (Instance != null && Instance != this)
-        {
-            Destroy(this.gameObject);
-            return;
-        }
-
-        Instance = this;
-        DontDestroyOnLoad(this.gameObject);
-
-    }
-
-
-                          /////////// Save Avatar ////////////////
+    /////////// Save Avatar ////////////////
     public void SaveAvatarData(SelectItem selectItem)
     {
 
@@ -67,10 +51,6 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         if (_loginManager == null)
         {
             _loginManager = FindObjectOfType<LoginManager>();
-        }
-        if (_Name == null)
-        {
-            _Name = FindObjectOfType<entername>();
         }
         if (_Launcher == null)
         {
@@ -140,7 +120,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
     private List<SelectItem._AvatarData> LoadSavedAvatarData()
     {
-        return new List<SelectItem._AvatarData>(); 
+        return new List<SelectItem._AvatarData>();
     }
 
 
@@ -177,7 +157,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
         var Avatar = new Avatar
         {
-            name = _Name.username.text,
+            uid = _loginManager._Avatar.uid,
             gender_id = selectItem.selectedSex,
             skin_id = selectItem.selectedSkinColor,
             face_id = selectItem.selectedFaceIndex,
@@ -194,8 +174,8 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         };
 
         string json = JsonUtility.ToJson(Avatar);
-
-        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/avatar/createAvatar", "POST")
+        Debug.Log(json);
+        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/avatar/updateAvatar", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()
@@ -220,7 +200,6 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
             if (avatarResponse.status)
             {
                 Debug.Log("Login successful!");
-                _loginManager._Avatar.name = avatarResponse.data.avatar.name;
                 _loginManager._Avatar.gender_id = avatarResponse.data.avatar.gender_id;
                 _loginManager._Avatar.skin_id = avatarResponse.data.avatar.skin_id;
                 _loginManager._Avatar.face_id = avatarResponse.data.avatar.face_id;
@@ -263,7 +242,6 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
     public class Avatar
     {
         public string uid;
-        public string name;
         public int gender_id;
         public int skin_id;
         public int face_id;
@@ -275,10 +253,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         public int pant_color_id;
         public int shoe_id;
         public int shoe_color_id;
-        public int accessory_ids; // Allow multiple accessories
-        public int accessory_color_ids; // Allow multiple accessory colors
+        public int accessory_ids; 
     }
 
 }
-
-

@@ -95,6 +95,7 @@ public class LoginManager : MonoBehaviour
                 _Account.checkpoint = checkpoint;
                 _Account.access_token = accesstoken;
 
+                _Avatar.uid = loginResponse.data.avatar.uid;
                 _Avatar.name = loginResponse.data.avatar.name;
                 _Avatar.gender_id = loginResponse.data.avatar.gender_id;
                 _Avatar.skin_id = loginResponse.data.avatar.skin_id;
