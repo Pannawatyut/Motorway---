@@ -3,18 +3,30 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using TMPro;
-
+using UnityEngine.SceneManagement;
 
 public class LoginManager : MonoBehaviour
 {
-    public string email;
-    public string password;
+    public LoginManager Instance { get; private set; }
+    public TMP_InputField Email;
+    public TMP_InputField Password;
 
-    public TextMeshProUGUI[] Infouser;
-
-    private void Start()
+    private void Awake()
     {
-        StartCoroutine(Login(email, password));
+       if (Instance == null)
+        {
+            Instance = new LoginManager();
+        }
+        else
+        {
+            Destroy(Instance);
+        }
+       DontDestroyOnLoad(this);
+    }
+
+    public void OnClickLoginButton()
+    {
+        StartCoroutine(Login(Email.text, Password.text));
     }
 
     private IEnumerator Login(string email, string password)
@@ -67,15 +79,17 @@ public class LoginManager : MonoBehaviour
                 string vehicle = string.IsNullOrEmpty(loginResponse.data.account.vehicle) ? "-" : loginResponse.data.account.vehicle;
                 string checkpoint = string.IsNullOrEmpty(loginResponse.data.account.checkpoint) ? "-" : loginResponse.data.account.checkpoint;
 
-                Infouser[0].text = "" + firstName;
-                Infouser[1].text = "" + lastName;
-                Infouser[2].text = "" + loginResponse.data.account.email;
-                Infouser[3].text = "" + gender;
-                Infouser[4].text = "" + age;
-                Infouser[5].text = "" + education;
-                Infouser[6].text = "" + occupation;
-                Infouser[7].text = "" + vehicle;
-                Infouser[8].text = "" + checkpoint;
+                _Account.first_name = firstName;
+                _Account.last_name = lastName;
+                _Account.email = loginResponse.data.account.email;
+                _Account.gender = gender;
+                _Account.age = age;
+                _Account.education = education;
+                _Account.occupation = occupation;
+                _Account.vehicle = vehicle;
+                _Account.checkpoint = checkpoint;
+
+                SceneManager.LoadScene("CharacterCustomizer");
             }
             else
             {
@@ -83,41 +97,48 @@ public class LoginManager : MonoBehaviour
             }
         }
     }
+
+    public Account _Account;
+
+
+    // โครงสร้างข้อมูลสำหรับคำขอล็อกอิน
+    [System.Serializable]
+    public class LoginRequest
+    {
+        public string email;
+        public string password;
+    }
+
+    // โครงสร้างข้อมูลสำหรับผลลัพธ์การล็อกอิน
+    [System.Serializable]
+    public class LoginResponse
+    {
+        public bool status;
+        public Data data;
+    }
+
+    [System.Serializable]
+    public class Data
+    {
+        public Account account;
+    }
+
+    [System.Serializable]
+    public class Account
+    {
+        public string uid;
+        public string email;
+        public string first_name;
+        public string last_name;
+        public string gender;
+        public string age;
+        public string education;
+        public string occupation;
+        public string vehicle;
+        public string checkpoint;
+    }
 }
 
-// โครงสร้างข้อมูลสำหรับคำขอล็อกอิน
-[System.Serializable]
-public class LoginRequest
-{
-    public string email;
-    public string password;
-}
 
-// โครงสร้างข้อมูลสำหรับผลลัพธ์การล็อกอิน
-[System.Serializable]
-public class LoginResponse
-{
-    public bool status;
-    public Data data;
-}
 
-[System.Serializable]
-public class Data
-{
-    public Account account;
-}
 
-[System.Serializable]
-public class Account
-{
-    public string uid;
-    public string email;
-    public string first_name;
-    public string last_name;
-    public string gender;
-    public string age;
-    public string education;
-    public string occupation;
-    public string vehicle;
-    public string checkpoint;
-}
