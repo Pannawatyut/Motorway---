@@ -6,6 +6,16 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Photon.Pun.Demo.PunBasics;
 
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Networking;
+using TMPro;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
+using System;
+
 public class LoginManager : MonoBehaviour
 {
     public static LoginManager Instance { get; private set; }
@@ -24,6 +34,8 @@ public class LoginManager : MonoBehaviour
             return;
         }
         DontDestroyOnLoad(gameObject);
+
+        //Test();
     }
 
     public void OnClickLoginButton()
