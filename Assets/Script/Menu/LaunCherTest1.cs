@@ -2,6 +2,8 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
+
+
 namespace Photon.Pun.Demo.PunBasics
 {
     public class LaunCherTest1 : MonoBehaviourPunCallbacks
@@ -72,5 +74,7 @@ namespace Photon.Pun.Demo.PunBasics
                 PhotonNetwork.LoadLevel("Game");
             }
         }
+
     }
+
 }
