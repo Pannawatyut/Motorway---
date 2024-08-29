@@ -4,10 +4,9 @@ using UnityEngine;
 /// <summary>
 /// Handles authentication calls to Firebase
 /// </summary>
-
 public static class FirebaseAuthHandler
 {
-    private const string ApiKey = "AIzaSyBnd9_2iMEHzKt6EwNoWxXLHIs88B82E3k"; //TODO: Change [API_KEY] to your API_KEY
+    private const string ApiKey = "AIzaSyBnd9_2iMEHzKt6EwNoWxXLHIs88B82E3k"; // Replace with your actual API_KEY
 
     /// <summary>
     /// Signs in a user with their Id Token
@@ -17,7 +16,7 @@ public static class FirebaseAuthHandler
     public static void SingInWithToken(string token, string providerId)
     {
         var payLoad =
-            $"{{\"postBody\":\"id_token={token}&providerId={providerId}\",\"requestUri\":\"http://localhost\",\"returnIdpCredential\":true,\"returnSecureToken\":true}}";
+            $"{{\"postBody\":\"id_token={token}&providerId={providerId}\",\"requestUri\":\"http://localhost:57847\",\"returnIdpCredential\":true,\"returnSecureToken\":true}}";
         RestClient.Post($"https://identitytoolkit.googleapis.com/v1/accounts:signInWithIdp?key={ApiKey}", payLoad).Then(
             response =>
             {

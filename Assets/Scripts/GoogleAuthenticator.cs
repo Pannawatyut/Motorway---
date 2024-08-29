@@ -6,16 +6,15 @@ using UnityEngine;
 /// <summary>
 /// Handles calls to the Google provider for authentication
 /// </summary>
-
 public static class GoogleAuthenticator
 {
-    private const string ClientId = "GOOGLE_CLIENT_ID"; //
-    private const string ClientSecret = "GOOGLE_CLIENT_SECRET"; //
+    private const string ClientId = "GOOGLE_CLIENT_ID";
+    private const string ClientSecret = "GOOGLE_CLIENT_SECRET";
     
-    private const int Port = 1234;
-    private static readonly string RedirectUri = $"http://localhost:{Port}";
-    
-    private static readonly HttpCodeListener codeListener = new HttpCodeListener(Port);
+    // Use the full URL as the redirect URI
+    private static readonly string RedirectUri = "http://localhost:57847/";
+
+    private static readonly HttpCodeListener codeListener = new HttpCodeListener();
 
     /// <summary>
     /// Opens a webpage that prompts the user to sign in and copy the auth code 
@@ -34,7 +33,7 @@ public static class GoogleAuthenticator
             codeListener.StopListening();
         });
     }
-    
+
     /// <summary>
     /// Exchanges the Auth Code with the user's Id Token
     /// </summary>

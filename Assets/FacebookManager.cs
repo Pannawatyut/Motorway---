@@ -4,10 +4,18 @@ using UnityEngine;
 using TMPro;
 using Facebook.Unity;
 using System;
+using UnityEngine.Networking;
 
 public class FacebookManager : MonoBehaviour
 {
+
     #region Initialize
+    [Serializable]
+    public class UserData
+    {
+        public string email;
+        public string facebook_id;
+    }
 
     private void Awake()
     {
@@ -31,6 +39,7 @@ public class FacebookManager : MonoBehaviour
             {
                 Debug.Log("User is already logged in.");
                 LogAccessTokenInfo();
+                FetchProfile();  // Fetch email and Facebook ID
             }
             else
             {
@@ -78,7 +87,7 @@ public class FacebookManager : MonoBehaviour
     // Login
     public void Facebook_LogIn()
     {
-        var permissions = new List<string> { "public_profile" };
+        var permissions = new List<string> { "public_profile", "email" };
         FB.LogInWithReadPermissions(permissions, AuthCallback);
     }
 
@@ -89,6 +98,7 @@ public class FacebookManager : MonoBehaviour
             Debug.Log("Login successful.");
             LogAccessTokenInfo();
             DealWithFbMenus(true);
+            FetchProfile();  // Fetch email and Facebook ID
         }
         else
         {
@@ -115,6 +125,72 @@ public class FacebookManager : MonoBehaviour
 
     #endregion
 
+    #region User Profile
+
+    private void FetchProfile()
+    {
+        FB.API("/me?fields=id,name,email", HttpMethod.GET, ProfileCallback);
+    }
+
+    private void ProfileCallback(IGraphResult result)
+    {
+        if (result.Error != null)
+        {
+            Debug.LogError("Error fetching profile: " + result.Error);
+            return;
+        }
+
+        var profile = result.ResultDictionary;
+        string email = string.Empty;
+        string facebookId = string.Empty;
+
+        if (profile.ContainsKey("id"))
+        {
+            facebookId = profile["id"].ToString();
+            Debug.Log("Facebook ID: " + facebookId);
+        }
+        if (profile.ContainsKey("email"))
+        {
+            email = profile["email"].ToString();
+            Debug.Log("Email: " + email);
+        }
+
+        // Start sending email and Facebook ID to backend
+        StartCoroutine(SendEmailandFacebookID(email, facebookId));
+    }
+
+    private IEnumerator SendEmailandFacebookID(string email, string facebookId)
+    {
+        // Create an instance of UserData and assign the email and Facebook ID
+        UserData userData = new UserData { email = email, facebook_id = facebookId };
+
+        // Convert the UserData object to JSON
+        string json = JsonUtility.ToJson(userData);
+
+        // Create a UnityWebRequest for the POST method
+        using var request = new UnityWebRequest("http://192.168.1.214:7000/api/user/loginFacebook", "POST")
+        {
+            uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
+            downloadHandler = new DownloadHandlerBuffer()
+        };
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        // Send the request and wait for a response
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.Success)
+        {
+            Debug.Log("Successfully sent email and Facebook ID to backend.");
+        }
+        else
+        {
+            Debug.LogError("Failed to send email and Facebook ID to backend: " + request.error);
+        }
+    }
+
+
+    #endregion
+
     #region Share (Optional, if needed in the future)
 
     // Uncomment if needed
@@ -124,8 +200,6 @@ public class FacebookManager : MonoBehaviour
         string url = "https://developers.facebook.com/docs/unity/reference/current/FB.ShareLink";
         FB.ShareLink(
             new Uri(url),
-            "Checkout COCO 3D channel",
-            "I just watched " + "22" + " times of this channel",
             null,
             ShareCallback);
     }
