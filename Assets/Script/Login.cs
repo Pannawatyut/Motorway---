@@ -38,9 +38,19 @@ public class LoginManager : MonoBehaviour
         //Test();
     }
 
+    public void Start()
+    {
+        //_ByPass();
+    }
+
     public void OnClickLoginButton()
     {
         StartCoroutine(Login(Email.text, Password.actualInput));
+    }
+
+    public void _ByPass()
+    {
+        StartCoroutine(Login("pongsakorn.pisa@kmutt.ac.th", "123"));
     }
 
     private IEnumerator Login(string email, string password)
