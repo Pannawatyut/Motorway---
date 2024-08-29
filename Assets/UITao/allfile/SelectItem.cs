@@ -5,7 +5,8 @@ using Photon.Pun;
 using ExitGames.Client.Photon;
 using UnityEngine.SceneManagement;
 using Photon.Pun.Demo.PunBasics;
-
+using UnityEngine.UI;
+using TMPro;
 public class SelectItem : MonoBehaviourPunCallbacks
 {
 
@@ -25,6 +26,8 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public GameObject[] gender;
     public GameObject[] SelectImagesAccessory;
 
+    public TextMeshProUGUI PlayerName;
+
     public Color[] ColorsBody;
     public Material Skinbody;
 
@@ -40,10 +43,15 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public int selectedAccessoryIndex = 0;
     public int selectedSkinColor = 0;
     public int selectedSex = 0;
+    public string Name;
 
     public int sexcolor; // chang to shirt Men & Women This ID Shrit 4
     public SkinnedMeshRenderer shirtRenderer;
     public SkinnedMeshRenderer shoesRenderer;
+
+    public LoginManager _loginManager;
+
+    public bool isInitialized = false;
 
     [System.Serializable]
     public class _AvatarData
@@ -55,75 +63,75 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
     public List<_AvatarData> avatarData = new List<_AvatarData>();
 
+    public override void OnEnable()
+    {
+        _RPCName(_loginManager._Avatar.name);
+    }
+    public void _RPCName(string _Name)
+    {
+        photonView.RPC("_LoadName", RpcTarget.OthersBuffered, _Name);
+    }
+
+    [PunRPC]
+    public void _LoadName(string _Name)
+    {
+        PlayerName.text = _Name;
+    }
     void Start()
     {
         BodySelection(selectedSex);
         if (photonView.IsMine)
         {
-            BodySelection(selectedSex);
-            if (selectedHairIndex == 0 &&
-                selectedShirtIndex == 0 &&
-                selectedPantsIndex == 0 &&
-                selectedShoesIndex == 0 &&
-                selectedFaceIndex == 0 &&
-                selectedAccessoryIndex == 0 &&
-                selectedSkinColor == 0)
+            if (_loginManager == null)
             {
-                if (selectedHairIndex == 0) SelectHair(0);
-                if (selectedShirtIndex == 0) SelectShirt(0);
-                if (selectedPantsIndex == 0) SelectPants(0);
-                if (selectedShoesIndex == 0) SelectShoes(0);
-                if (selectedFaceIndex == 0) SelectFace(0);
-                if (selectedSkinColor == 0) ChangeSkinColor(0);
-
-                // Set default colors
-                int colorIndex = 0; // 7th color in the array (0-based index)
-                ChangeShirtColor(colorIndex);
-                ChangePantsColor(colorIndex);
-                ChangeShoesColor(colorIndex);
-            }
-        ////////////////////////////// Load Avatar To Script Name AssetCharactor //////////////////////////////////////////////////////////// 
-            int hairId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Hair")?.Id ?? selectedHairIndex;
-            int hairColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Hair")?.ColorId ?? selectedHairColorIndex;
-
-            int faceId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Face")?.Id ?? selectedFaceIndex;
-            int faceColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Face")?.ColorId ?? 0; // Default face color
-
-            int shirtId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shirt")?.Id ?? selectedShirtIndex;
-            int shirtColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shirt")?.ColorId ?? selectedShirtColorIndex;
-
-            int pantsId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Pants")?.Id ?? selectedPantsIndex;
-            int pantsColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Pants")?.ColorId ?? selectedPantsColorIndex;
-
-            int shoesId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shoes")?.Id ?? selectedShoesIndex;
-            int shoesColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shoes")?.ColorId ?? selectedShoesColorIndex;
-
-            // Collect all accessory IDs and colors
-            List<int> accessoryIds = new List<int>();
-            List<int> accessoryColorIds = new List<int>();
-            foreach (var data in AssetCharactor.Instance.AvatarData)
-            {
-                if (data.Type == "Accessory")
-                {
-                    accessoryIds.Add(data.Id);
-                    accessoryColorIds.Add(data.ColorId);
-                }
+                _loginManager = FindObjectOfType<LoginManager>();
             }
 
-            int skincolorID = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "SkinColor")?.Id ?? selectedSkinColor;
 
-            int sexId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Sex")?.Id ?? selectedSex;
+            
+            //////////////////////////////// Load Avatar To Script Name AssetCharactor //////////////////////////////////////////////////////////// 
+            //int hairId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Hair")?.Id ?? selectedHairIndex;
+            //int hairColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Hair")?.ColorId ?? selectedHairColorIndex;
 
-            // Call RPC to initialize avatar for all players
-            photonView.RPC("InitializeAvatar", RpcTarget.AllBuffered, 
-                hairId, hairColorId, faceId, faceColorId,
-                shirtId, shirtColorId, pantsId, pantsColorId,
-                shoesId, shoesColorId, accessoryIds.ToArray(), accessoryColorIds.ToArray(),
-                sexId, skincolorID);
+            //int faceId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Face")?.Id ?? selectedFaceIndex;
+            //int faceColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Face")?.ColorId ?? 0; // Default face color
+
+            //int shirtId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shirt")?.Id ?? selectedShirtIndex;
+            //int shirtColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shirt")?.ColorId ?? selectedShirtColorIndex;
+
+            //int pantsId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Pants")?.Id ?? selectedPantsIndex;
+            //int pantsColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Pants")?.ColorId ?? selectedPantsColorIndex;
+
+            //int shoesId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shoes")?.Id ?? selectedShoesIndex;
+            //int shoesColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shoes")?.ColorId ?? selectedShoesColorIndex;
+
+            //// Collect all accessory IDs and colors
+            //List<int> accessoryIds = new List<int>();
+            //List<int> accessoryColorIds = new List<int>();
+            //foreach (var data in AssetCharactor.Instance.AvatarData)
+            //{
+            //    if (data.Type == "Accessory")
+            //    {
+            //        accessoryIds.Add(data.Id);
+            //        accessoryColorIds.Add(data.ColorId);
+            //    }
+            //}
+
+            //int skincolorID = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "SkinColor")?.Id ?? selectedSkinColor;
+
+            //int sexId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Sex")?.Id ?? selectedSex;
+
+            //// Call RPC to initialize avatar for all players
+            //photonView.RPC("InitializeAvatar", RpcTarget.AllBuffered, 
+            //    hairId, hairColorId, faceId, faceColorId,
+            //    shirtId, shirtColorId, pantsId, pantsColorId,
+            //    shoesId, shoesColorId, accessoryIds,
+            //    sexId, skincolorID);
         }
+
     }
 
-
+    
     private void LoadSavedAvatarData()
     {
         bool[] loadedAccessories = new bool[Accessories.Length];
@@ -201,16 +209,52 @@ public class SelectItem : MonoBehaviourPunCallbacks
         
     }
 
-    void Update()
+    private void Update()
     {
-      //   if (Input.GetKeyDown(KeyCode.F))
-      //  {
-      //       // Handle leave room and scene loading logic
-      //      PhotonNetwork.LeaveRoom();
-      //      SceneManager.LoadScene(3);
-      // }
+        if (_loginManager != null && isInitialized == false)
+        {
+            isInitialized = true;
+            selectedHairIndex = _loginManager._Avatar.hair_id;
+            selectedHairColorIndex = _loginManager._Avatar.hair_color_id;
+            selectedShirtIndex = _loginManager._Avatar.shirt_id;
+            selectedShirtColorIndex = _loginManager._Avatar.shirt_color_id;
+            selectedPantsIndex = _loginManager._Avatar.pant_id;
+            selectedPantsColorIndex = _loginManager._Avatar.pant_color_id;
+            selectedShoesIndex = _loginManager._Avatar.shoe_id;
+            selectedShoesColorIndex = _loginManager._Avatar.shoe_color_id;
+            selectedFaceIndex = _loginManager._Avatar.face_id;
+            selectedAccessoryIndex = _loginManager._Avatar.accessory_ids;
+            selectedSkinColor = _loginManager._Avatar.skin_id;
+            selectedSex = _loginManager._Avatar.gender_id;
+            Name = _loginManager._Avatar.name;
+            PlayerName.text = Name;
+            //BodySelection(selectedSex);
+            SelectHair(selectedHairIndex);
+            SelectShirt(selectedShirtIndex);
+            SelectPants(selectedPantsIndex);
+            SelectShoes(selectedShoesIndex);
+            SelectFace(selectedFaceIndex);
+            ChangeSkinColor(selectedSkinColor);
+
+            ChangeShirtColor(selectedShirtColorIndex);
+            ChangePantsColor(selectedPantsColorIndex);
+            ChangeShoesColor(selectedShoesColorIndex);
+
+            photonView.RPC("InitializeAvatar", RpcTarget.AllBuffered,
+    selectedHairIndex, selectedHairColorIndex, selectedFaceIndex, selectedFaceIndex,
+    selectedShirtIndex, selectedShirtColorIndex, selectedPantsIndex, selectedPantsColorIndex,
+    selectedShoesIndex, selectedShoesColorIndex, selectedAccessoryIndex,
+    selectedSex, selectedSkinColor,Name);
+
+            photonView.RPC("UpdatePlayerNameText", RpcTarget.OthersBuffered, Name);
+        }
     }
 
+    [PunRPC]
+    void UpdatePlayerNameText(string playerName)
+    {
+        PlayerName.text = Name;
+    }
 
     public void RandomAvatar()
     {
@@ -266,6 +310,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
     public void SelectHair(int index)
     {
+        Debug.Log("select hair" + index);
         if (index >= 0 && index < Hair.Length)
         {
             for (int i = 0; i < Hair.Length; i++)
@@ -500,9 +545,11 @@ public class SelectItem : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void InitializeAvatar(int hairId, int hairColorId, int faceId, int faceColorId, 
-        int shirtId, int shirtColorId, int pantsId, int pantsColorId, 
-        int shoesId, int shoesColorId, int[] accessoryIds, int[] accessoryColorIds, int sexId, int skinID)
+    public void InitializeAvatar(int hairId, int hairColorId, int faceId, int faceColorId,
+        int shirtId, int shirtColorId, int pantsId, int pantsColorId,
+        int shoesId, int shoesColorId,
+        int accessoryIds,
+        int sexId, int skinID, string _Name)
     {
         // Set avatar data in AssetCharactor
         avatarData.Clear();
@@ -511,15 +558,19 @@ public class SelectItem : MonoBehaviourPunCallbacks
         avatarData.Add(new _AvatarData { Type = "Shirt", Id = shirtId, ColorId = shirtColorId });
         avatarData.Add(new _AvatarData { Type = "Pants", Id = pantsId, ColorId = pantsColorId });
         avatarData.Add(new _AvatarData { Type = "Shoes", Id = shoesId, ColorId = shoesColorId });
-
-        for (int i = 0; i < accessoryIds.Length; i++)
-        {
-            avatarData.Add(new _AvatarData { Type = "Accessory", Id = accessoryIds[i], ColorId = accessoryColorIds[i] });
-        }
+        avatarData.Add(new _AvatarData { Type = "Accessory", Id = accessoryIds });
+        //for (int i = 0; i < accessoryIds.Length; i++)
+        //{
+        //    avatarData.Add(new _AvatarData { Type = "Accessory", Id = accessoryIds[i]});
+        //}
 
         avatarData.Add(new _AvatarData { Type = "SkinColor", Id = skinID, ColorId = 0 });
         avatarData.Add(new _AvatarData { Type = "Sex", Id = sexId, ColorId = 0 });
 
+        Name = _Name;
+
+        photonView.RPC("UpdatePlayerNameText", RpcTarget.OthersBuffered, _Name);
+        Debug.Log($"InitializeAvatar called on client: Name={Name}, PlayerName.text={PlayerName.text}");
         // Apply the avatar data to the character
         LoadSavedAvatarData();
     }

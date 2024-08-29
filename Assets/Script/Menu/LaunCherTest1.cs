@@ -65,7 +65,7 @@ namespace Photon.Pun.Demo.PunBasics
         public override void OnJoinedRoom()
         {
             Debug.Log("Joined Room with " + PhotonNetwork.CurrentRoom.PlayerCount + " player(s).");
-
+            this.GetComponent<LaunCherTest1>().enabled = false;
             if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
             {
                 // Load the main game scene

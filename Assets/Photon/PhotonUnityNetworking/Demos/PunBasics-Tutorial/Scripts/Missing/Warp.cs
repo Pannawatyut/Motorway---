@@ -13,7 +13,7 @@ public class Warp : MonoBehaviourPunCallbacks
     public string SceneGame;
     private bool inside = false;
     public GameObject pressF;
-
+    private bool isSceneLoading = false;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
@@ -50,8 +50,11 @@ public class Warp : MonoBehaviourPunCallbacks
 
     private IEnumerator LeaveRoomAndLoadScene()
     {
+        if (isSceneLoading) yield break;  // Prevent further execution if a scene load is already in progress
+        isSceneLoading = true;
         if (PhotonNetwork.InRoom)
         {
+            Debug.Log("The Scene going to is " + SceneGame);
             PhotonNetwork.LeaveRoom(); // Leave the current room
 
             // Wait until Photon confirms that the player has left the room
@@ -63,14 +66,14 @@ public class Warp : MonoBehaviourPunCallbacks
 
         // Small delay to ensure all Photon operations have completed
         yield return new WaitForSeconds(0.2f);
-
+        
         SceneManager.LoadScene(SceneGame); // Now load the scene
     }
 
     public override void OnLeftRoom()
     {
-        // Optionally, you can handle any additional logic here when the room is left.
-        // This will be called automatically when PhotonNetwork.LeaveRoom() completes.
-        Debug.Log("Left the room, now loading scene...");
+
+        //Debug.Log($"Left the room, now loading scene...{SceneGame}");
+        isSceneLoading = false;  // Reset flag after leaving the room
     }
 }

@@ -10,25 +10,25 @@ public class LoginManager : MonoBehaviour
 {
     public static LoginManager Instance { get; private set; }
     public TMP_InputField Email;
-    public TMP_InputField Password;
+    public MaskedPasswordScript Password;
     public LaunCherTest1 _Launcher;
     private void Awake()
     {
-       if (Instance == null)
+        if (Instance == null)
         {
-            Instance = new LoginManager();
+            Instance = this;
         }
         else
         {
-            Destroy(Instance);
+            Destroy(gameObject);
+            return;
         }
-        _Launcher =  this.GetComponent<LaunCherTest1>();
-       DontDestroyOnLoad(this);
+        DontDestroyOnLoad(gameObject);
     }
 
     public void OnClickLoginButton()
     {
-        StartCoroutine(Login(Email.text, Password.text));
+        StartCoroutine(Login(Email.text, Password.actualInput));
     }
 
     private IEnumerator Login(string email, string password)
@@ -107,7 +107,7 @@ public class LoginManager : MonoBehaviour
                 _Avatar.pant_color_id = loginResponse.data.avatar.pant_color_id;
                 _Avatar.shoe_id = loginResponse.data.avatar.shoe_id;
                 _Avatar.shoe_color_id = loginResponse.data.avatar.shoe_color_id;
-                _Avatar.accessory_id = loginResponse.data.avatar.accessory_id;
+                _Avatar.accessory_ids = loginResponse.data.avatar.accessory_ids;
 
 
                 if (_Avatar.name != null)
@@ -127,6 +127,8 @@ public class LoginManager : MonoBehaviour
             }
         }
     }
+
+
 
     public Account _Account;
     public Avatar _Avatar;
@@ -186,7 +188,7 @@ public class LoginManager : MonoBehaviour
         public int pant_color_id;
         public int shoe_id;
         public int shoe_color_id;
-        public int accessory_id;
+        public int accessory_ids;
     }
 }
 

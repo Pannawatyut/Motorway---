@@ -107,7 +107,7 @@ namespace Photon.Pun.Demo.PunBasics
 
         public override void OnLeftRoom()
         {
-            SceneManager.LoadScene("MiniGame");
+            //SceneManager.LoadScene("MiniGame");
         }
 
         public void LeaveRoom()
