@@ -4,6 +4,7 @@
     {
         _MainTex ("Albedo", 2D) = "white" { }
         _BumpMap ("Normal map", 2D) = "bump" { }
+        _Color ("Main Color", Color) = (1,1,1,1)
         [HideInInspector] BAKERY_META_ALPHA_ENABLE ("Enable Bakery alpha meta pass", Float) = 1.0
     }
     SubShader

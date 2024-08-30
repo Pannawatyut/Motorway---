@@ -43,6 +43,7 @@ public class BakeryVolume : MonoBehaviour
     public int resolutionZ = 16;
     public Encoding encoding = Encoding.Half4;
     public ShadowmaskEncoding shadowmaskEncoding = ShadowmaskEncoding.RGBA8;
+    public bool firstLightIsAlwaysAlpha = false;
     public bool denoise = false;
     public bool isGlobal = false;
     public Texture3D bakedTexture0, bakedTexture1, bakedTexture2, bakedTexture3, bakedMask;

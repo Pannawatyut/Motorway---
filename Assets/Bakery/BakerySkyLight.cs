@@ -29,6 +29,8 @@ public class BakerySkyLight : MonoBehaviour
 
     public static int lightsChanged = 0; // 1 = const, 2 = full
 
+    static GameObject objShownError;
+
 #if UNITY_EDITOR
     void OnValidate()
     {
@@ -49,32 +51,21 @@ public class BakerySkyLight : MonoBehaviour
             gameObject.GetComponent<BakeryPointLight>() != null ||
             gameObject.GetComponent<BakeryLightMesh>() != null)
         {
-            EditorUtility.DisplayDialog("Bakery", "Can't have more than one Bakery light on one object", "OK");
+            if (objShownError != gameObject)
+            {
+                EditorUtility.DisplayDialog("Bakery", "Can't have more than one Bakery light on one object", "OK");
+                objShownError = gameObject;
+            }
+            else
+            {
+                Debug.LogError("Can't have more than one Bakery light on one object");
+            }
             DestroyImmediate(this);
             return;
         }
 
         if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-        if (UID == 0) UID = Guid.NewGuid().GetHashCode();
-        ftUniqueIDRegistry.Register(UID, gameObject.GetInstanceID());
-    }
-
-    void OnDestroy()
-    {
-        if (UID == 0) return;
-        if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-        ftUniqueIDRegistry.Deregister(UID);
-    }
-
-    void Update()
-    {
-        if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-        if (!ftUniqueIDRegistry.Mapping.ContainsKey(UID)) ftUniqueIDRegistry.Register(UID, gameObject.GetInstanceID());
-        if (gameObject.GetInstanceID() != ftUniqueIDRegistry.GetInstanceId(UID))
-        {
-            UID = Guid.NewGuid().GetHashCode();
-            ftUniqueIDRegistry.Register(UID, gameObject.GetInstanceID());
-        }
+        if (UID == 0) UID = Guid.NewGuid().GetHashCode(); // legacy
     }
 
     void OnDrawGizmos()

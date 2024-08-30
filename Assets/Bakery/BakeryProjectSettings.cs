@@ -9,14 +9,43 @@ public class BakeryProjectSettings : ScriptableObject
     [SerializeField]
     public bool mipmapLightmaps = false;
 
-    // Use PNG instead of TGA for shadowmasks, directions and L1 maps
+    // Use PNG instead of TGA for shadowmasks, directions and L1 maps?
+    // 'Asset' converts to Unity's own format. It is possible to limit the mipmap count here.
     public enum FileFormat
     {
         TGA = 0,
-        PNG = 1
+        PNG = 1,
+        Asset = 2
     }
     [SerializeField]
     public FileFormat format8bit = FileFormat.TGA;
+
+    // Use .hdr files or Unity assets for color/RNM/L0 lightmaps
+    public enum FileFormatHDR
+    {
+        HDR = 0,
+        Asset = 1
+    }
+    [SerializeField]
+    public FileFormatHDR formatHDR = FileFormatHDR.HDR;
+
+    // Compress lightmaps?
+    public enum Compression
+    {
+        CompressButAllowOverridingAsset = 0, // default behaviour
+        ForceCompress = 1,
+        ForceNoCompress = 2
+    }
+    [SerializeField]
+    public Compression lightmapCompression = Compression.CompressButAllowOverridingAsset;
+
+    // Max mipmap count when format8bit or formatHDR are set to Asset
+    [SerializeField]
+    public int maxAssetMip = 100;
+
+    // Use high quality compression for directional and SH L1 maps? (on desktop, high = BC7, not high = DXT1)
+    [SerializeField]
+    public bool dirHighQuality = true;
 
     // Padding values for atlas packers
     [SerializeField]
@@ -52,9 +81,23 @@ public class BakeryProjectSettings : ScriptableObject
     [SerializeField]
     public bool alternativeScaleInLightmap = false;
 
+    // Make xatlas align charts to 4x4 block boundaries to make texture compression happy
+    [SerializeField]
+    public bool alignToTextureBlocksWithXatlas = true;
+
     // Should we adjust sample positions to prevent incorrect shadowing on very low-poly meshes with smooth normals?
     [SerializeField]
     public bool generateSmoothPos = true;
+
+    [SerializeField]
+    public bool perTriangleSmoothPos = true;
+
+    // Use renderer.receiveGI
+    [SerializeField]
+    public bool takeReceiveGIIntoAccount = true;
+
+    [SerializeField]
+    public bool removeRinging = false;
 }
 
 #endif

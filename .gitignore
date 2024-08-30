@@ -90,3 +90,5 @@ WebGL Builds/TemplateData/webgl-logo.png
 WebGL Builds/TemplateData/webmemd-icon.png
 Assets/Scripts/GoogleAuthenticator.cs
 Assets/FacebookManager.cs
+Assets/Editor/x64/Bakery/cudnn64_7.dll
+Assets/Editor/x64/Bakery/cudnn64_7.dll.meta
