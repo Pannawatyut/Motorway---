@@ -12,6 +12,13 @@ PluginImporter:
   validateReferences: 1
   platformData:
   - first:
+      : Any
+    second:
+      enabled: 0
+      settings:
+        Exclude Linux64: 1
+        Exclude OSXUniversal: 1
+  - first:
       Android: Android
     second:
       enabled: 1
@@ -25,7 +32,14 @@ PluginImporter:
       Editor: Editor
     second:
       enabled: 1
-      settings: {}
+      settings:
+        DefaultValueInitialized: true
+  - first:
+      Windows Store Apps: WindowsStoreApps
+    second:
+      enabled: 0
+      settings:
+        CPU: AnyCPU
   userData: 
   assetBundleName: 
   assetBundleVariant: 
