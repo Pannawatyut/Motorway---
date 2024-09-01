@@ -78,11 +78,12 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         {
             _Name = FindObjectOfType<entername>();
         }
-        if (_Launcher == null)
+
+       /* if (_Launcher == null)
         {
             Debug.Log("tring to find Launcher");
             //_Launcher = FindObjectsOfType<LaunCherTest1>()[0];
-        }
+        }*/
     }
 
     ///Not Use///
@@ -174,36 +175,26 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
             yield break;
         }
 
-        List<int> accessoryIds = new List<int>();
-        List<int> accessoryColorIds = new List<int>();
-
-        for (int i = 0; i < selectItem.Accessories.Length; i++)
-        {
-            if (selectItem.Accessories[i].activeSelf)
-            {
-                accessoryIds.Add(i);
-            }
-        }
-
         var Avatar = new Avatar
         {
             name = _Name.username.text,
-            gender_id = selectItem.selectedSex,
-            skin_id = selectItem.selectedSkinColor,
-            face_id = selectItem.selectedFaceIndex,
-            hair_id = selectItem.selectedHairIndex,
-            hair_color_id = selectItem.selectedHairColorIndex,
-            shirt_id = selectItem.selectedShirtIndex,
-            shirt_color_id = selectItem.selectedShirtColorIndex,
-            pant_id = selectItem.selectedPantsIndex,
-            pant_color_id = selectItem.selectedPantsColorIndex,
-            shoe_id = selectItem.selectedShoesIndex,
-            shoe_color_id = selectItem.selectedShoesColorIndex,
-            accessory_id = selectItem.selectedAccessoryIndex,
+            gender_id = selectItem.selectedSex.ToString(),
+            skin_id = selectItem.selectedSkinColor.ToString(),
+            face_id = selectItem.selectedFaceIndex.ToString(),
+            hair_id = selectItem.selectedHairIndex.ToString(),
+            hair_color_id = selectItem.selectedHairColorIndex.ToString(),
+            shirt_id = selectItem.selectedShirtIndex.ToString(),
+            shirt_color_id = selectItem.selectedShirtColorIndex.ToString(),
+            pant_id = selectItem.selectedPantsIndex.ToString(),
+            pant_color_id = selectItem.selectedPantsColorIndex.ToString(),
+            shoe_id = selectItem.selectedShoesIndex.ToString(),
+            shoe_color_id = selectItem.selectedShoesColorIndex.ToString(),
+            accessory_id = selectItem.selectedAccessoryIndex.ToString(),
 
         };
 
         string json = JsonUtility.ToJson(Avatar);
+        Debug.Log("SENT THIS CREATE AVATAR-> " + json);
 
         using var request = new UnityWebRequest("http://13.250.106.216:1000/api/avatar/createAvatar", "POST")
         {
@@ -234,18 +225,18 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
             {
                 Debug.Log("Login successful!");
                 _loginManager._Avatar.name = avatarResponse.data.avatar.name;
-                _loginManager._Avatar.gender_id = avatarResponse.data.avatar.gender_id;
-                _loginManager._Avatar.skin_id = avatarResponse.data.avatar.skin_id;
-                _loginManager._Avatar.face_id = avatarResponse.data.avatar.face_id;
-                _loginManager._Avatar.hair_id = avatarResponse.data.avatar.hair_id;
-                _loginManager._Avatar.hair_color_id = avatarResponse.data.avatar.hair_color_id;
-                _loginManager._Avatar.shirt_id = avatarResponse.data.avatar.shirt_id;
-                _loginManager._Avatar.shirt_color_id = avatarResponse.data.avatar.shirt_color_id;
-                _loginManager._Avatar.pant_id = avatarResponse.data.avatar.pant_id;
-                _loginManager._Avatar.pant_color_id = avatarResponse.data.avatar.pant_color_id;
-                _loginManager._Avatar.shoe_id = avatarResponse.data.avatar.shoe_id;
-                _loginManager._Avatar.shoe_color_id = avatarResponse.data.avatar.shoe_color_id;
-                _loginManager._Avatar.accessory_id = avatarResponse.data.avatar.accessory_id;
+                _loginManager._Avatar.gender_id = int.Parse(avatarResponse.data.avatar.gender_id);
+                _loginManager._Avatar.skin_id = int.Parse(avatarResponse.data.avatar.skin_id);
+                _loginManager._Avatar.face_id = int.Parse(avatarResponse.data.avatar.face_id);
+                _loginManager._Avatar.hair_id = int.Parse(avatarResponse.data.avatar.hair_id);
+                _loginManager._Avatar.hair_color_id = int.Parse(avatarResponse.data.avatar.hair_color_id);
+                _loginManager._Avatar.shirt_id = int.Parse(avatarResponse.data.avatar.shirt_id);
+                _loginManager._Avatar.shirt_color_id = int.Parse(avatarResponse.data.avatar.shirt_color_id);
+                _loginManager._Avatar.pant_id = int.Parse(avatarResponse.data.avatar.pant_id);
+                _loginManager._Avatar.pant_color_id = int.Parse(avatarResponse.data.avatar.pant_color_id);
+                _loginManager._Avatar.shoe_id = int.Parse(avatarResponse.data.avatar.shoe_id);
+                _loginManager._Avatar.shoe_color_id = int.Parse(avatarResponse.data.avatar.shoe_color_id);
+                _loginManager._Avatar.accessory_id = int.Parse(avatarResponse.data.avatar.accessory_id);
 
                 //_Launcher.Connect();
                 _LoadingBar.SetActive(true);
@@ -283,21 +274,19 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
     [System.Serializable]
     public class Avatar
     {
-        public string uid;
         public string name;
-        public int gender_id;
-        public int skin_id;
-        public int face_id;
-        public int hair_id;
-        public int hair_color_id;
-        public int shirt_id;
-        public int shirt_color_id;
-        public int pant_id;
-        public int pant_color_id;
-        public int shoe_id;
-        public int shoe_color_id;
-        public int accessory_id; // Allow multiple accessories
-        public int accessory_color_ids; // Allow multiple accessory colors
+        public string gender_id;
+        public string skin_id;
+        public string face_id;
+        public string hair_id;
+        public string hair_color_id;
+        public string shirt_id;
+        public string shirt_color_id;
+        public string pant_id;
+        public string pant_color_id;
+        public string shoe_id;
+        public string shoe_color_id;
+        public string accessory_id; // Allow multiple accessories
     }
 
 }

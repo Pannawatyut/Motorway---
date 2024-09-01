@@ -61,7 +61,7 @@ public class CharacterCountDisplay : MonoBehaviour
             if (hasProfanity)
             {
                 feedbackText.SetActive(true);
-                Nulltext.SetActive(false);
+                
                 // Optionally, you can clear the input field if it contains profanity
                 // inputField.text = ""; // Uncomment this line if you want to clear the text
             }
@@ -79,12 +79,18 @@ public class CharacterCountDisplay : MonoBehaviour
             {
                 _Male.interactable = true;
                 _Female.interactable = true;
+                Debug.Log(" NOT NULL");
+                Nulltext.SetActive(false);
             }
             else
             {
                 _Male.interactable = false;
                 _Female.interactable = false;
+                Debug.Log("NULL");
+                Nulltext.SetActive(true);
             }
+
+            
         }
     }
 
