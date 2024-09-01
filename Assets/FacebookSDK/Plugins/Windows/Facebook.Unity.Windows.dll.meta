@@ -12,13 +12,6 @@ PluginImporter:
   validateReferences: 1
   platformData:
   - first:
-      : Any
-    second:
-      enabled: 0
-      settings:
-        Exclude Linux64: 1
-        Exclude OSXUniversal: 1
-  - first:
       Any: 
     second:
       enabled: 0
@@ -27,8 +20,7 @@ PluginImporter:
       Editor: Editor
     second:
       enabled: 1
-      settings:
-        DefaultValueInitialized: true
+      settings: {}
   - first:
       Standalone: Win
     second:
@@ -39,12 +31,6 @@ PluginImporter:
       Standalone: Win64
     second:
       enabled: 1
-      settings:
-        CPU: AnyCPU
-  - first:
-      Windows Store Apps: WindowsStoreApps
-    second:
-      enabled: 0
       settings:
         CPU: AnyCPU
   userData: 
