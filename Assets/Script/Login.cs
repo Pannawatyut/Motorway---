@@ -136,7 +136,7 @@ public class LoginManager : MonoBehaviour
                 if (_Avatar.name != null)
                 {
                     Debug.Log("Found Avatar");
-                    _Launcher.Connect();
+                    // _Launcher.Connect();
                 }
                 else
                 {
