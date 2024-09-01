@@ -3408,3 +3408,548 @@ Symbol file LoadedFromMemory is not a mono symbol file
 Symbol file LoadedFromMemory is not a mono symbol file
 Symbol file LoadedFromMemory is not a mono symbol file
 Symbol file LoadedFromMemory is not a mono symbol file
+2024-9-1
+Rendering UV GBuffer for Game_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA3 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA4 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA5 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA6 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA5.lz4" 2 0 5 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA3.lz4" 2 0 3 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA4.lz4" 2 0 4 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA2.lz4" 2 0 2 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA6.lz4" 2 0 6 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_7_0_6" 1924 0 7 batchpointlight_7_0_6.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_7" 1924 0 7 direct0.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_7" 1924 0 7 direct1.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_7" 1924 0 7 direct2.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_7" 1924 0 7 direct3.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_7" 1924 0 7 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "probes" 4 0 7 comp_7.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_5_0_6" 4 0 5 batchpointlight_5_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_5" 4 0 5 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_5" 4 0 5 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_5" 4 0 5 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_5" 4 0 5 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_5" 4 0 5 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5" 4 0 5 comp_5.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_3_0_6" 4 0 3 batchpointlight_3_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_3" 4 0 3 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_3" 4 0 3 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_3" 4 0 3 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_3" 4 0 3 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_3" 4 0 3 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_4_0_6" 4 0 4 batchpointlight_4_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_4" 4 0 4 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_4" 4 0 4 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_4" 4 0 4 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_4" 4 0 4 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_4" 4 0 4 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4" 4 0 4 comp_4.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_2_0_6" 4 0 2 batchpointlight_2_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_2" 4 0 2 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_2" 4 0 2 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_2" 4 0 2 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_2" 4 0 2 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_2" 4 0 2 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_6_0_6" 4 0 6 batchpointlight_6_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_6" 4 0 6 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_6" 4 0 6 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_6" 4 0 6 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_6" 4 0 6 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_6" 4 0 6 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6" 4 0 6 comp_6.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_1_0_6" 4 0 1 batchpointlight_1_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_1" 4 0 1 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_1" 4 0 1 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_1" 4 0 1 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_1" 4 0 1 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_1" 4 0 1 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_0_0_6" 4 0 0 batchpointlight_0_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_0" 4 0 0 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_0" 4 0 0 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_0" 4 0 0 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_0" 4 0 0 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_0" 4 0 0 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA50.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA30.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA40.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA20.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA60.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA10.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM00.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA51.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA31.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA41.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA21.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA61.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA11.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM01.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA52.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA32.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA42.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA22.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA62.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA12.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM02.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA53.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA33.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA43.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA23.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA63.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA13.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM03.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "probes_final" 1924 16 7 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_final" 4 16 5 "gi_Game_LMA54.bin" "Game_LMA5_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_final" 4 16 3 "gi_Game_LMA34.bin" "Game_LMA3_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_final" 4 16 4 "gi_Game_LMA44.bin" "Game_LMA4_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_final" 4 16 2 "gi_Game_LMA24.bin" "Game_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_final" 4 16 6 "gi_Game_LMA64.bin" "Game_LMA6_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_final" 4 16 1 "gi_Game_LMA14.bin" "Game_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_final" 4 16 0 "gi_Game_LM04.bin" "Game_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Soar\AppData\Local\Temp\frender" "probes_final_" 4 0 7 shcomp_7.bin
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "5" "Game_LMA5_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "3" "Game_LMA3_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "4" "Game_LMA4_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "2" "Game_LMA2_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "6" "Game_LMA6_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "1" "Game_LMA1_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "0" "Game_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA5_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA3_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA4_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA2_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA6_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LM0_final.hdr" 1024
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 2
+Num alphas of 1024x256: 1
+Num alphas of 1024x1024: 4
+Num alphas of 2048x1024: 4
+Done
+Rendering UV GBuffer for Game_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA3 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA4 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA5 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA6 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_7_0_6" 1924 0 7 batchpointlight_7_0_6.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_7" 1924 0 7 direct0.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_7" 1924 0 7 direct1.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_7" 1924 0 7 direct2.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_7" 1924 0 7 direct3.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_7" 1924 0 7 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "probes" 4 0 7 comp_7.bin
+Running ftraceRTX texgiprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "probes_final" 1924 16 7 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Soar\AppData\Local\Temp\frender" "probes_final_" 4 0 7 shcomp_7.bin
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 2
+Num alphas of 1024x256: 1
+Num alphas of 1024x1024: 4
+Num alphas of 2048x1024: 4
+Done
+Rendering UV GBuffer for Game_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA3 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA4 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA5 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA6 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA5.lz4" 2 0 5 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA3.lz4" 2 0 3 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA4.lz4" 2 0 4 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA2.lz4" 2 0 2 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA6.lz4" 2 0 6 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\Soar\AppData\Local\Temp\frender" "uvpos_Game_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_7_0_6" 1924 0 7 batchpointlight_7_0_6.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_7" 1924 0 7 direct0.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_7" 1924 0 7 direct1.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_7" 1924 0 7 direct2.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_7" 1924 0 7 direct3.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_7" 1924 0 7 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "probes" 4 0 7 comp_7.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_5_0_6" 4 0 5 batchpointlight_5_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_5" 4 0 5 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_5" 4 0 5 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_5" 4 0 5 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_5" 4 0 5 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_5" 4 0 5 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5" 4 0 5 comp_5.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_3_0_6" 4 0 3 batchpointlight_3_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_3" 4 0 3 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_3" 4 0 3 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_3" 4 0 3 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_3" 4 0 3 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_3" 4 0 3 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_4_0_6" 4 0 4 batchpointlight_4_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_4" 4 0 4 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_4" 4 0 4 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_4" 4 0 4 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_4" 4 0 4 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_4" 4 0 4 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4" 4 0 4 comp_4.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_2_0_6" 4 0 2 batchpointlight_2_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_2" 4 0 2 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_2" 4 0 2 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_2" 4 0 2 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_2" 4 0 2 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_2" 4 0 2 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_6_0_6" 4 0 6 batchpointlight_6_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_6" 4 0 6 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_6" 4 0 6 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_6" 4 0 6 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_6" 4 0 6 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_6" 4 0 6 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6" 4 0 6 comp_6.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_1_0_6" 4 0 1 batchpointlight_1_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_1" 4 0 1 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_1" 4 0 1 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_1" 4 0 1 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_1" 4 0 1 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_1" 4 0 1 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_0_0_6" 4 0 0 batchpointlight_0_0_6.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_0" 4 0 0 direct0.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_0" 4 0 0 direct1.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_0" 4 0 0 direct2.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_0" 4 0 0 direct3.bin
+Running ftraceRTX sun "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_0" 4 0 0 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA50.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA30.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA40.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA20.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA60.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA10.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM00.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA51.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA31.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA41.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA21.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA61.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA11.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM01.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA52.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA32.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA42.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA22.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA62.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA12.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM02.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA53.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA33.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA43.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA23.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA63.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA13.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM03.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "probes_final" 1924 16 7 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA5_final" 4 16 5 "gi_Game_LMA54.bin" "Game_LMA5_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA3_final" 4 16 3 "gi_Game_LMA34.bin" "Game_LMA3_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA4_final" 4 16 4 "gi_Game_LMA44.bin" "Game_LMA4_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA2_final" 4 16 2 "gi_Game_LMA24.bin" "Game_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA6_final" 4 16 6 "gi_Game_LMA64.bin" "Game_LMA6_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LMA1_final" 4 16 1 "gi_Game_LMA14.bin" "Game_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\Soar\AppData\Local\Temp\frender" "Game_LM0_final" 4 16 0 "gi_Game_LM04.bin" "Game_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Soar\AppData\Local\Temp\frender" "probes_final_" 4 0 7 shcomp_7.bin
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "5" "Game_LMA5_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "3" "Game_LMA3_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "4" "Game_LMA4_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "2" "Game_LMA2_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "6" "Game_LMA6_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "1" "Game_LMA1_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\Soar\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "C:\Users\Soar\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\Soar\AppData\Local\Temp\frender" "0" "Game_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA5_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA3_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA4_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA2_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA6_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\Soar\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "C:/Users/Soar/Documents/GitHub/Motorway---/Assets/BakeryLightmaps/Game_LM0_final.hdr" 1024
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 2
+Num alphas of 1024x256: 1
+Num alphas of 1024x1024: 4
+Num alphas of 2048x1024: 4
+Done
+Rendering UV GBuffer for Game_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA3 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA4 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA5 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA6 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\Soar\AppData\Local\Temp\frender" "PointBatch_7_0_6" 1924 0 7 batchpointlight_7_0_6.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_1_7" 1924 0 7 direct0.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_2_7" 1924 0 7 direct1.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_3_7" 1924 0 7 direct2.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_4_7" 1924 0 7 direct3.bin
+Running ftraceRTX sunprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "light_5_7" 1924 0 7 direct4.bin
+Running ftraceRTX addmul "C:\Users\Soar\AppData\Local\Temp\frender" "probes" 4 0 7 comp_7.bin
+Running ftraceRTX texgiprobesh "C:\Users\Soar\AppData\Local\Temp\frender" "probes_final" 1924 16 7 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\Soar\AppData\Local\Temp\frender" "probes_final_" 4 0 7 shcomp_7.bin
+Symbol file LoadedFromMemory is not a mono symbol file
+Total cache size 37678280
+Total cache size after purge 37678280
+Total cache size 37678280
+Total cache size after purge 37678280
+Rebuilding DAG because directory contents changed: Library/PlayerDataCache/Win64/Data
+*** Tundra requires additional run (0.02 seconds), 0 items updated, 0 evaluated
+Finished compiling graph: 213 nodes, 423 flattened edges (423 ToBuild, 0 ToUse), maximum node priority 7
+[183/212    0s] WriteText Library/Bee/artifacts/csharpactions/boot.config_tyr4.info
+[185/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/Resources/unity_builtin_extra
+[186/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets3.resource
+[187/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/level4.resS
+[188/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/resources.assets
+[189/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets2.assets.resS
+[190/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets0.assets
+[191/212    0s] AddBootConfigGUID Library/Bee/artifacts/WinPlayerBuildProgram/boot.config
+[192/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/level1
+[193/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets3.assets
+[194/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets4.assets
+[195/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/level0.resS
+[196/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets2.assets
+[197/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/resources.resource
+[198/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/level2
+[199/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets3.assets.resS
+[200/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets1.assets
+[201/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/level3
+[202/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/level0
+[203/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/boot.config
+[204/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/globalgamemanagers
+[205/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/globalgamemanagers.assets
+[206/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/globalgamemanagers.assets.resS
+[207/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/level4
+[208/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets0.assets.resS
+[209/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets1.assets.resS
+[210/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/sharedassets4.assets.resS
+[211/212    0s] CopyFiles C:/Users/Soar/Downloads/Motorway/Motorway_exe/MotorwayRender_Data/resources.assets.resS
+*** Tundra build success (0.53 seconds), 28 items updated, 212 evaluated
+Total cache size 37678280
+Total cache size after purge 37678280
+Done
+Done
+Done
+Done
+Running ftraceRTX.exe interactive "C:\Users\Soar\AppData\Local\Temp\frender" a 4 0 0 preview.bin
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Done
+Running ftraceRTX.exe interactive "C:\Users\Soar\AppData\Local\Temp\frender" a 4 0 0 preview.bin
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+abort_threads: Failed aborting id: 000000000000BAE4, mono_thread_manage will ignore it
+
+abort_threads: Failed aborting id: 000000000000BAE4, mono_thread_manage will ignore it
+

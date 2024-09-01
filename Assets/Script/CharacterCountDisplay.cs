@@ -49,6 +49,9 @@ public class CharacterCountDisplay : MonoBehaviour
         }
     }
 
+
+    public Button _Male;
+    public Button _Female;
     void UpdateCharacterCountAndFilterProfanity(string text)
     {
         if (inputField != null && characterCountText != null)
@@ -58,7 +61,7 @@ public class CharacterCountDisplay : MonoBehaviour
             if (hasProfanity)
             {
                 feedbackText.SetActive(true);
-                Nulltext.SetActive(false);
+                
                 // Optionally, you can clear the input field if it contains profanity
                 // inputField.text = ""; // Uncomment this line if you want to clear the text
             }
@@ -71,6 +74,23 @@ public class CharacterCountDisplay : MonoBehaviour
             int currentTextLength = inputField.text.Length;
             int characterLimit = inputField.characterLimit;
             characterCountText.text = currentTextLength + "/" + characterLimit;
+
+            if (currentTextLength != 0)
+            {
+                _Male.interactable = true;
+                _Female.interactable = true;
+                Debug.Log(" NOT NULL");
+                Nulltext.SetActive(false);
+            }
+            else
+            {
+                _Male.interactable = false;
+                _Female.interactable = false;
+                Debug.Log("NULL");
+                Nulltext.SetActive(true);
+            }
+
+            
         }
     }
 

@@ -5,8 +5,9 @@ using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.Events;
 
-public class CheckGenderInScene : MonoBehaviourPunCallbacks
+public class CheckGenderInScene : MonoBehaviour
 {
     [SerializeField]
     private List<SelectItem._AvatarData> avatarData = new List<SelectItem._AvatarData>();
@@ -17,6 +18,31 @@ public class CheckGenderInScene : MonoBehaviourPunCallbacks
     {
         get { return avatarData; }
         private set { avatarData = value; }
+    }
+
+    public void OnEnable()
+    {
+        _SetupUI();
+    }
+
+    public UnityEvent _Event_Male;
+    public UnityEvent _Event_FeMale;
+
+    public void _SetupUI()
+    {
+
+        _loginManager = FindObjectOfType<LoginManager>();
+
+        if (_loginManager._Avatar.gender_id == 3) // MALE
+        {
+            _Event_Male.Invoke();
+            Debug.Log("is MALE");
+        }
+        else // FEMALE
+        {
+            _Event_FeMale.Invoke();
+            Debug.Log("is Female");
+        }
     }
 
     /////////// Save Avatar ////////////////
@@ -33,6 +59,7 @@ public class CheckGenderInScene : MonoBehaviourPunCallbacks
         AvatarData.Add(new SelectItem._AvatarData { Type = "Shoes", Id = selectItem.selectedShoesIndex, ColorId = selectItem.selectedShoesColorIndex });
         AvatarData.Add(new SelectItem._AvatarData { Type = "Face", Id = selectItem.selectedFaceIndex, ColorId = 0 });
         AvatarData.Add(new SelectItem._AvatarData { Type = "SkinColor", Id = selectItem.selectedSkinColor, ColorId = 0 });
+
         for (int i = 0; i < selectItem.Accessories.Length; i++)
         {
             if (selectItem.Accessories[i].activeSelf)
@@ -42,101 +69,24 @@ public class CheckGenderInScene : MonoBehaviourPunCallbacks
         }
 
         AvatarData.Add(new SelectItem._AvatarData { Type = "Sex", Id = selectItem.selectedSex, ColorId = 0 });
-
-
-        SaveAvatarDataToStorage();
-    }
-    private void Update()
-    {
-        if (_loginManager == null)
-        {
-            _loginManager = FindObjectOfType<LoginManager>();
-        }
-        if (_Launcher == null)
-        {
-            Debug.Log("tring to find Launcher");
-            _Launcher = FindObjectsOfType<LaunCherTest1>()[0];
-        }
     }
 
-    ///Not Use///
-    public void LoadAvatarDataFromAssetCharactor()
-    {
-        SelectItem selectItem = FindObjectOfType<SelectItem>(); // Find SelectItem in the scene
-        if (selectItem != null)
-        {
-            bool[] loadedAccessories = new bool[selectItem.Accessories.Length];
-
-            foreach (var data in AvatarData)
-            {
-                switch (data.Type)
-                {
-                    case "Hair":
-                        selectItem.SelectHair(data.Id);
-                        selectItem.ChangeHairColor(data.ColorId);
-                        break;
-                    case "Shirt":
-                        selectItem.SelectShirt(data.Id);
-                        selectItem.ChangeShirtColor(data.ColorId);
-                        break;
-                    case "Pants":
-                        selectItem.SelectPants(data.Id);
-                        selectItem.ChangePantsColor(data.ColorId);
-                        break;
-                    case "Shoes":
-                        selectItem.SelectShoes(data.Id);
-                        selectItem.ChangeShoesColor(data.ColorId);
-                        break;
-                    case "Face":
-                        selectItem.SelectFace(data.Id);
-                        break;
-                    case "SkinColor":
-                        selectItem.ChangeSkinColor(data.Id);
-                        break;
-                    case "Accessory":
-                        if (data.Id >= 0 && data.Id < selectItem.Accessories.Length)
-                        {
-                            selectItem.Accessories[data.Id].SetActive(true);
-                            loadedAccessories[data.Id] = true;
-                        }
-                        break;
-                    case "Sex":
-                        selectItem.BodySelection(data.Id);
-                        break;
-                }
-            }
-
-            // Disable accessories that were not loaded from saved data
-            for (int i = 0; i < selectItem.Accessories.Length; i++)
-            {
-                if (!loadedAccessories[i])
-                {
-                    selectItem.Accessories[i].SetActive(false);
-                }
-            }
-        }
-    }
-
-
-    private List<SelectItem._AvatarData> LoadSavedAvatarData()
-    {
-        return new List<SelectItem._AvatarData>();
-    }
-
-
-    private void SaveAvatarDataToStorage()
-    {
-        // Implement saving logic to storage
-    }
+    public GameObject _LoadingBar;
+    public GameObject _LoadingFailed;
+    public GameObject _LoadingOK;
 
     public void OnClickCreateAvatarButton()
     {
         StartCoroutine(CreateAvatar());
     }
 
+    public AvatarResponse avatarResponse;
 
     private IEnumerator CreateAvatar()
     {
+        // ADD LOADING POPUP HERE
+        _LoadingBar.SetActive(true);
+
         SelectItem selectItem = FindObjectOfType<SelectItem>();
 
         if (selectItem == null)
@@ -186,20 +136,22 @@ public class CheckGenderInScene : MonoBehaviourPunCallbacks
 
         yield return request.SendWebRequest();
 
+        _LoadingBar.SetActive(false);
+
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
             Debug.LogError("Status Code: " + request.responseCode);
             Debug.LogError("URL: " + request.url);
+            _LoadingFailed.SetActive(true);
         }
         else
         {
-            Debug.Log("Login Response: " + request.downloadHandler.text);
-            var avatarResponse = JsonUtility.FromJson<AvatarResponse>(request.downloadHandler.text);
+            Debug.Log("SAVE AVATAR - UPDATE API : " + request.downloadHandler.text);
+            avatarResponse = JsonUtility.FromJson<AvatarResponse>(request.downloadHandler.text);
 
             if (avatarResponse.status)
             {
-                Debug.Log("Login successful!");
                 _loginManager._Avatar.gender_id = int.Parse(avatarResponse.data.avatar.gender_id);
                 _loginManager._Avatar.skin_id = int.Parse(avatarResponse.data.avatar.skin_id);
                 _loginManager._Avatar.face_id = int.Parse(avatarResponse.data.avatar.face_id);
@@ -211,13 +163,17 @@ public class CheckGenderInScene : MonoBehaviourPunCallbacks
                 _loginManager._Avatar.pant_color_id = int.Parse(avatarResponse.data.avatar.pant_color_id);
                 _loginManager._Avatar.shoe_id = int.Parse(avatarResponse.data.avatar.shoe_id);
                 _loginManager._Avatar.shoe_color_id = int.Parse(avatarResponse.data.avatar.shoe_color_id);
-                _loginManager._Avatar.accessory_ids = int.Parse(avatarResponse.data.avatar.accessory_id);
+                _loginManager._Avatar.accessory_id = int.Parse(avatarResponse.data.avatar.accessory_id);
 
-                _Launcher.Connect();
+                _LoadingOK.SetActive(true);
+                yield return new WaitForSeconds(3);
+
+                Application.LoadLevel("Game");
             }
             else
             {
-                Debug.LogError("Login failed!");
+                Debug.Log("SAVE AVATAR FAILED - UPDATE API : " + request.downloadHandler.text);
+                // ADD FAILED POPUP HERE
             }
         }
     }

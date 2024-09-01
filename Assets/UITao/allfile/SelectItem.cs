@@ -63,9 +63,47 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
     public List<_AvatarData> avatarData = new List<_AvatarData>();
 
+    public bool _isSetup;
     public override void OnEnable()
     {
-        _RPCName(_loginManager._Avatar.name);
+
+        if (photonView.IsMine)
+        {
+            if (!_isSetup)
+            {
+                if (_loginManager == null)
+                {
+                    _loginManager = FindObjectOfType<LoginManager>();
+                }
+
+                if (_loginManager._Avatar.name != "")
+                {
+                    // GET USER AVATAR
+                    selectedHairIndex = _loginManager._Avatar.hair_id;
+                    selectedHairColorIndex = _loginManager._Avatar.hair_color_id;
+                    selectedShirtIndex = _loginManager._Avatar.shirt_id;
+                    selectedShirtColorIndex = _loginManager._Avatar.shirt_color_id;
+                    selectedPantsIndex = _loginManager._Avatar.pant_id;
+                    selectedPantsColorIndex = _loginManager._Avatar.pant_color_id;
+                    selectedShoesIndex = _loginManager._Avatar.shoe_id;
+                    selectedShoesColorIndex = _loginManager._Avatar.shoe_color_id;
+                    selectedFaceIndex = _loginManager._Avatar.face_id;
+                    selectedAccessoryIndex = _loginManager._Avatar.accessory_id;
+                    selectedSkinColor = _loginManager._Avatar.skin_id;
+                    //selectedSex = _loginManager._Avatar.gender_id; - FIXED BY PREFAB
+
+                    // GET NAME
+                    Name = _loginManager._Avatar.name;
+                    BodySelection(selectedSex);
+                }
+
+                _isSetup = true;
+            }
+            
+            
+            
+        }
+
     }
     public void _RPCName(string _Name)
     {
@@ -77,60 +115,6 @@ public class SelectItem : MonoBehaviourPunCallbacks
     {
         PlayerName.text = _Name;
     }
-    void Start()
-    {
-        BodySelection(selectedSex);
-        if (photonView.IsMine)
-        {
-            if (_loginManager == null)
-            {
-                _loginManager = FindObjectOfType<LoginManager>();
-            }
-
-
-            
-            //////////////////////////////// Load Avatar To Script Name AssetCharactor //////////////////////////////////////////////////////////// 
-            //int hairId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Hair")?.Id ?? selectedHairIndex;
-            //int hairColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Hair")?.ColorId ?? selectedHairColorIndex;
-
-            //int faceId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Face")?.Id ?? selectedFaceIndex;
-            //int faceColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Face")?.ColorId ?? 0; // Default face color
-
-            //int shirtId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shirt")?.Id ?? selectedShirtIndex;
-            //int shirtColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shirt")?.ColorId ?? selectedShirtColorIndex;
-
-            //int pantsId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Pants")?.Id ?? selectedPantsIndex;
-            //int pantsColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Pants")?.ColorId ?? selectedPantsColorIndex;
-
-            //int shoesId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shoes")?.Id ?? selectedShoesIndex;
-            //int shoesColorId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Shoes")?.ColorId ?? selectedShoesColorIndex;
-
-            //// Collect all accessory IDs and colors
-            //List<int> accessoryIds = new List<int>();
-            //List<int> accessoryColorIds = new List<int>();
-            //foreach (var data in AssetCharactor.Instance.AvatarData)
-            //{
-            //    if (data.Type == "Accessory")
-            //    {
-            //        accessoryIds.Add(data.Id);
-            //        accessoryColorIds.Add(data.ColorId);
-            //    }
-            //}
-
-            //int skincolorID = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "SkinColor")?.Id ?? selectedSkinColor;
-
-            //int sexId = AssetCharactor.Instance.AvatarData.Find(d => d.Type == "Sex")?.Id ?? selectedSex;
-
-            //// Call RPC to initialize avatar for all players
-            //photonView.RPC("InitializeAvatar", RpcTarget.AllBuffered, 
-            //    hairId, hairColorId, faceId, faceColorId,
-            //    shirtId, shirtColorId, pantsId, pantsColorId,
-            //    shoesId, shoesColorId, accessoryIds,
-            //    sexId, skincolorID);
-        }
-
-    }
-
     
     private void LoadSavedAvatarData()
     {
@@ -194,6 +178,10 @@ public class SelectItem : MonoBehaviourPunCallbacks
               $"PantsIndex={selectedPantsIndex}, PantsColorIndex={selectedPantsColorIndex}, " +
               $"ShoesIndex={selectedShoesIndex}, ShoesColorIndex={selectedShoesColorIndex}, " +
               $"AccessoryIndex={selectedAccessoryIndex}, Sex={selectedSex}, SkinColor={selectedSkinColor}");
+
+        // 
+        BodySelection(selectedSex);
+
         ChangeSkinColor(selectedSkinColor);
         SelectHair(selectedHairIndex);
         ChangeHairColor(selectedHairColorIndex);
@@ -205,7 +193,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
         SelectShoes(selectedShoesIndex);
         ChangeShoesColor(selectedShoesColorIndex);
         //ToggleAccessory(selectedAccessoryIndex);
-        BodySelection(selectedSex);
+        
         
     }
 
@@ -214,41 +202,11 @@ public class SelectItem : MonoBehaviourPunCallbacks
         if (_loginManager != null && isInitialized == false)
         {
             isInitialized = true;
-            selectedHairIndex = _loginManager._Avatar.hair_id;
-            selectedHairColorIndex = _loginManager._Avatar.hair_color_id;
-            selectedShirtIndex = _loginManager._Avatar.shirt_id;
-            selectedShirtColorIndex = _loginManager._Avatar.shirt_color_id;
-            selectedPantsIndex = _loginManager._Avatar.pant_id;
-            selectedPantsColorIndex = _loginManager._Avatar.pant_color_id;
-            selectedShoesIndex = _loginManager._Avatar.shoe_id;
-            selectedShoesColorIndex = _loginManager._Avatar.shoe_color_id;
-            selectedFaceIndex = _loginManager._Avatar.face_id;
-            selectedAccessoryIndex = _loginManager._Avatar.accessory_ids;
-            selectedSkinColor = _loginManager._Avatar.skin_id;
-            selectedSex = _loginManager._Avatar.gender_id;
-            Name = _loginManager._Avatar.name;
-            PlayerName.text = Name;
-            //BodySelection(selectedSex);
-            SelectHair(selectedHairIndex);
-            SelectShirt(selectedShirtIndex);
-            SelectPants(selectedPantsIndex);
-            SelectShoes(selectedShoesIndex);
-            SelectFace(selectedFaceIndex);
-            ChangeSkinColor(selectedSkinColor);
-
-            ChangeShirtColor(selectedShirtColorIndex);
-            ChangePantsColor(selectedPantsColorIndex);
-            ChangeShoesColor(selectedShoesColorIndex);
-
-            photonView.RPC("InitializeAvatar", RpcTarget.AllBuffered,
-    selectedHairIndex, selectedHairColorIndex, selectedFaceIndex, selectedFaceIndex,
-    selectedShirtIndex, selectedShirtColorIndex, selectedPantsIndex, selectedPantsColorIndex,
-    selectedShoesIndex, selectedShoesColorIndex, selectedAccessoryIndex,
-    selectedSex, selectedSkinColor,Name);
-
-            photonView.RPC("UpdatePlayerNameText", RpcTarget.OthersBuffered, Name);
+           
         }
     }
+
+
 
     [PunRPC]
     void UpdatePlayerNameText(string playerName)
@@ -338,7 +296,17 @@ public class SelectItem : MonoBehaviourPunCallbacks
     {
         if (colorIndex >= 0 && colorIndex < HairColors.Length)
         {
-            HairMaterial.color = HairColors[colorIndex];
+            if (!HairMaterial)
+            {
+                 SelectHair(selectedHairIndex);
+                 HairMaterial.color = HairColors[colorIndex];
+            }
+            else
+            {
+                HairMaterial.color = HairColors[colorIndex];
+            }
+
+            
             selectedHairColorIndex = colorIndex;
 
         }
@@ -346,8 +314,21 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
     public void ToggleAccessory(int index)
     {
+        foreach(GameObject x in Accessories)
+        {
+            x.SetActive(false);
+        }
+
+        foreach (GameObject x in SelectImagesAccessory)
+        {
+            x.SetActive(false);
+        }
+
+
+
         if (index >= 0 && index < Accessories.Length)
         {
+
             if (index == selectedAccessoryIndex)
             {
                 bool isActive = Accessories[index].activeSelf;
@@ -406,7 +387,16 @@ public class SelectItem : MonoBehaviourPunCallbacks
     {
         if (colorIndex >= 0 && colorIndex < HairColors.Length)
         {
-            ShirtMaterial.color = HairColors[colorIndex];
+            if (!ShirtMaterial)
+            {
+                SelectShirt(selectedShirtIndex);
+                ShirtMaterial.color = HairColors[colorIndex];           
+            }
+            else
+            {
+                ShirtMaterial.color = HairColors[colorIndex];
+            }
+            
             selectedShirtColorIndex = colorIndex;
         }
     }
@@ -446,7 +436,17 @@ public class SelectItem : MonoBehaviourPunCallbacks
     {
         if (colorIndex >= 0 && colorIndex < HairColors.Length)
         {
-            PantsMaterial.color = HairColors[colorIndex];
+            if (!PantsMaterial)
+            {
+                SelectPants(selectedPantsIndex);
+                PantsMaterial.color = HairColors[colorIndex];
+            }
+            else
+            {
+                PantsMaterial.color = HairColors[colorIndex];
+            }
+
+            
             selectedPantsColorIndex = colorIndex;
 
         }
@@ -493,7 +493,17 @@ public class SelectItem : MonoBehaviourPunCallbacks
     {
         if (colorIndex >= 0 && colorIndex < HairColors.Length)
         {
-            ShoesMaterial.color = HairColors[colorIndex];
+            if (!ShoesMaterial)
+            {
+                SelectShoes(selectedPantsIndex);
+                ShoesMaterial.color = HairColors[colorIndex];
+            }
+            else
+            {
+                ShoesMaterial.color = HairColors[colorIndex];
+            }
+
+            
             selectedShoesColorIndex = colorIndex;
 
         }
@@ -525,54 +535,88 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
     public void BodySelection(int index)
     {
+
+        // Whatever the hell it is, don't mess with it.
+        // SELECT BODY
         selectedSex = index;
-        ExitGames.Client.Photon.Hashtable customProperties = new ExitGames.Client.Photon.Hashtable();
-        customProperties["selectedSex"] = selectedSex;
-        PhotonNetwork.LocalPlayer.SetCustomProperties(customProperties);
         if(selectedSex == 3)
         {
-            gender[0].SetActive(true);
-            gender[1].SetActive(false);
-            imagboyselect.ChangeButton_BoyAssets();
+            if (gender[0])
+                gender[0].SetActive(true);
+            if(gender[1])
+                gender[1].SetActive(false);
+
+            if(imagboyselect)
+                imagboyselect.ChangeButton_BoyAssets();
         }
         if(selectedSex == 4)
         {
-            gender[0].SetActive(false);
-            gender[1].SetActive(true);
-            imagboyselect.ChangeButton_WomenAssets();
+            if (gender[0])
+                gender[0].SetActive(false);
+            if (gender[1])
+                gender[1].SetActive(true);
+
+            if (imagboyselect)
+                imagboyselect.ChangeButton_WomenAssets();
         }
+
+        // SETUP AVATAR 
+        _SetUpAvatar();
 
     }
 
+    public void _SetUpAvatar()
+    {
+        if(PlayerName)
+            PlayerName.text = Name;
+
+        SelectHair(selectedHairIndex);
+        SelectShirt(selectedShirtIndex);
+        SelectPants(selectedPantsIndex);
+        SelectShoes(selectedShoesIndex);
+        SelectFace(selectedFaceIndex);
+        ChangeHairColor(selectedHairColorIndex);
+        ChangeSkinColor(selectedSkinColor);
+        ChangeShirtColor(selectedShirtColorIndex);
+        ChangePantsColor(selectedPantsColorIndex);
+        ChangeShoesColor(selectedShoesColorIndex);
+        ToggleAccessory(selectedAccessoryIndex);
+
+        // SENT TO OTHER
+        photonView.RPC("InitializeAvatar", RpcTarget.AllBuffered,
+        selectedHairIndex, selectedHairColorIndex, selectedFaceIndex,
+        selectedShirtIndex, selectedShirtColorIndex, selectedPantsIndex, selectedPantsColorIndex,
+        selectedShoesIndex, selectedShoesColorIndex, selectedAccessoryIndex,
+        selectedSex, selectedSkinColor, Name);
+        // SENT NAME
+        photonView.RPC("UpdatePlayerNameText", RpcTarget.OthersBuffered, Name);
+
+        Debug.Log("DONE SETUP");
+    }
+
     [PunRPC]
-    public void InitializeAvatar(int hairId, int hairColorId, int faceId, int faceColorId,
+    public void InitializeAvatar(int hairId, int hairColorId, int faceId,
         int shirtId, int shirtColorId, int pantsId, int pantsColorId,
         int shoesId, int shoesColorId,
         int accessoryIds,
         int sexId, int skinID, string _Name)
     {
-        // Set avatar data in AssetCharactor
-        avatarData.Clear();
-        avatarData.Add(new _AvatarData { Type = "Hair", Id = hairId, ColorId = hairColorId });
-        avatarData.Add(new _AvatarData { Type = "Face", Id = faceId, ColorId = faceColorId });
-        avatarData.Add(new _AvatarData { Type = "Shirt", Id = shirtId, ColorId = shirtColorId });
-        avatarData.Add(new _AvatarData { Type = "Pants", Id = pantsId, ColorId = pantsColorId });
-        avatarData.Add(new _AvatarData { Type = "Shoes", Id = shoesId, ColorId = shoesColorId });
-        avatarData.Add(new _AvatarData { Type = "Accessory", Id = accessoryIds });
-        //for (int i = 0; i < accessoryIds.Length; i++)
-        //{
-        //    avatarData.Add(new _AvatarData { Type = "Accessory", Id = accessoryIds[i]});
-        //}
-
-        avatarData.Add(new _AvatarData { Type = "SkinColor", Id = skinID, ColorId = 0 });
-        avatarData.Add(new _AvatarData { Type = "Sex", Id = sexId, ColorId = 0 });
-
         Name = _Name;
+        PlayerName.text = _Name;
 
-        photonView.RPC("UpdatePlayerNameText", RpcTarget.OthersBuffered, _Name);
-        Debug.Log($"InitializeAvatar called on client: Name={Name}, PlayerName.text={PlayerName.text}");
-        // Apply the avatar data to the character
-        LoadSavedAvatarData();
+        Debug.Log($"InitializeAvatar called on client: Name={_Name}, PlayerName.text={PlayerName.text}");
+
+        ChangeSkinColor(skinID);
+        SelectHair(hairId);
+        ChangeHairColor(hairColorId);
+        SelectFace(faceId);
+        SelectShirt(shirtId);
+        ChangeShirtColor(shirtColorId);
+        SelectPants(pantsId);
+        ChangePantsColor(pantsColorId);
+        SelectShoes(shoesId);
+        ChangeShoesColor(shoesColorId);
+        ToggleAccessory(accessoryIds);
     }
 
 }

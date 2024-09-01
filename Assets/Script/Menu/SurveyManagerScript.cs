@@ -29,8 +29,15 @@ public class SurveyManagerScript : MonoBehaviour
 
     public string _Test;
 
+    public GameObject _QAPanel;
+
+    public GameObject _LoadingBar;
+    public GameObject _LoadingFailed;
+    public GameObject _LoadingOK;
+
     IEnumerator SubmitQuestionaire()
     {
+        _LoadingBar.SetActive(true);
         // Initialize SurveyData object
         _questionaire = new SurveyData();
         _questionaire.suggestion = _suggestion.text;
@@ -53,6 +60,7 @@ public class SurveyManagerScript : MonoBehaviour
         }
 
         yield return null;
+        _LoadingBar.SetActive(false);
 
         string json = JsonUtility.ToJson(_questionaire);
         Debug.Log(json);
@@ -69,12 +77,28 @@ public class SurveyManagerScript : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success)
         {
+            _LoadingOK.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            _LoadingOK.SetActive(false);
+            _QAPanel.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            ButtonChangePlayerCanMove.Reset = true;
             Debug.LogError("Error: " + request.error);
             Debug.LogError("Status Code: " + request.responseCode);
             Debug.LogError("URL: " + request.url);
         }
         else
         {
+
+            _LoadingOK.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            _LoadingOK.SetActive(false);
+            _QAPanel.SetActive(false);
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+            ButtonChangePlayerCanMove.Reset = true;
+
             Debug.Log("Login Response: " + request.downloadHandler.text);
         }
     }
