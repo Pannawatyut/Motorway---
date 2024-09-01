@@ -47,6 +47,7 @@ public class entername : MonoBehaviour
     // Start is called before the first frame update
     public void Open()
     {
+        output.text = "";
         Button[0].SetActive(true);
     }
 
@@ -110,4 +111,6 @@ public class entername : MonoBehaviour
         }
         return false;
     }
+
+  
 }

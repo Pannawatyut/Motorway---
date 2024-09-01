@@ -21,6 +21,10 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         private set { avatarData = value; }
     }
 
+    public GameObject _LoadingBar;
+    public GameObject _LoadingFailed;
+    public GameObject _LoadingOK;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -32,6 +36,8 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         Instance = this;
         DontDestroyOnLoad(this.gameObject);
 
+        SelectItem selectItem = FindObjectOfType<SelectItem>();
+        selectItem.selectedSex = 3;
     }
 
 
@@ -75,7 +81,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         if (_Launcher == null)
         {
             Debug.Log("tring to find Launcher");
-            _Launcher = FindObjectsOfType<LaunCherTest1>()[0];
+            //_Launcher = FindObjectsOfType<LaunCherTest1>()[0];
         }
     }
 
@@ -156,6 +162,10 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
     private IEnumerator CreateAvatar()
     {
+
+        // Add LOADING POPUP HERE
+        _LoadingBar.SetActive(true);
+
         SelectItem selectItem = FindObjectOfType<SelectItem>();
 
         if (selectItem == null)
@@ -189,7 +199,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
             pant_color_id = selectItem.selectedPantsColorIndex,
             shoe_id = selectItem.selectedShoesIndex,
             shoe_color_id = selectItem.selectedShoesColorIndex,
-            accessory_ids = selectItem.selectedAccessoryIndex,
+            accessory_id = selectItem.selectedAccessoryIndex,
 
         };
 
@@ -206,8 +216,11 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
         yield return request.SendWebRequest();
 
+        _LoadingBar.SetActive(false);
+
         if (request.result != UnityWebRequest.Result.Success)
         {
+            _LoadingFailed.SetActive(true);
             Debug.LogError("Error: " + request.error);
             Debug.LogError("Status Code: " + request.responseCode);
             Debug.LogError("URL: " + request.url);
@@ -232,9 +245,17 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
                 _loginManager._Avatar.pant_color_id = avatarResponse.data.avatar.pant_color_id;
                 _loginManager._Avatar.shoe_id = avatarResponse.data.avatar.shoe_id;
                 _loginManager._Avatar.shoe_color_id = avatarResponse.data.avatar.shoe_color_id;
-                _loginManager._Avatar.accessory_ids = avatarResponse.data.avatar.accessory_ids;
+                _loginManager._Avatar.accessory_id = avatarResponse.data.avatar.accessory_id;
 
-                _Launcher.Connect();
+                //_Launcher.Connect();
+                _LoadingBar.SetActive(true);
+                yield return new WaitForSeconds(3f);
+
+                _LoadingOK.SetActive(true);
+
+                Application.LoadLevel("Game");
+
+                // Add LOADING POPUP HERE
             }
             else
             {
@@ -275,7 +296,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         public int pant_color_id;
         public int shoe_id;
         public int shoe_color_id;
-        public int accessory_ids; // Allow multiple accessories
+        public int accessory_id; // Allow multiple accessories
         public int accessory_color_ids; // Allow multiple accessory colors
     }
 

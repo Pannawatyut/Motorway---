@@ -49,7 +49,8 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    private void Start()
+
+    public void _CallStarter()
     {
         StartCoroutine(CountdownTimer());
         UpdateScoreDisplay(); // Initialize the score display
@@ -93,7 +94,7 @@ public class ScoreManager : MonoBehaviour
         time = 0;
         // Implement what should happen when the timer ends
         Debug.Log("Timer ended");
-        //SendScoreToData();
+        SendScoreToData();
         End_Menu.SetActive(true);
         end_score.text = _score.ToString();
     }
@@ -121,15 +122,15 @@ public class ScoreManager : MonoBehaviour
         if (consecutiveCorrectAnswers > 0)
         {
             Combotext[0].SetActive(true);
-            Combotext[1].SetActive(true);
+            //Combotext[1].SetActive(true);
         }
         if (consecutiveCorrectAnswers == 0)
         {
             Combotext[0].SetActive(false);
-            Combotext[1].SetActive(false);
+            //Combotext[1].SetActive(false);
         }
         UpdateMultiplier();
-        StartCoroutine(ScaleText(Combo, 1.5f, 0.2f)); // Call the scaling animation
+        StartCoroutine(ScaleText(Combo, 1.5f, 0.1f)); // Call the scaling animation
     }
 
     public void WrongAnswer()
@@ -138,7 +139,7 @@ public class ScoreManager : MonoBehaviour
         Combo.text = "";
         MultiplierScore.text = "";
         Combotext[0].SetActive(false);
-        Combotext[1].SetActive(false);
+        //Combotext[1].SetActive(false);
         scoreMultiplier = 1;
     }
 
