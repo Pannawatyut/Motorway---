@@ -18,7 +18,7 @@ public class SurveyManagerScript : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.A))
         {
-            OnSubmitQuestionaire();
+            //OnSubmitQuestionaire();
         }
     }
 

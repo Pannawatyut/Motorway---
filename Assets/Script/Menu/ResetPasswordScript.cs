@@ -21,6 +21,12 @@ public class ResetPasswordScript : MonoBehaviour
     public TMP_InputField OTP;
     public TMP_InputField Password;
 
+
+    public GameObject _FailedPanel;
+    public GameObject _FailedPanel_Email;
+    public GameObject _LoadingPanel;
+    public GameObject _OKPanel;
+
     #region FirstStep
     public void OnClickForgetPassword()
     {
@@ -28,6 +34,7 @@ public class ResetPasswordScript : MonoBehaviour
     }
     private IEnumerator SendPasswordResetRequest(string email)
     {
+        _LoadingPanel.SetActive(true);
         // Create an instance of EmailData and assign the email
         EmailData emailData = new EmailData { email = email };
 
@@ -46,11 +53,12 @@ public class ResetPasswordScript : MonoBehaviour
 
         // Send the request and wait for a response
         yield return request.SendWebRequest();
-
+        _LoadingPanel.SetActive(false);
         // Check the result of the request
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
+            _FailedPanel_Email.SetActive(true);
         }
         else
         {
@@ -76,12 +84,15 @@ public class ResetPasswordScript : MonoBehaviour
     }
     #endregion
 
+
+
     public void OnClickResetPassword()
     {
         StartCoroutine(SendResetPassword(Email.text));
     }
     private IEnumerator SendResetPassword(string email)
     {
+        _LoadingPanel.SetActive(true);
         // Create an instance of EmailData and assign the email
         ResetPassword newPassword = new ResetPassword()
         {
@@ -107,10 +118,12 @@ public class ResetPasswordScript : MonoBehaviour
         // Send the request and wait for a response
         yield return request.SendWebRequest();
 
+        _LoadingPanel.SetActive(false);
         // Check the result of the request
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
+            _FailedPanel.SetActive(true);
         }
         else
         {
@@ -122,8 +135,9 @@ public class ResetPasswordScript : MonoBehaviour
             if (response.status)
             {
                 Debug.Log("Password Successfully change to : " + response.data.password);
-                LoginPage.SetActive(true);
-                SecondPage.SetActive(false);
+                // LoginPage.SetActive(true);
+                // SecondPage.SetActive(false);
+                _OKPanel.SetActive(true);
             }
             else
             {

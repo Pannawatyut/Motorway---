@@ -189,7 +189,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
             pant_color_id = selectItem.selectedPantsColorIndex,
             shoe_id = selectItem.selectedShoesIndex,
             shoe_color_id = selectItem.selectedShoesColorIndex,
-            accessory_ids = selectItem.selectedAccessoryIndex,
+            accessory_id = selectItem.selectedAccessoryIndex,
 
         };
 
@@ -232,7 +232,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
                 _loginManager._Avatar.pant_color_id = avatarResponse.data.avatar.pant_color_id;
                 _loginManager._Avatar.shoe_id = avatarResponse.data.avatar.shoe_id;
                 _loginManager._Avatar.shoe_color_id = avatarResponse.data.avatar.shoe_color_id;
-                _loginManager._Avatar.accessory_ids = avatarResponse.data.avatar.accessory_ids;
+                _loginManager._Avatar.accessory_ids = avatarResponse.data.avatar.accessory_id;
 
                 _Launcher.Connect();
             }
@@ -275,7 +275,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         public int pant_color_id;
         public int shoe_id;
         public int shoe_color_id;
-        public int accessory_ids; // Allow multiple accessories
+        public int accessory_id; // Allow multiple accessories
         public int accessory_color_ids; // Allow multiple accessory colors
     }
 

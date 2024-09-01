@@ -13,6 +13,10 @@ public class RegisterScript : MonoBehaviour
 
     public GameObject LoginPage;
     public GameObject RegisterPage;
+
+    public GameObject _LoadingPanel;
+    public GameObject _FailedPanel;
+    public GameObject _OKPanel;
     public void OnClickRegisterButton()
     {
         StartCoroutine(Register(Email.text, Password.text));
@@ -20,6 +24,7 @@ public class RegisterScript : MonoBehaviour
 
     private IEnumerator Register(string email, string password)
     {
+        _LoadingPanel.SetActive(true);
         // สร้างอ็อบเจ็กต์การล็อกอิน
         var RegisterData = new RegisterInfo
         {
@@ -42,11 +47,12 @@ public class RegisterScript : MonoBehaviour
 
         // ส่งคำขอและรอรับการตอบกลับ
         yield return request.SendWebRequest();
-
+        _LoadingPanel.SetActive(false);
         // ตรวจสอบผลลัพธ์ของคำขอ
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
+            _FailedPanel.SetActive(true);
         }
         else
         {
@@ -55,6 +61,7 @@ public class RegisterScript : MonoBehaviour
             _Register.email = email;
             _Register.password = password;
             Debug.Log("Login Response: " + request.downloadHandler.text);
+            _OKPanel.SetActive(true);
         }
     }
     public RegisterInfo _Register;
