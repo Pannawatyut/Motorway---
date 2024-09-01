@@ -26,52 +26,19 @@ namespace Photon.Pun.Demo.PunBasics
         {
             Instance = this;
 
-            if (!PhotonNetwork.IsConnected)
-            {
-                SceneManager.LoadScene("StarGame");
-                return;
-            }
-
-            if (malePlayerPrefab == null || femalePlayerPrefab == null)
-            {
-                Debug.LogError("Missing playerPrefab Reference. Please set it up in GameObject 'Game Manager'", this);
-            }
-            else
-            {
-                if (PhotonNetwork.InRoom && PlayerManager.LocalPlayerInstance == null)
-                {
-                    Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
-                    InstantiatePlayer();
-                }
-                else
-                {
-                    Debug.LogFormat("Ignoring scene load for {0}", SceneManagerHelper.ActiveSceneName);
-                }
-            }
-        }
-
-        void Update()
-        {
             if (_LoginManager == null)
             {
                 _LoginManager = FindObjectOfType<LoginManager>();
             }
-            if (PhotonNetwork.InRoom && PlayerManager.LocalPlayerInstance == null)
-            {
-                Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
-                InstantiatePlayer();
-            }
-            // if (Input.GetKeyDown(KeyCode.Escape))
-            // {
-            //     QuitApplication();
-            //     
-            // }
-            // if (Input.GetKeyDown(KeyCode.G))
-            // {
-            //     // Handle leave room and scene loading logic
-            //     PhotonNetwork.LeaveRoom();
-            //     SceneManager.LoadScene(3);
-            // }
+
+            PhotonNetwork.ConnectUsingSettings();
+
+            
+        }
+
+        public override void OnConnectedToMaster()
+        {
+                PhotonNetwork.JoinRandomOrCreateRoom();
         }
 
         public override void OnJoinedRoom()
@@ -83,32 +50,12 @@ namespace Photon.Pun.Demo.PunBasics
             }
         }
 
-        public void OnPlayerEnteredRoom(Player other)
+        public override void OnJoinRandomFailed(short returnCode, string message)
         {
-            //Debug.Log("OnPlayerEnteredRoom() " + other.NickName);
-            Debug.Log("Player Entered the Room");
-            if (PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogFormat("OnPlayerEnteredRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
-                LoadArena();
-            }
+            // Join failed, create a new room
+            PhotonNetwork.JoinRandomOrCreateRoom();
         }
 
-        public void OnPlayerLeftRoom(Player other)
-        {
-            //Debug.Log("OnPlayerLeftRoom() " + other.NickName);
-
-            if (PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogFormat("OnPlayerLeftRoom IsMasterClient {0}", PhotonNetwork.IsMasterClient);
-                LoadArena();
-            }
-        }
-
-        public override void OnLeftRoom()
-        {
-            //SceneManager.LoadScene("MiniGame");
-        }
 
         public void LeaveRoom()
         {
@@ -120,17 +67,6 @@ namespace Photon.Pun.Demo.PunBasics
             Application.Quit();
         }
 
-        private void LoadArena()
-        {
-            if (!PhotonNetwork.IsMasterClient)
-            {
-                Debug.LogError("PhotonNetwork : Trying to Load a level but we are not the master Client");
-                return;
-            }
-
-            Debug.LogFormat("PhotonNetwork : Loading Level : {0}", PhotonNetwork.CurrentRoom.PlayerCount);
-            //PhotonNetwork.LoadLevel("Game");
-        }
 
         private void InstantiatePlayer()
         {

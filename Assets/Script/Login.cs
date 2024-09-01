@@ -55,7 +55,12 @@ public class LoginManager : MonoBehaviour
 
     public void _ByPass()
     {
-        StartCoroutine(Login("pongsakorn.pisa@kmutt.ac.th", "123"));
+        StartCoroutine(Login("Test1@gmail.com", "123"));
+    }
+
+    public void _ByPass_1()
+    {
+        StartCoroutine(Login("Test2@gmail.com", "123"));
     }
 
     private IEnumerator Login(string email, string password)
@@ -103,6 +108,9 @@ public class LoginManager : MonoBehaviour
             // แปลงข้อมูลตอบกลับเป็นอ็อบเจ็กต์
             var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
 
+            //SceneManager.LoadScene("CharacterCustomizer");
+
+
             if (loginResponse.status)
             {
                 Debug.Log("Login successful!");
@@ -143,7 +151,7 @@ public class LoginManager : MonoBehaviour
                 _Avatar.pant_color_id = loginResponse.data.avatar.pant_color_id;
                 _Avatar.shoe_id = loginResponse.data.avatar.shoe_id;
                 _Avatar.shoe_color_id = loginResponse.data.avatar.shoe_color_id;
-                _Avatar.accessory_ids = loginResponse.data.avatar.accessory_ids;
+                _Avatar.accessory_id = loginResponse.data.avatar.accessory_id;
 
 
                 if (_Avatar.name != null)
@@ -225,7 +233,7 @@ public class LoginManager : MonoBehaviour
         public int pant_color_id;
         public int shoe_id;
         public int shoe_color_id;
-        public int accessory_ids;
+        public int accessory_id;
     }
 }
 

@@ -55,10 +55,10 @@ public class Warp : MonoBehaviourPunCallbacks
         if (PhotonNetwork.InRoom)
         {
             Debug.Log("The Scene going to is " + SceneGame);
-            PhotonNetwork.LeaveRoom(); // Leave the current room
+            PhotonNetwork.Disconnect();
 
             // Wait until Photon confirms that the player has left the room
-            while (PhotonNetwork.InRoom || PhotonNetwork.IsConnectedAndReady == false)
+            while (!PhotonNetwork.IsConnected)
             {
                 yield return null;
             }

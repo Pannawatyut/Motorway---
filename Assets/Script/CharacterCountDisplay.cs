@@ -49,6 +49,9 @@ public class CharacterCountDisplay : MonoBehaviour
         }
     }
 
+
+    public Button _Male;
+    public Button _Female;
     void UpdateCharacterCountAndFilterProfanity(string text)
     {
         if (inputField != null && characterCountText != null)
@@ -71,6 +74,17 @@ public class CharacterCountDisplay : MonoBehaviour
             int currentTextLength = inputField.text.Length;
             int characterLimit = inputField.characterLimit;
             characterCountText.text = currentTextLength + "/" + characterLimit;
+
+            if (currentTextLength != 0)
+            {
+                _Male.interactable = true;
+                _Female.interactable = true;
+            }
+            else
+            {
+                _Male.interactable = false;
+                _Female.interactable = false;
+            }
         }
     }
 

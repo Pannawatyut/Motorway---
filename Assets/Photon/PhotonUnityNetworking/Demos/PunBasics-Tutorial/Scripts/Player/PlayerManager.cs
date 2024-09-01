@@ -62,7 +62,7 @@ namespace Photon.Pun.Demo.PunBasics
                 }
 
                 // Send the "this" instance to the SetTarget method of the existing UI prefab.
-                playerUiPrefab.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
+                //playerUiPrefab.SendMessage("SetTarget", this, SendMessageOptions.RequireReceiver);
             }
 
             #if UNITY_5_4_OR_NEWER
