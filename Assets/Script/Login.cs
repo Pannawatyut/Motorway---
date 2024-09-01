@@ -22,11 +22,6 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField Email;
     public MaskedPasswordScript Password;
     public LaunCherTest1 _Launcher;
-
-    public GameObject _LoadingBar;
-    public GameObject _LoadingFailed;
-    public GameObject _LoadingOK;
-
     private void Awake()
     {
         if (Instance == null)
@@ -55,19 +50,11 @@ public class LoginManager : MonoBehaviour
 
     public void _ByPass()
     {
-        StartCoroutine(Login("Test1@gmail.com", "123"));
-    }
-
-    public void _ByPass_1()
-    {
-        StartCoroutine(Login("Test2@gmail.com", "123"));
+        StartCoroutine(Login("pongsakorn.pisa@kmutt.ac.th", "123"));
     }
 
     private IEnumerator Login(string email, string password)
     {
-
-        _LoadingBar.SetActive(true);
-
         // สร้างอ็อบเจ็กต์การล็อกอิน
         var loginData = new LoginRequest
         {
@@ -91,25 +78,17 @@ public class LoginManager : MonoBehaviour
         // ส่งคำขอและรอรับการตอบกลับ
         yield return request.SendWebRequest();
 
-        _LoadingBar.SetActive(false);
-
         // ตรวจสอบผลลัพธ์ของคำขอ
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
-
-            _LoadingFailed.SetActive(true);
         }
         else
         {
             Debug.Log("Login Response: " + request.downloadHandler.text);
 
-            _LoadingOK.SetActive(true);
             // แปลงข้อมูลตอบกลับเป็นอ็อบเจ็กต์
             var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
-
-            //SceneManager.LoadScene("CharacterCustomizer");
-
 
             if (loginResponse.status)
             {
@@ -157,8 +136,7 @@ public class LoginManager : MonoBehaviour
                 if (_Avatar.name != null)
                 {
                     Debug.Log("Found Avatar");
-                    //_Launcher.Connect();
-                    SceneManager.LoadScene("Game");
+                    _Launcher.Connect();
                 }
                 else
                 {
