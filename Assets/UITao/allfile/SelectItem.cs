@@ -90,7 +90,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
                     selectedFaceIndex = _loginManager._Avatar.face_id;
                     selectedAccessoryIndex = _loginManager._Avatar.accessory_id;
                     selectedSkinColor = _loginManager._Avatar.skin_id;
-                    selectedSex = _loginManager._Avatar.gender_id;
+                    //selectedSex = _loginManager._Avatar.gender_id; - FIXED BY PREFAB
 
                     // GET NAME
                     Name = _loginManager._Avatar.name;

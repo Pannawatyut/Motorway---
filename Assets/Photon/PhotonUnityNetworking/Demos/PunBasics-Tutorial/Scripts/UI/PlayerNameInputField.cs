@@ -16,7 +16,7 @@ namespace Photon.Pun.Demo.PunBasics
         /// </summary>
         void Start()
         {
-            string defaultName = JsonFileUtility.LoadPlayerName(); // Load from JSON
+            /*string defaultName = JsonFileUtility.LoadPlayerName(); // Load from JSON
             InputField _inputField = this.GetComponent<InputField>();
 
             if (_inputField != null)
@@ -24,7 +24,7 @@ namespace Photon.Pun.Demo.PunBasics
                 _inputField.text = defaultName;
             }
 
-            PhotonNetwork.NickName = defaultName;
+            PhotonNetwork.NickName = defaultName;*/
         }
 
         #endregion
@@ -38,14 +38,14 @@ namespace Photon.Pun.Demo.PunBasics
         public void SetPlayerName(string value)
         {
             // #Important
-            if (string.IsNullOrEmpty(value))
+            /*if (string.IsNullOrEmpty(value))
             {
                 Debug.LogError("Player Name is null or empty");
                 return;
             }
 
             PhotonNetwork.NickName = value;
-            JsonFileUtility.SavePlayerName(value); // Save to JSON
+            JsonFileUtility.SavePlayerName(value); // Save to JSON*/
         }
 
         #endregion

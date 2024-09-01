@@ -73,6 +73,7 @@ namespace Photon.Pun.Demo.PunBasics
             if (_LoginManager != null)
             {
                 int genderID = _LoginManager._Avatar.gender_id;
+                PhotonNetwork.NickName = _LoginManager.name ;
 
                 if (genderID == 3)
                 {
@@ -91,6 +92,8 @@ namespace Photon.Pun.Demo.PunBasics
             {
                 Debug.LogError("LoginManager instance is not available.");
             }
+
+
         }
 
         private void InstantiateMalePlayer()
