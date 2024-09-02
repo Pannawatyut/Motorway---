@@ -260,10 +260,10 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public void ChangeSkinColor(int colorIndex)
     {
 
-        if (Skinbody == null)
-        {
+        //if (Skinbody == null)
+        //{
             Skinbody = _Body.material;
-        }
+        //}
 
         if (colorIndex >= 0 && colorIndex < ColorsBody.Length)
         {
