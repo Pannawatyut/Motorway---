@@ -1,19 +1,5 @@
 {
   "dependencies": {
-    "com.google.external-dependency-manager": {
-      "version": "https://github.com/google-unity/external-dependency-manager.git#1.2.182",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "a9c3ae1e997a77f6978f8257d3cad11f0e03afe7"
-    },
-    "com.nobi.roundedcorners": {
-      "version": "https://github.com/kirevdokimov/Unity-UI-Rounded-Corners.git",
-      "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "06c20cafa885cbb9f14791c269cda6b547e0be30"
-    },
     "com.unity.2d.sprite": {
       "version": "1.0.0",
       "depth": 0,
