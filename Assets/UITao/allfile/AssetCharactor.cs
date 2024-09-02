@@ -39,8 +39,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         SelectItem selectItem = FindObjectOfType<SelectItem>();
         selectItem.selectedSex = 3;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        
     }
 
 
@@ -73,6 +72,8 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
     }
     private void Update()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         if (_loginManager == null)
         {
             _loginManager = FindObjectOfType<LoginManager>();
@@ -81,6 +82,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         {
             _Name = FindObjectOfType<entername>();
         }
+
 
        /* if (_Launcher == null)
         {
