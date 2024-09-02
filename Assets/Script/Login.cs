@@ -78,6 +78,8 @@ public class LoginManager : MonoBehaviour
         {
             Debug.LogError("Error: " + request.error);
             _LoadingFailed.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            _LoadingFailed.SetActive(false);
         }
         else
         {
@@ -132,11 +134,13 @@ public class LoginManager : MonoBehaviour
                 if (_Avatar.name != null)
                 {
                     Debug.Log("Found Avatar");
+                    yield return new WaitForSeconds(3f);
                     SceneManager.LoadScene("Game");
                 }
                 else
                 {
                     Debug.Log("No Avatar");
+                    yield return new WaitForSeconds(3f);
                     SceneManager.LoadScene("CharacterCustomizer");
                 }
             }
