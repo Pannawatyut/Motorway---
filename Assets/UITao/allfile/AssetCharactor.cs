@@ -82,11 +82,14 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
             _Name = FindObjectOfType<entername>();
         }
 
-       /* if (_Launcher == null)
-        {
-            Debug.Log("tring to find Launcher");
-            //_Launcher = FindObjectsOfType<LaunCherTest1>()[0];
-        }*/
+        /* if (_Launcher == null)
+         {
+             Debug.Log("tring to find Launcher");
+             //_Launcher = FindObjectsOfType<LaunCherTest1>()[0];
+         }*/
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     ///Not Use///
