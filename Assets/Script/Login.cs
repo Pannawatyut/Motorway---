@@ -6,22 +6,16 @@ using TMPro;
 using UnityEngine.SceneManagement;
 using Photon.Pun.Demo.PunBasics;
 
-
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Networking;
-using TMPro;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System;
-
 public class LoginManager : MonoBehaviour
 {
     public static LoginManager Instance { get; private set; }
     public TMP_InputField Email;
     public MaskedPasswordScript Password;
     public LaunCherTest1 _Launcher;
+
+    public GameObject _LoadingBar;
+    public GameObject _LoadingFailed;
+    public GameObject _LoadingOK;
     private void Awake()
     {
         if (Instance == null)
@@ -56,6 +50,7 @@ public class LoginManager : MonoBehaviour
     private IEnumerator Login(string email, string password)
     {
         // สร้างอ็อบเจ็กต์การล็อกอิน
+        _LoadingBar.SetActive(true);
         var loginData = new LoginRequest
         {
             email = email,
@@ -77,16 +72,19 @@ public class LoginManager : MonoBehaviour
 
         // ส่งคำขอและรอรับการตอบกลับ
         yield return request.SendWebRequest();
-
+        _LoadingBar.SetActive(false);
         // ตรวจสอบผลลัพธ์ของคำขอ
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
+            _LoadingFailed.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            _LoadingFailed.SetActive(false);
         }
         else
         {
             Debug.Log("Login Response: " + request.downloadHandler.text);
-
+            _LoadingOK.SetActive(true);
             // แปลงข้อมูลตอบกลับเป็นอ็อบเจ็กต์
             var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
 
@@ -136,11 +134,13 @@ public class LoginManager : MonoBehaviour
                 if (_Avatar.name != null)
                 {
                     Debug.Log("Found Avatar");
-                    // _Launcher.Connect();
+                    yield return new WaitForSeconds(3f);
+                    SceneManager.LoadScene("Game");
                 }
                 else
                 {
                     Debug.Log("No Avatar");
+                    yield return new WaitForSeconds(3f);
                     SceneManager.LoadScene("CharacterCustomizer");
                 }
             }
