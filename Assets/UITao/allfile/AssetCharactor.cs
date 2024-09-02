@@ -39,8 +39,6 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         SelectItem selectItem = FindObjectOfType<SelectItem>();
         selectItem.selectedSex = 3;
 
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
     }
 
 
@@ -90,6 +88,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+  
     }
 
     ///Not Use///
