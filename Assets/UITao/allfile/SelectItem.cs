@@ -255,9 +255,16 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
     }
 
+    public SkinnedMeshRenderer _Body;
 
     public void ChangeSkinColor(int colorIndex)
     {
+
+        if (Skinbody != null)
+        {
+            Skinbody = _Body.material;
+        }
+
         if (colorIndex >= 0 && colorIndex < ColorsBody.Length)
         {
             Skinbody.color = ColorsBody[colorIndex];
