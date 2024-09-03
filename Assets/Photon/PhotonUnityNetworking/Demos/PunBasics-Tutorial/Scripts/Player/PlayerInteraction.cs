@@ -5,20 +5,20 @@ using System.Collections;
 public class PlayerInteraction : MonoBehaviourPun
 {
     public Canvas canvasPressF;
-    private bool playerInside;
+    public bool playerInside;
     private GameObject currentNPC;
-    private Canvas Dialog;
+    public Canvas Dialog;
     private int number = 0;
     public static bool PressF;
 
     public ThirdPersonOrbitCamBasic cam;
-    private bool isCursorVisible = false; // Track the cursor state
+    public bool isCursorVisible = true; // Track the cursor state
     private SoundManager _soundManager; // Reference to the SoundManager
 
     private void Start()
     {
     #if !UNITY_ANDROID
-        DisableCursor();
+        //DisableCursor();
     #endif
         number = 0;
         _soundManager = SoundManager.instance; // Ensure SoundManager is correctly referenced
@@ -88,7 +88,7 @@ public class PlayerInteraction : MonoBehaviourPun
                 //โชว์ Dialog
                 if (Dialog != null)
                 {
-                    Dialog.transform.GetChild(0).gameObject.SetActive(true);
+                    Dialog.gameObject.SetActive(true);
                 }
                 
                 //Lock cam
