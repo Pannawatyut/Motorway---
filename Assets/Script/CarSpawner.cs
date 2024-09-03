@@ -39,6 +39,7 @@ public class CarSpawner : MonoBehaviour
     public Image sliderFill;
 
     public bool _isStart;
+    public AudioSource _ButtonSound;
 
     private void Start()
     {
@@ -182,6 +183,7 @@ public class CarSpawner : MonoBehaviour
             ScoreManager.Instance.CorrectAnswer();
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("suscess");
+            _ButtonSound.Play();
         }
         else
         {
@@ -190,6 +192,7 @@ public class CarSpawner : MonoBehaviour
             ScoreManager.Instance.WrongAnswer();
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("fail");
+            _ButtonSound.Play();
         }
 
         StartCoroutine(MoveAndDestroyFirstCar(spawnedCars[0]));
