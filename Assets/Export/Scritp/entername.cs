@@ -37,7 +37,9 @@ public class entername : MonoBehaviour
          "S3x", "S3xx", "S3ks", "YesHEE", "Y3sHEE", "Y@SHEE",
          "HEE", "H33", "H3E", "T3D", "T@D", "T£D", "YED", "Y3D", "Y£D",
          "KUI", "K¥I", "KUI", "Y3T", "YET", "HEE!", "H3E!", "HEE@","วชิรา","HE3","HE3!","ดoก","ดอกทง",
-         "ดอกทj","แตด","llตด","llตd","เกลียด","นัดเยส","สวะ","เxี้ย","ไอ้","อี","เต๋า","กะหรี่"
+         "ดอกทj","แตด","llตด","llตd","เกลียด","นัดเยส","สวะ","เxี้ย","ไอ้","อี","เต๋า","กะหรี่","KUY","Kuy","kUy","kuY","kuy","KuY","KUy",
+         "kUy","kUY"
+
 
 
         };

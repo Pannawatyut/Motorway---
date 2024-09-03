@@ -125,7 +125,7 @@ public class CheckGenderInScene : MonoBehaviour
 
         string json = JsonUtility.ToJson(Avatar);
         Debug.Log(json);
-        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/avatar/updateAvatar", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL + "/api/avatar/updateAvatar", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()

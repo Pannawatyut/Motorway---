@@ -36,7 +36,7 @@ public class RegisterScript : MonoBehaviour
         string json = JsonUtility.ToJson(RegisterData);
 
         // สร้าง UnityWebRequest สำหรับ POST method
-        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/user/register", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL + "/api/user/register", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()

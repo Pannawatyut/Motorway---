@@ -157,7 +157,7 @@ public class LeaderboardManager : MonoBehaviour
 
                 // Set the text values based on the leaderboard data
                 numText.text = entry["rank"].ToString();
-                nameText.text = entry["first_name"].ToString();
+                nameText.text = entry["avatar_name"].ToString();
                 scoreText.text = entry["score"].ToString();
 
                 Debug.Log($"Updated Rank: {entry["rank"]}, Name: {entry["first_name"]}, Score: {entry["score"]}");

@@ -38,6 +38,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
         SelectItem selectItem = FindObjectOfType<SelectItem>();
         selectItem.selectedSex = 3;
+
     }
 
 
@@ -79,11 +80,15 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
             _Name = FindObjectOfType<entername>();
         }
 
-       /* if (_Launcher == null)
-        {
-            Debug.Log("tring to find Launcher");
-            //_Launcher = FindObjectsOfType<LaunCherTest1>()[0];
-        }*/
+        /* if (_Launcher == null)
+         {
+             Debug.Log("tring to find Launcher");
+             //_Launcher = FindObjectsOfType<LaunCherTest1>()[0];
+         }*/
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+  
     }
 
     ///Not Use///
@@ -196,7 +201,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         string json = JsonUtility.ToJson(Avatar);
         Debug.Log("SENT THIS CREATE AVATAR-> " + json);
 
-        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/avatar/createAvatar", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/avatar/createAvatar", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()
@@ -219,24 +224,25 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("Login Response: " + request.downloadHandler.text);
-            var avatarResponse = JsonUtility.FromJson<AvatarResponse>(request.downloadHandler.text);
+            var avatarResponse = JsonUtility.FromJson<LoginManager.LoginResponse>(request.downloadHandler.text);
 
             if (avatarResponse.status)
             {
                 Debug.Log("Login successful!");
                 _loginManager._Avatar.name = avatarResponse.data.avatar.name;
-                _loginManager._Avatar.gender_id = int.Parse(avatarResponse.data.avatar.gender_id);
-                _loginManager._Avatar.skin_id = int.Parse(avatarResponse.data.avatar.skin_id);
-                _loginManager._Avatar.face_id = int.Parse(avatarResponse.data.avatar.face_id);
-                _loginManager._Avatar.hair_id = int.Parse(avatarResponse.data.avatar.hair_id);
-                _loginManager._Avatar.hair_color_id = int.Parse(avatarResponse.data.avatar.hair_color_id);
-                _loginManager._Avatar.shirt_id = int.Parse(avatarResponse.data.avatar.shirt_id);
-                _loginManager._Avatar.shirt_color_id = int.Parse(avatarResponse.data.avatar.shirt_color_id);
-                _loginManager._Avatar.pant_id = int.Parse(avatarResponse.data.avatar.pant_id);
-                _loginManager._Avatar.pant_color_id = int.Parse(avatarResponse.data.avatar.pant_color_id);
-                _loginManager._Avatar.shoe_id = int.Parse(avatarResponse.data.avatar.shoe_id);
-                _loginManager._Avatar.shoe_color_id = int.Parse(avatarResponse.data.avatar.shoe_color_id);
-                _loginManager._Avatar.accessory_id = int.Parse(avatarResponse.data.avatar.accessory_id);
+                _loginManager._Avatar.uid = avatarResponse.data.avatar.uid;
+                _loginManager._Avatar.gender_id = avatarResponse.data.avatar.gender_id;
+                _loginManager._Avatar.skin_id = avatarResponse.data.avatar.skin_id;
+                _loginManager._Avatar.face_id = avatarResponse.data.avatar.face_id;
+                _loginManager._Avatar.hair_id = avatarResponse.data.avatar.hair_id;
+                _loginManager._Avatar.hair_color_id = avatarResponse.data.avatar.hair_color_id;
+                _loginManager._Avatar.shirt_id = avatarResponse.data.avatar.shirt_id;
+                _loginManager._Avatar.shirt_color_id = avatarResponse.data.avatar.shirt_color_id;
+                _loginManager._Avatar.pant_id = avatarResponse.data.avatar.pant_id;
+                _loginManager._Avatar.pant_color_id = avatarResponse.data.avatar.pant_color_id;
+                _loginManager._Avatar.shoe_id = avatarResponse.data.avatar.shoe_id;
+                _loginManager._Avatar.shoe_color_id =avatarResponse.data.avatar.shoe_color_id;
+                _loginManager._Avatar.accessory_id = avatarResponse.data.avatar.accessory_id;
 
                 //_Launcher.Connect();
                 _LoadingBar.SetActive(true);
