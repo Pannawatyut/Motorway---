@@ -16,6 +16,8 @@ public class LoginManager : MonoBehaviour
     public GameObject _LoadingBar;
     public GameObject _LoadingFailed;
     public GameObject _LoadingOK;
+
+    public string _APIURL;
     private void Awake()
     {
         if (Instance == null)
@@ -61,7 +63,7 @@ public class LoginManager : MonoBehaviour
         string json = JsonUtility.ToJson(loginData);
 
         // สร้าง UnityWebRequest สำหรับ POST method
-        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/user/login", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/user/login", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()

@@ -168,7 +168,7 @@ public class FacebookManager : MonoBehaviour
         string json = JsonUtility.ToJson(userData);
 
         // Create a UnityWebRequest for the POST method
-        using var request = new UnityWebRequest("http://192.168.1.214:7000/api/user/loginFacebook", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/ api/user/loginFacebook", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()

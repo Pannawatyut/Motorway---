@@ -201,7 +201,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         string json = JsonUtility.ToJson(Avatar);
         Debug.Log("SENT THIS CREATE AVATAR-> " + json);
 
-        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/avatar/createAvatar", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/avatar/createAvatar", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()

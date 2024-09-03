@@ -239,7 +239,7 @@ public class ScoreManager : MonoBehaviour
         string json = JsonUtility.ToJson(Score);
         Debug.Log("Sending JSON Data: " + json);
 
-        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/leaderboard/updateScore", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/leaderboard/updateScore", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()
