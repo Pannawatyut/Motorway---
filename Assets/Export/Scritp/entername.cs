@@ -12,7 +12,7 @@ public class entername : MonoBehaviour
     public TextMeshProUGUI output;
     public TextMeshProUGUI UserRequir;
     public GameObject feedbackText;
-
+    public LoginManager _loginManager;
     // List of forbidden words
     public List<string> profaneWords = new List<string>();
 
@@ -41,8 +41,6 @@ public class entername : MonoBehaviour
          "kUy","kUY","Kuuy","KUuy","kUUy","KuUy","CuM","cUm","CUm","cum","cuM","KUUY","KUU","kuu","Kuu","Dick","Pussy","DICK","dick",
          "kUU","PUSSY","pussy","Sawa","SAWA","sawa"
 
-
-
         };
         #endregion
     }
@@ -64,7 +62,15 @@ public class entername : MonoBehaviour
 
     private void Update()
     {
+        if (_loginManager == null)
+        {
+            _loginManager = FindObjectOfType<LoginManager>();
+        }
 
+        if (_loginManager._Avatar.name != null)
+        {
+            this.gameObject.SetActive(false);
+        }
     }
     public void NameCheck()
     {
