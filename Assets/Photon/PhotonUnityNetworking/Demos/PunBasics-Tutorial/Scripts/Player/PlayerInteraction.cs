@@ -12,13 +12,13 @@ public class PlayerInteraction : MonoBehaviourPun
     public static bool PressF;
 
     public ThirdPersonOrbitCamBasic cam;
-    private bool isCursorVisible = false; // Track the cursor state
+    private bool isCursorVisible = true; // Track the cursor state
     private SoundManager _soundManager; // Reference to the SoundManager
 
     private void Start()
     {
     #if !UNITY_ANDROID
-        DisableCursor();
+        //DisableCursor();
     #endif
         number = 0;
         _soundManager = SoundManager.instance; // Ensure SoundManager is correctly referenced
