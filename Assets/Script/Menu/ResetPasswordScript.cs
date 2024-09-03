@@ -42,7 +42,7 @@ public class ResetPasswordScript : MonoBehaviour
         string json = JsonUtility.ToJson(emailData);
 
         // Create a UnityWebRequest for the POST method
-        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/user/forgotPassword", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/user/forgotPassword", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()
@@ -106,7 +106,7 @@ public class ResetPasswordScript : MonoBehaviour
         string json = JsonUtility.ToJson(newPassword);
 
         // Create a UnityWebRequest for the POST method
-        using var request = new UnityWebRequest("http://13.250.106.216:1000/api/user/resetPassword", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/user/resetPassword", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()
