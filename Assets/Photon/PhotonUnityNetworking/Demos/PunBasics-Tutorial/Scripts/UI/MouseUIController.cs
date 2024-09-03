@@ -10,7 +10,7 @@ public class MouseUIController : MonoBehaviour
     public RectTransform uiRectTransform;  // Use RectTransform for the panel
     public float zoomSpeed = 0.1f; // Speed factor for zooming, lower means slower zooming
 
-    private bool isFollowingMouse = false; // Flag to control whether the UI follows the mouse
+    private bool isFollowingMouse = true; // Flag to control whether the UI follows the mouse
     private bool isDragging = false; // Flag to control dragging state
     private Vector2 dragOffset; // Offset to maintain the relative position of the panel during dragging
     public GameObject isOn; // GameObject to indicate dragging status
@@ -49,7 +49,7 @@ private Vector2 defaultPosition; // Default position of the UI element
         if (Input.GetMouseButtonDown(0)) // Left mouse button down
         {
             isDragging = true;
-            isOn.gameObject.SetActive(false);
+            //isOn.gameObject.SetActive(false);
             // Calculate the drag offset in local space
             Vector2 localMousePosition;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(uiRectTransform, Input.mousePosition, null, out localMousePosition);
@@ -59,7 +59,7 @@ private Vector2 defaultPosition; // Default position of the UI element
         if (Input.GetMouseButtonUp(0)) // Left mouse button up
         {
             isDragging = false;
-            isOn.gameObject.SetActive(true);
+            //isOn.gameObject.SetActive(true);
 
         }
 
@@ -100,9 +100,7 @@ private Vector2 defaultPosition; // Default position of the UI element
 
     public void ToggleMouseFollow()
     {
-        isFollowingMouse = !isFollowingMouse;
-      
-      
+        isFollowingMouse = !isFollowingMouse;   
     }
 
     public void OnButtonClick()
