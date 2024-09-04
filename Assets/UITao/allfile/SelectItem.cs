@@ -278,10 +278,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public void ChangeSkinColor(int colorIndex)
     {
 
-        foreach (GameObject x in SelectedImagesColorSkin)
-        {
-            x.SetActive(false);
-        }
+
 
         //if (Skinbody == null)
         //{
@@ -294,27 +291,31 @@ public class SelectItem : MonoBehaviourPunCallbacks
             selectedSkinColor = colorIndex;
         }
 
-        if (colorIndex >= 0 && colorIndex < ColorsBody.Length)
+        if (imagboyselect != null)
         {
-            
-            if (colorIndex == selectedSkinColor)
+            foreach (GameObject x in SelectedImagesColorSkin)
             {
-                SelectedImagesColorSkin[colorIndex].SetActive(true);
+                x.SetActive(false);
             }
-            else
+            if (colorIndex >= 0 && colorIndex < ColorsBody.Length)
             {
-                SelectedImagesColorSkin[colorIndex].SetActive(false);
 
+                if (colorIndex == selectedSkinColor)
+                {
+                    SelectedImagesColorSkin[colorIndex].SetActive(true);
+                }
+                else
+                {
+                    SelectedImagesColorSkin[colorIndex].SetActive(false);
+
+                }
             }
         }
     }
 
     public void SelectHair(int index)
     {
-        foreach (GameObject x in SelectImagesHair)
-        {
-            x.SetActive(false);
-        }
+ 
 
         Debug.Log("select hair" + index);
         if (index >= 0 && index < Hair.Length)
@@ -339,27 +340,32 @@ public class SelectItem : MonoBehaviourPunCallbacks
         {
             ChangeHairColor(6);
         }
-        if (index >= 0 && index < SelectImagesHair.Length)
+        if (imagboyselect != null)
         {
-            Debug.Log("Select Hair = " + index);
-            if (index == selectedHairIndex)
-            {            
-                SelectImagesHair[index].SetActive(true);
-            }
-            else
+            foreach (GameObject x in SelectImagesHair)
             {
-                SelectImagesHair[index].SetActive(false);
+                x.SetActive(false);
+            }
 
+            if (index >= 0 && index < SelectImagesHair.Length)
+            {
+                Debug.Log("Select Hair = " + index);
+                if (index == selectedHairIndex)
+                {
+                    SelectImagesHair[index].SetActive(true);
+                }
+                else
+                {
+                    SelectImagesHair[index].SetActive(false);
+
+                }
             }
         }
     }
 
     public void ChangeHairColor(int colorIndex)
     {
-        foreach (GameObject x in SelectedImagesColorHair)
-        {
-            x.SetActive(false);
-        }
+
 
         if (colorIndex >= 0 && colorIndex < HairColors.Length)
         {
@@ -376,18 +382,25 @@ public class SelectItem : MonoBehaviourPunCallbacks
             
             selectedHairColorIndex = colorIndex;
         }
-
-        if (colorIndex >= 0 && colorIndex < HairColors.Length)
+        if (imagboyselect != null)
         {
-            //Debug.Log("Select Hair = " + colorIndex);
-            if (colorIndex == selectedHairColorIndex)
+            foreach (GameObject x in SelectedImagesColorHair)
             {
-                SelectedImagesColorHair[colorIndex].SetActive(true);
+                x.SetActive(false);
             }
-            else
-            {
-                SelectedImagesColorHair[colorIndex].SetActive(false);
 
+            if (colorIndex >= 0 && colorIndex < HairColors.Length)
+            {
+                //Debug.Log("Select Hair = " + colorIndex);
+                if (colorIndex == selectedHairColorIndex)
+                {
+                    SelectedImagesColorHair[colorIndex].SetActive(true);
+                }
+                else
+                {
+                    SelectedImagesColorHair[colorIndex].SetActive(false);
+
+                }
             }
         }
     }
@@ -426,10 +439,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
     public void SelectShirt(int index)
     {
-        foreach (GameObject x in SelectImagesShirt)
-        {
-            x.SetActive(false);
-        }
+
         if (index >= 0 && index < Shirt.Length)
         {
             for (int i = 0; i < Shirt.Length; i++)
@@ -466,18 +476,25 @@ public class SelectItem : MonoBehaviourPunCallbacks
         }
         else
         ChangeShirtColor(6);
-
-        if (index >= 0 && index < SelectImagesShirt.Length)
+        if (imagboyselect != null)
         {
-            Debug.Log("Select Hair = " + index);
-            if (index == selectedShirtIndex)
+            foreach (GameObject x in SelectImagesShirt)
             {
-                SelectImagesShirt[index].SetActive(true);
+                x.SetActive(false);
             }
-            else
-            {
-                SelectImagesShirt[index].SetActive(false);
 
+            if (index >= 0 && index < SelectImagesShirt.Length)
+            {
+                Debug.Log("Select Hair = " + index);
+                if (index == selectedShirtIndex)
+                {
+                    SelectImagesShirt[index].SetActive(true);
+                }
+                else
+                {
+                    SelectImagesShirt[index].SetActive(false);
+
+                }
             }
         }
     }
@@ -486,10 +503,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public void ChangeShirtColor(int colorIndex)
     {
 
-        foreach (GameObject x in SelectedImagesColorShirt)
-        {
-            x.SetActive(false);
-        }
+
         if (colorIndex >= 0 && colorIndex < HairColors.Length)
         {
             if (!ShirtMaterial)
@@ -504,20 +518,26 @@ public class SelectItem : MonoBehaviourPunCallbacks
             
             selectedShirtColorIndex = colorIndex;
         }
-
-
-        if (colorIndex >= 0 && colorIndex < HairColors.Length)
+        if (imagboyselect != null)
         {
-
-            //Debug.Log($"selected Shirt Color = {selectedShirtIndex}");
-            if (colorIndex == selectedShirtColorIndex)
+            foreach (GameObject x in SelectedImagesColorShirt)
             {
-                SelectedImagesColorShirt[colorIndex].SetActive(true);
+                x.SetActive(false);
             }
-            else
-            {
-                SelectedImagesColorShirt[colorIndex].SetActive(false);
 
+            if (colorIndex >= 0 && colorIndex < HairColors.Length)
+            {
+
+                //Debug.Log($"selected Shirt Color = {selectedShirtIndex}");
+                if (colorIndex == selectedShirtColorIndex)
+                {
+                    SelectedImagesColorShirt[colorIndex].SetActive(true);
+                }
+                else
+                {
+                    SelectedImagesColorShirt[colorIndex].SetActive(false);
+
+                }
             }
         }
     }
@@ -525,10 +545,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public void SelectPants(int index)
     {
 
-        foreach (GameObject x in SelectImagesPant)
-        {
-            x.SetActive(false);
-        }
+
         if (index >= 0 && index < Pants.Length)
         {
             for (int i = 0; i < Pants.Length; i++)
@@ -557,16 +574,23 @@ public class SelectItem : MonoBehaviourPunCallbacks
         else
         ChangePantsColor(6);
 
-        if (index >= 0 && index < SelectImagesPant.Length)
+        if (imagboyselect != null)
         {
-
-            if (index == selectedPantsIndex)
+            foreach (GameObject x in SelectImagesPant)
             {
-                SelectImagesPant[index].SetActive(true);
+                x.SetActive(false);
             }
-            else
+            if (index >= 0 && index < SelectImagesPant.Length)
             {
-                SelectImagesPant[index].SetActive(true);
+
+                if (index == selectedPantsIndex)
+                {
+                    SelectImagesPant[index].SetActive(true);
+                }
+                else
+                {
+                    SelectImagesPant[index].SetActive(true);
+                }
             }
         }
     }
@@ -574,10 +598,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public void ChangePantsColor(int colorIndex)
     {
 
-        foreach (GameObject x in SelectedImagesColorPant)
-        {
-            x.SetActive(false);
-        }
+
         if (colorIndex >= 0 && colorIndex < HairColors.Length)
         {
             if (!PantsMaterial)
@@ -595,18 +616,25 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
         }
 
-        if (colorIndex >= 0 && colorIndex < HairColors.Length)
+        if (imagboyselect != null)
         {
-
-            //Debug.Log($"selected Shirt Color = {selectedShirtIndex}");
-            if (colorIndex == selectedPantsColorIndex)
+            foreach (GameObject x in SelectedImagesColorPant)
             {
-                SelectedImagesColorPant[colorIndex].SetActive(true);
+                x.SetActive(false);
             }
-            else
+            if (colorIndex >= 0 && colorIndex < HairColors.Length)
             {
-                SelectedImagesColorPant[colorIndex].SetActive(false);
 
+                //Debug.Log($"selected Shirt Color = {selectedShirtIndex}");
+                if (colorIndex == selectedPantsColorIndex)
+                {
+                    SelectedImagesColorPant[colorIndex].SetActive(true);
+                }
+                else
+                {
+                    SelectedImagesColorPant[colorIndex].SetActive(false);
+
+                }
             }
         }
     }
@@ -614,10 +642,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public void SelectShoes(int index)
     {
 
-        foreach (GameObject x in SelectImagesShoes)
-        {
-            x.SetActive(false);
-        }
+
         if (index >= 0 && index < Shoes.Length)
         {
             for (int i = 0; i < Shoes.Length; i++)
@@ -653,25 +678,29 @@ public class SelectItem : MonoBehaviourPunCallbacks
         else
         ChangeShoesColor(6);
 
-        if (index >= 0 && index < SelectImagesShoes.Length)
+        if (imagboyselect != null)
         {
-
-            if (index == selectedShoesIndex)
+            foreach (GameObject x in SelectImagesShoes)
             {
-                SelectImagesShoes[index].SetActive(true);
+                x.SetActive(false);
             }
-            else
+            if (index >= 0 && index < SelectImagesShoes.Length)
             {
-                SelectImagesShoes[index].SetActive(true);
+
+                if (index == selectedShoesIndex)
+                {
+                    SelectImagesShoes[index].SetActive(true);
+                }
+                else
+                {
+                    SelectImagesShoes[index].SetActive(true);
+                }
             }
         }
     }
     public void ChangeShoesColor(int colorIndex)
     {
-        foreach (GameObject x in SelectedImagesColorShoes)
-        {
-            x.SetActive(false);
-        }
+
         if (colorIndex >= 0 && colorIndex < HairColors.Length)
         {
             if (!ShoesMaterial)
@@ -688,27 +717,31 @@ public class SelectItem : MonoBehaviourPunCallbacks
             selectedShoesColorIndex = colorIndex;
 
         }
-        if (colorIndex >= 0 && colorIndex < HairColors.Length)
+        if (imagboyselect != null)
         {
-
-            //Debug.Log($"selected Shirt Color = {selectedShirtIndex}");
-            if (colorIndex == selectedShoesColorIndex)
+            foreach (GameObject x in SelectedImagesColorShoes)
             {
-                SelectedImagesColorShoes[colorIndex].SetActive(true);
+                x.SetActive(false);
             }
-            else
+            if (colorIndex >= 0 && colorIndex < HairColors.Length)
             {
-                SelectedImagesColorShoes[colorIndex].SetActive(false);
+
+                //Debug.Log($"selected Shirt Color = {selectedShirtIndex}");
+                if (colorIndex == selectedShoesColorIndex)
+                {
+                    SelectedImagesColorShoes[colorIndex].SetActive(true);
+                }
+                else
+                {
+                    SelectedImagesColorShoes[colorIndex].SetActive(false);
+                }
             }
         }
     }
 
     public void SelectFace(int index)
     {
-        foreach (GameObject x in SelectImagesFace)
-        {
-            x.SetActive(false);
-        }
+
 
         if (index >= 0 && index < Face.Length)
         {
@@ -719,18 +752,26 @@ public class SelectItem : MonoBehaviourPunCallbacks
             selectedFaceIndex = index;
 
         }
-
-        if (index >= 0 && index < SelectImagesFace.Length)
+        if (imagboyselect != null)
         {
-            Debug.Log("Select Face = " + index);
-
-            if (index == selectedFaceIndex)
+            foreach (GameObject x in SelectImagesFace)
             {
-                SelectImagesFace[index].SetActive(true);
+                x.SetActive(false);
             }
-            else
+
+
+            if (index >= 0 && index < SelectImagesFace.Length)
             {
-                SelectImagesFace[index].SetActive(false);
+                Debug.Log("Select Face = " + index);
+
+                if (index == selectedFaceIndex)
+                {
+                    SelectImagesFace[index].SetActive(true);
+                }
+                else
+                {
+                    SelectImagesFace[index].SetActive(false);
+                }
             }
         }
     }
