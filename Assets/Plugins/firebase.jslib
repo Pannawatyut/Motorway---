@@ -1,9 +1,9 @@
 mergeInto(LibraryManager.library, {
     GetJSON: function(path, objectName, callback, fallback) {
-        var parsedPath = Pointer_stringify(path);
-        var parsedObjectName = Pointer_stringify(objectName);
-        var parsedCallback = Pointer_stringify(callback);
-        var parsedFallback = Pointer_stringify(fallback);
+        var parsedPath = UTF8ToString(path);
+        var parsedObjectName = UTF8ToString(objectName);
+        var parsedCallback = UTF8ToString(callback);
+        var parsedFallback = UTF8ToString(fallback);
         
         try {
             firebase.database().ref(parsedPath).once('value').then(function(snapshot) {

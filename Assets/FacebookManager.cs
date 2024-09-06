@@ -1,14 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
 using Facebook.Unity;
-using System;
+using TMPro;
+using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class FacebookManager : MonoBehaviour
 {
-
     #region Initialize
     [Serializable]
     public class UserData
@@ -16,6 +16,8 @@ public class FacebookManager : MonoBehaviour
         public string email;
         public string facebook_id;
     }
+
+    public LoginManager loginManager;
 
     private void Awake()
     {
@@ -39,7 +41,7 @@ public class FacebookManager : MonoBehaviour
             {
                 Debug.Log("User is already logged in.");
                 LogAccessTokenInfo();
-                FetchProfile();  // Fetch email and Facebook ID
+                FetchProfile(); // Fetch email and Facebook ID
             }
             else
             {
@@ -98,7 +100,7 @@ public class FacebookManager : MonoBehaviour
             Debug.Log("Login successful.");
             LogAccessTokenInfo();
             DealWithFbMenus(true);
-            FetchProfile();  // Fetch email and Facebook ID
+            FetchProfile(); // Fetch email and Facebook ID
         }
         else
         {
@@ -168,26 +170,113 @@ public class FacebookManager : MonoBehaviour
         string json = JsonUtility.ToJson(userData);
 
         // Create a UnityWebRequest for the POST method
-        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/ api/user/loginFacebook", "POST")
+        using var request = new UnityWebRequest(
+            "https://api-motorway.mxrth.co:1000/api/user/loginFacebook",
+            "POST"
+        )
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
-            downloadHandler = new DownloadHandlerBuffer()
+            downloadHandler = new DownloadHandlerBuffer(),
         };
         request.SetRequestHeader("Content-Type", "application/json");
 
-        // Send the request and wait for a response
         yield return request.SendWebRequest();
-
-        if (request.result == UnityWebRequest.Result.Success)
+        loginManager._LoadingBar.SetActive(false);
+        // ตรวจสอบผลลัพธ์ของคำขอ
+        if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.Log("Successfully sent email and Facebook ID to backend.");
+            Debug.LogError("Error: " + request.error);
+            loginManager._LoadingFailed.SetActive(true);
+            yield return new WaitForSeconds(2f);
+            loginManager._LoadingFailed.SetActive(false);
         }
         else
         {
-            Debug.LogError("Failed to send email and Facebook ID to backend: " + request.error);
+            Debug.Log("Login Response: " + request.downloadHandler.text);
+            loginManager._LoadingOK.SetActive(true);
+            // แปลงข้อมูลตอบกลับเป็นอ็อบเจ็กต์
+            var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+
+            if (loginResponse.status)
+            {
+                Debug.Log("Login successful!");
+                // ทำการเก็บข้อมูล token หรือข้อมูลอื่นๆ จากการล็อกอิน
+                string uID = string.IsNullOrEmpty(loginResponse.data.account.uid)
+                    ? "-"
+                    : loginResponse.data.account.uid;
+                string firstName = string.IsNullOrEmpty(loginResponse.data.account.first_name)
+                    ? "-"
+                    : loginResponse.data.account.first_name;
+                string lastName = string.IsNullOrEmpty(loginResponse.data.account.last_name)
+                    ? "-"
+                    : loginResponse.data.account.last_name;
+                string gender = string.IsNullOrEmpty(loginResponse.data.account.gender)
+                    ? "-"
+                    : loginResponse.data.account.gender;
+                string age = string.IsNullOrEmpty(loginResponse.data.account.age)
+                    ? "-"
+                    : loginResponse.data.account.age;
+                string education = string.IsNullOrEmpty(loginResponse.data.account.education)
+                    ? "-"
+                    : loginResponse.data.account.education;
+                string occupation = string.IsNullOrEmpty(loginResponse.data.account.occupation)
+                    ? "-"
+                    : loginResponse.data.account.occupation;
+                string vehicle = string.IsNullOrEmpty(loginResponse.data.account.vehicle)
+                    ? "-"
+                    : loginResponse.data.account.vehicle;
+                string checkpoint = string.IsNullOrEmpty(loginResponse.data.account.checkpoint)
+                    ? "-"
+                    : loginResponse.data.account.checkpoint;
+                string accesstoken = string.IsNullOrEmpty(loginResponse.data.account.access_token)
+                    ? "-"
+                    : loginResponse.data.account.access_token;
+                loginManager._Account.uid = uID;
+                loginManager._Account.first_name = firstName;
+                loginManager._Account.last_name = lastName;
+                loginManager._Account.email = loginResponse.data.account.email;
+                loginManager._Account.gender = gender;
+                loginManager._Account.age = age;
+                loginManager._Account.education = education;
+                loginManager._Account.occupation = occupation;
+                loginManager._Account.vehicle = vehicle;
+                loginManager._Account.checkpoint = checkpoint;
+                loginManager._Account.access_token = accesstoken;
+
+                loginManager._Avatar.uid = loginResponse.data.avatar.uid;
+                loginManager._Avatar.name = loginResponse.data.avatar.name;
+                loginManager._Avatar.gender_id = loginResponse.data.avatar.gender_id;
+                loginManager._Avatar.skin_id = loginResponse.data.avatar.skin_id;
+                loginManager._Avatar.face_id = loginResponse.data.avatar.face_id;
+                loginManager._Avatar.hair_id = loginResponse.data.avatar.hair_id;
+                loginManager._Avatar.hair_color_id = loginResponse.data.avatar.hair_color_id;
+                loginManager._Avatar.shirt_id = loginResponse.data.avatar.shirt_id;
+                loginManager._Avatar.shirt_color_id = loginResponse.data.avatar.shirt_color_id;
+                loginManager._Avatar.pant_id = loginResponse.data.avatar.pant_id;
+                loginManager._Avatar.pant_color_id = loginResponse.data.avatar.pant_color_id;
+                loginManager._Avatar.shoe_id = loginResponse.data.avatar.shoe_id;
+                loginManager._Avatar.shoe_color_id = loginResponse.data.avatar.shoe_color_id;
+                loginManager._Avatar.accessory_id = loginResponse.data.avatar.accessory_id;
+
+                if (loginManager._Avatar.name != null)
+                {
+                    Debug.Log("Found Avatar");
+                    yield return new WaitForSeconds(3f);
+                    SceneManager.LoadScene("Game");
+                }
+                else
+                {
+                    Debug.Log("No Avatar");
+                    yield return new WaitForSeconds(3f);
+                    SceneManager.LoadScene("CharacterCustomizer");
+                }
+            }
+            else
+            {
+                Debug.LogError("Login failed!");
+            }
         }
     }
-
 
     #endregion
 
@@ -217,4 +306,53 @@ public class FacebookManager : MonoBehaviour
     */
 
     #endregion
+}
+
+[Serializable]
+public class LoginResponse
+{
+    public bool status;
+    public Data data;
+
+    [Serializable]
+    public class Data
+    {
+        public Account account;
+        public Avatar avatar;
+
+        [Serializable]
+        public class Account
+        {
+            public string uid;
+            public string first_name;
+            public string last_name;
+            public string email;
+            public string gender;
+            public string age;
+            public string education;
+            public string occupation;
+            public string vehicle;
+            public string checkpoint;
+            public string access_token;
+        }
+
+        [Serializable]
+        public class Avatar
+        {
+            public string uid;
+            public string name;
+            public int gender_id;
+            public int skin_id;
+            public int face_id;
+            public int hair_id;
+            public int hair_color_id;
+            public int shirt_id;
+            public int shirt_color_id;
+            public int pant_id;
+            public int pant_color_id;
+            public int shoe_id;
+            public int shoe_color_id;
+            public int accessory_id;
+        }
+    }
 }
