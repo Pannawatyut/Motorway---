@@ -1,11 +1,11 @@
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using TMPro;
-
+using UnityEngine.Networking;
 public class ScoreManager : MonoBehaviour
 {
     public float time = 180f; // 3 minutes in seconds
-    public int score = 0;
+    public int _score = 0;
 
     public int FirstTimePlay;
 
@@ -31,6 +31,8 @@ public class ScoreManager : MonoBehaviour
 
     public static ScoreManager Instance { get; private set; }
 
+    public LoginManager _loginManager;
+
     public int consecutiveCorrectAnswers = 0;
     public int scoreMultiplier = 1;
 
@@ -47,10 +49,18 @@ public class ScoreManager : MonoBehaviour
         }
     }
 
-    private void Start()
+
+    public void _CallStarter()
     {
         StartCoroutine(CountdownTimer());
         UpdateScoreDisplay(); // Initialize the score display
+    }
+    private void Update()
+    {
+        if (_loginManager == null)
+        {
+            _loginManager = FindObjectOfType<LoginManager>();
+        }
     }
 
     private void UpdateTimerDisplay()
@@ -62,7 +72,7 @@ public class ScoreManager : MonoBehaviour
 
     private void UpdateScoreDisplay()
     {
-        scoreText.text = score.ToString();
+        scoreText.text = _score.ToString();
     }
 
     private IEnumerator CountdownTimer()
@@ -84,22 +94,23 @@ public class ScoreManager : MonoBehaviour
         time = 0;
         // Implement what should happen when the timer ends
         Debug.Log("Timer ended");
+        SendScoreToData();
         End_Menu.SetActive(true);
-        end_score.text = score.ToString();
+        end_score.text = _score.ToString();
     }
 
     public void AddScore(int amount)
     {
-        score += amount * scoreMultiplier;
+        _score += amount * scoreMultiplier;
         UpdateScoreDisplay(); // Update the score display
     }
 
     public void SubtractScore(int amount)
     {
-        score -= amount;
-        if (score < 0)
+        _score -= amount;
+        if (_score < 0)
         {
-            score = 0;
+            _score = 0;
         }
         UpdateScoreDisplay(); // Update the score display
     }
@@ -111,15 +122,15 @@ public class ScoreManager : MonoBehaviour
         if (consecutiveCorrectAnswers > 0)
         {
             Combotext[0].SetActive(true);
-            Combotext[1].SetActive(true);
+            //Combotext[1].SetActive(true);
         }
         if (consecutiveCorrectAnswers == 0)
         {
             Combotext[0].SetActive(false);
-            Combotext[1].SetActive(false);
+            //Combotext[1].SetActive(false);
         }
         UpdateMultiplier();
-        StartCoroutine(ScaleText(Combo, 1.5f, 0.2f)); // Call the scaling animation
+        StartCoroutine(ScaleText(Combo, 1.5f, 0.1f)); // Call the scaling animation
     }
 
     public void WrongAnswer()
@@ -128,7 +139,7 @@ public class ScoreManager : MonoBehaviour
         Combo.text = "";
         MultiplierScore.text = "";
         Combotext[0].SetActive(false);
-        Combotext[1].SetActive(false);
+        //Combotext[1].SetActive(false);
         scoreMultiplier = 1;
     }
 
@@ -214,6 +225,55 @@ public class ScoreManager : MonoBehaviour
     {
         Setting.SetActive(true);
     }
-    
-    
+
+    public void SendScoreToData()
+    {
+        StartCoroutine(SendScore());
+    }
+    IEnumerator SendScore()
+    {
+        var Score = new Leaderboard
+        {
+            score = _score
+        };
+        string json = JsonUtility.ToJson(Score);
+        Debug.Log("Sending JSON Data: " + json);
+
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/leaderboard/updateScore", "POST")
+        {
+            uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
+            downloadHandler = new DownloadHandlerBuffer()
+        };
+
+        request.SetRequestHeader("Content-Type", "application/json");
+        request.SetRequestHeader("Authorization", _loginManager._Account.access_token);
+
+        yield return request.SendWebRequest();
+
+        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError)
+        {
+            Debug.LogError("Error: " + request.error + "\nResponse: " + request.downloadHandler.text);
+        }
+        else
+        {
+            Debug.Log("Score Update Successful: " + request.downloadHandler.text);
+        }
+    }
+    [System.Serializable]
+    public class Leaderboard
+    {
+        public int score;
+    }
+    [System.Serializable]
+    public class ScoreResponse
+    {
+        public bool status;
+        public Data data;
+    }
+    [System.Serializable]
+    public class Data
+    {
+        public Leaderboard leaderboard;
+
+    }
 }

@@ -10,10 +10,12 @@ float bakeryLightmapMode;
 
 //#define BAKERY_SSBUMP
 
+#define BAKERY_LMSPECOCCLUSION_MUL 10
+
 //#define BAKERY_COMPRESSED_VOLUME_RGBM
 
 // can't fit vertexLM SH to sm3_0 interpolators
-#ifndef SHADER_API_D3D11
+#if defined(SHADER_API_GLCORE) || defined(SHADER_API_GLES) || defined(SHADER_API_D3D11_9X)
     #undef BAKERY_VERTEXLMSH
 #endif
 
@@ -24,6 +26,7 @@ float bakeryLightmapMode;
 
     #undef BAKERY_RNM
     #undef BAKERY_SH
+    #undef BAKERY_MONOSH
     #undef BAKERY_VERTEXLM
 #endif
 
@@ -34,6 +37,10 @@ float bakeryLightmapMode;
 
 #ifndef UNITY_SHOULD_SAMPLE_SH
     #undef BAKERY_PROBESHNONLINEAR
+#endif
+
+#ifndef BAKERY_LMSPEC
+    #undef BAKERY_LMSPECOCCLUSION
 #endif
 
 #if defined(BAKERY_RNM) && defined(BAKERY_LMSPEC)
@@ -48,7 +55,7 @@ float bakeryLightmapMode;
 
 #define lumaConv float3(0.2125f, 0.7154f, 0.0721f)
 
-#if defined(BAKERY_SH) || defined(BAKERY_VERTEXLMSH) || defined(BAKERY_PROBESHNONLINEAR) || defined(BAKERY_VOLUME)
+#if defined(BAKERY_SH) || defined(BAKERY_MONOSH) || defined(BAKERY_VERTEXLMSH) || defined(BAKERY_PROBESHNONLINEAR) || defined(BAKERY_VOLUME)
 float shEvaluateDiffuseL1Geomerics(float L0, float3 L1, float3 n)
 {
     // average energy
@@ -89,6 +96,52 @@ float shEvaluateDiffuseL1Geomerics(float L0, float3 L1, float3 n)
         return float3(r, g, b);
     }
 #if defined(BAKERY_VERTEXLMDIR)
+
+#ifdef BAKERY_MONOSH
+    void BakeryVertexLMMonoSH(inout float3 diffuseColor, inout float3 specularColor, float3 nL1, float3 normalWorld, float3 viewDir, float smoothness)
+    {
+        nL1 = nL1;
+        float3 L0 = diffuseColor;
+        float3 L1x = nL1.x * L0 * 2;
+        float3 L1y = nL1.y * L0 * 2;
+        float3 L1z = nL1.z * L0 * 2;
+
+        float3 sh;
+    #if BAKERY_SHNONLINEAR
+        //sh.r = shEvaluateDiffuseL1Geomerics(L0.r, float3(L1x.r, L1y.r, L1z.r), normalWorld);
+        //sh.g = shEvaluateDiffuseL1Geomerics(L0.g, float3(L1x.g, L1y.g, L1z.g), normalWorld);
+        //sh.b = shEvaluateDiffuseL1Geomerics(L0.b, float3(L1x.b, L1y.b, L1z.b), normalWorld);
+
+        float lumaL0 = dot(L0, 1);
+        float lumaL1x = dot(L1x, 1);
+        float lumaL1y = dot(L1y, 1);
+        float lumaL1z = dot(L1z, 1);
+        float lumaSH = shEvaluateDiffuseL1Geomerics(lumaL0, float3(lumaL1x, lumaL1y, lumaL1z), normalWorld);
+
+        sh = L0 + normalWorld.x * L1x + normalWorld.y * L1y + normalWorld.z * L1z;
+        float regularLumaSH = dot(sh, 1);
+        //sh *= regularLumaSH < 0.001 ? 1 : (lumaSH / regularLumaSH);
+        sh *= lerp(1, lumaSH / regularLumaSH, saturate(regularLumaSH*16));
+
+    #else
+        sh = L0 + normalWorld.x * L1x + normalWorld.y * L1y + normalWorld.z * L1z;
+    #endif
+
+        diffuseColor = max(sh, 0.0);
+
+        #ifdef BAKERY_LMSPEC
+            float3 dominantDir = nL1;
+            float focus = saturate(length(dominantDir));
+            half3 halfDir = Unity_SafeNormalize(normalize(dominantDir) - viewDir);
+            half nh = saturate(dot(normalWorld, halfDir));
+            half perceptualRoughness = SmoothnessToPerceptualRoughness(smoothness );//* sqrt(focus));
+            half roughness = PerceptualRoughnessToRoughness(perceptualRoughness);
+            half spec = GGXTerm(nh, roughness);
+            specularColor = max(spec * sh, 0.0);
+        #endif
+    }
+#endif
+
     void BakeryVertexLMDirection(inout float3 diffuseColor, inout float3 specularColor, float3 lightDirection, float3 vertexNormalWorld, float3 normalWorld, float3 viewDir, float smoothness)
     {
         float3 dominantDir = Unity_SafeNormalize(lightDirection);
@@ -440,6 +493,10 @@ sampler2D _RNM0, _RNM1, _RNM2;
 float4 _RNM0_TexelSize;
 #endif
 
+#if UNITY_VERSION >= 201740
+    SamplerState bakery_trilinear_clamp_sampler;
+#endif
+
 #ifdef BAKERY_VOLUME
 Texture3D _Volume0, _Volume1, _Volume2, _VolumeMask;
 SamplerState sampler_Volume0;
@@ -525,7 +582,11 @@ float3 _GlobalVolumeMin, _GlobalVolumeInvSize;
 #ifdef BAKERY_LMSPEC
 float BakeryDirectionalLightmapSpecular(float2 lmUV, float3 normalWorld, float3 viewDir, float smoothness)
 {
+#if UNITY_VERSION >= 201740
+    float3 dominantDir = unity_LightmapInd.Sample(bakery_trilinear_clamp_sampler, lmUV).xyz * 2 - 1;
+#else
     float3 dominantDir = UNITY_SAMPLE_TEX2D_SAMPLER(unity_LightmapInd, unity_Lightmap, lmUV).xyz * 2 - 1;
+#endif
     half3 halfDir = Unity_SafeNormalize(normalize(dominantDir) - viewDir);
     half nh = saturate(dot(normalWorld, halfDir));
     half perceptualRoughness = SmoothnessToPerceptualRoughness(smoothness);
@@ -581,11 +642,22 @@ void BakeryRNM(inout float3 diffuseColor, inout float3 specularColor, float2 lmU
 #ifdef BAKERY_SH
 void BakerySH(inout float3 diffuseColor, inout float3 specularColor, float2 lmUV, float3 normalWorld, float3 viewDir, float smoothness)
 {
+
+    /*
 #ifdef SHADER_API_D3D11
-    float3 L0 = DecodeLightmap(BakeryTex2D(unity_Lightmap, samplerunity_Lightmap, lmUV, _RNM0_TexelSize));
+    #if UNITY_VERSION >= 201740
+        float3 L0 = DecodeLightmap(BakeryTex2D(unity_Lightmap, bakery_trilinear_clamp_sampler, lmUV, _RNM0_TexelSize));
+    #else
+        float3 L0 = DecodeLightmap(BakeryTex2D(unity_Lightmap, samplerunity_Lightmap, lmUV, _RNM0_TexelSize));
+    #endif
 #else
     float3 L0 = DecodeLightmap(UNITY_SAMPLE_TEX2D(unity_Lightmap, lmUV));
 #endif
+    */
+
+    // already sampled
+    float3 L0 = diffuseColor;
+
     float3 nL1x = BakeryTex2D(_RNM0, lmUV, _RNM0_TexelSize) * 2 - 1;
     float3 nL1y = BakeryTex2D(_RNM1, lmUV, _RNM0_TexelSize) * 2 - 1;
     float3 nL1z = BakeryTex2D(_RNM2, lmUV, _RNM0_TexelSize) * 2 - 1;
@@ -616,8 +688,66 @@ void BakerySH(inout float3 diffuseColor, inout float3 specularColor, float2 lmUV
 
     diffuseColor = max(sh, 0.0);
 
+    specularColor = 0;
     #ifdef BAKERY_LMSPEC
         float3 dominantDir = float3(dot(nL1x, lumaConv), dot(nL1y, lumaConv), dot(nL1z, lumaConv));
+        float focus = saturate(length(dominantDir));
+        half3 halfDir = Unity_SafeNormalize(normalize(dominantDir) - viewDir);
+        half nh = saturate(dot(normalWorld, halfDir));
+        half perceptualRoughness = SmoothnessToPerceptualRoughness(smoothness );//* sqrt(focus));
+        half roughness = PerceptualRoughnessToRoughness(perceptualRoughness);
+        half spec = GGXTerm(nh, roughness);
+
+        sh = L0 + dominantDir.x * L1x + dominantDir.y * L1y + dominantDir.z * L1z;
+
+        specularColor = max(spec * sh, 0.0);
+    #endif
+}
+#endif
+
+#ifdef BAKERY_MONOSH
+void BakeryMonoSH(inout float3 diffuseColor, inout float3 specularColor, float2 lmUV, float3 normalWorld, float3 viewDir, float smoothness)
+{
+
+#if UNITY_VERSION >= 201740
+    float3 dominantDir = unity_LightmapInd.Sample(bakery_trilinear_clamp_sampler, lmUV).xyz;
+    float3 L0 = DecodeLightmap(unity_Lightmap.Sample(bakery_trilinear_clamp_sampler, lmUV));
+#else
+    float3 dominantDir = UNITY_SAMPLE_TEX2D_SAMPLER(unity_LightmapInd, unity_Lightmap, lmUV).xyz;
+    float3 L0 = DecodeLightmap(UNITY_SAMPLE_TEX2D_SAMPLER(unity_Lightmap, unity_Lightmap, lmUV));
+#endif
+
+    float3 nL1 = dominantDir * 2 - 1;
+    float3 L1x = nL1.x * L0 * 2;
+    float3 L1y = nL1.y * L0 * 2;
+    float3 L1z = nL1.z * L0 * 2;
+
+    float3 sh;
+#if BAKERY_SHNONLINEAR
+    float lumaL0 = dot(L0, 1);
+    float lumaL1x = dot(L1x, 1);
+    float lumaL1y = dot(L1y, 1);
+    float lumaL1z = dot(L1z, 1);
+    float lumaSH = shEvaluateDiffuseL1Geomerics(lumaL0, float3(lumaL1x, lumaL1y, lumaL1z), normalWorld);
+
+    sh = L0 + normalWorld.x * L1x + normalWorld.y * L1y + normalWorld.z * L1z;
+    float regularLumaSH = dot(sh, 1);
+    //sh *= regularLumaSH < 0.001 ? 1 : (lumaSH / regularLumaSH);
+    sh *= lerp(1, lumaSH / regularLumaSH, saturate(regularLumaSH*16));
+
+    //sh.r = shEvaluateDiffuseL1Geomerics(L0.r, float3(L1x.r, L1y.r, L1z.r), normalWorld);
+    //sh.g = shEvaluateDiffuseL1Geomerics(L0.g, float3(L1x.g, L1y.g, L1z.g), normalWorld);
+    //sh.b = shEvaluateDiffuseL1Geomerics(L0.b, float3(L1x.b, L1y.b, L1z.b), normalWorld);
+
+#else
+    sh = L0 + normalWorld.x * L1x + normalWorld.y * L1y + normalWorld.z * L1z;
+#endif
+
+    diffuseColor = max(sh, 0.0);
+
+    specularColor = 0;
+    #ifdef BAKERY_LMSPEC
+        dominantDir = nL1;
         float focus = saturate(length(dominantDir));
         half3 halfDir = Unity_SafeNormalize(normalize(dominantDir) - viewDir);
         half nh = saturate(dot(normalWorld, halfDir));
@@ -635,6 +765,7 @@ void BakerySH(inout float3 diffuseColor, inout float3 specularColor, float2 lmUV
 half4 bakeryFragForwardBase(BakeryVertexOutputForwardBase i) : SV_Target
 {
     FRAGMENT_SETUP(s)
+    UNITY_SETUP_INSTANCE_ID(i);
 #if UNITY_OPTIMIZE_TEXCUBELOD
     s.reflUVW = i.reflUVW;
 #endif
@@ -686,9 +817,9 @@ half4 bakeryFragForwardBase(BakeryVertexOutputForwardBase i) : SV_Target
         #else
             L0 = tex0.xyz;
         #endif
-        L1x = tex1.xyz * L0;
-        L1y = tex2.xyz * L0;
-        L1z = tex3.xyz * L0;
+        L1x = tex1.xyz * L0 * 2;
+        L1y = tex2.xyz * L0 * 2;
+        L1z = tex3.xyz * L0 * 2;
     #else
         float4 tex0, tex1, tex2;
         float3 L0, L1x, L1y, L1z;
@@ -719,7 +850,11 @@ half4 bakeryFragForwardBase(BakeryVertexOutputForwardBase i) : SV_Target
         half roughness = PerceptualRoughnessToRoughness(perceptualRoughness);
         half spec = GGXTerm(nh, roughness);
         float3 sh = L0 + dominantDir.x * L1x + dominantDir.y * L1y + dominantDir.z * L1z;
-        gi.indirect.specular += max(spec * sh, 0.0);
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular *= saturate(dot(spec * sh, BAKERY_LMSPECOCCLUSION_MUL));
+        #else
+            gi.indirect.specular += max(spec * sh, 0.0);
+        #endif
     #endif
 
 #elif BAKERY_PROBESHNONLINEAR
@@ -731,10 +866,17 @@ half4 bakeryFragForwardBase(BakeryVertexOutputForwardBase i) : SV_Target
 
 #ifdef DIRLIGHTMAP_COMBINED
 #ifdef BAKERY_LMSPEC
+#ifndef BAKERY_MONOSH
     if (bakeryLightmapMode == BAKERYMODE_DEFAULT)
     {
-        gi.indirect.specular += BakeryDirectionalLightmapSpecular(i.ambientOrLightmapUV.xy, s.normalWorld, s.eyeVec, s.smoothness) * gi.indirect.diffuse;
+        float3 spec = BakeryDirectionalLightmapSpecular(i.ambientOrLightmapUV.xy, s.normalWorld, s.eyeVec, s.smoothness) * gi.indirect.diffuse;
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular *= saturate(dot(spec, BAKERY_LMSPECOCCLUSION_MUL));
+        #else
+            gi.indirect.specular += spec;
+        #endif
     }
+#endif
 #endif
 #endif
 
@@ -745,11 +887,23 @@ half4 bakeryFragForwardBase(BakeryVertexOutputForwardBase i) : SV_Target
         float3 prevSpec = gi.indirect.specular;
 
         #if defined(BAKERY_VERTEXLMDIR)
-            BakeryVertexLMDirection(gi.indirect.diffuse, gi.indirect.specular, i.lightDirection, i.tangentToWorldAndPackedData[2].xyz, s.normalWorld, s.eyeVec, s.smoothness);
-            gi.indirect.specular += prevSpec;
+            #ifdef BAKERY_MONOSH
+                BakeryVertexLMMonoSH(gi.indirect.diffuse, gi.indirect.specular, i.lightDirection, s.normalWorld, s.eyeVec, s.smoothness);
+            #else
+                BakeryVertexLMDirection(gi.indirect.diffuse, gi.indirect.specular, i.lightDirection, i.tangentToWorldAndPackedData[2].xyz, s.normalWorld, s.eyeVec, s.smoothness);
+            #endif
+            #ifdef BAKERY_LMSPECOCCLUSION
+                gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+            #else
+                gi.indirect.specular += prevSpec;
+            #endif
         #elif defined (BAKERY_VERTEXLMSH)
             BakeryVertexLMSH(gi.indirect.diffuse, gi.indirect.specular, i.shL1x, i.shL1y, i.shL1z, s.normalWorld, s.eyeVec, s.smoothness);
-            gi.indirect.specular += prevSpec;
+            #ifdef BAKERY_LMSPECOCCLUSION
+                gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+            #else
+                gi.indirect.specular += prevSpec;
+            #endif
         #endif
     }
 #endif
@@ -770,7 +924,11 @@ half4 bakeryFragForwardBase(BakeryVertexOutputForwardBase i) : SV_Target
 
         float3 prevSpec = gi.indirect.specular;
         BakeryRNM(gi.indirect.diffuse, gi.indirect.specular, i.ambientOrLightmapUV.xy, normalMap, s.smoothness, eyeVecT);
-        gi.indirect.specular += prevSpec;
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+        #else
+            gi.indirect.specular += prevSpec;
+        #endif
     }
 #endif
 
@@ -781,8 +939,27 @@ half4 bakeryFragForwardBase(BakeryVertexOutputForwardBase i) : SV_Target
     {
         float3 prevSpec = gi.indirect.specular;
         BakerySH(gi.indirect.diffuse, gi.indirect.specular, i.ambientOrLightmapUV.xy, s.normalWorld, s.eyeVec, s.smoothness);
-        gi.indirect.specular += prevSpec;
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+        #else
+            gi.indirect.specular += prevSpec;
+        #endif
     }
+#endif
+
+#ifdef DIRLIGHTMAP_COMBINED
+#ifdef BAKERY_MONOSH
+    if (bakeryLightmapMode != BAKERYMODE_VERTEXLM)
+    {
+        float3 prevSpec = gi.indirect.specular;
+        BakeryMonoSH(gi.indirect.diffuse, gi.indirect.specular, i.ambientOrLightmapUV.xy, s.normalWorld, s.eyeVec, s.smoothness);
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+        #else
+            gi.indirect.specular += prevSpec;
+        #endif
+    }
+#endif
 #endif
 
     half4 c = UNITY_BRDF_PBS(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness, s.normalWorld, -s.eyeVec, gi.light, gi.indirect);
@@ -951,6 +1128,7 @@ struct BakeryVertexOutputDeferred
 #endif
 #endif
 
+    UNITY_VERTEX_INPUT_INSTANCE_ID
     UNITY_VERTEX_OUTPUT_STEREO
 };
 
@@ -959,6 +1137,7 @@ BakeryVertexOutputDeferred bakeryVertDeferred(BakeryVertexInput v)
     UNITY_SETUP_INSTANCE_ID(v);
     BakeryVertexOutputDeferred o;
     UNITY_INITIALIZE_OUTPUT(BakeryVertexOutputDeferred, o);
+    UNITY_TRANSFER_INSTANCE_ID(v, o);
     UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 
     float4 posWorld = mul(unity_ObjectToWorld, v.vertex);
@@ -1061,6 +1240,7 @@ void bakeryFragDeferred(
 #endif
 
     FRAGMENT_SETUP(s)
+    UNITY_SETUP_INSTANCE_ID(i);
 #if UNITY_OPTIMIZE_TEXCUBELOD
         s.reflUVW = i.reflUVW;
 #endif
@@ -1109,9 +1289,9 @@ void bakeryFragDeferred(
         #else
             L0 = tex0.xyz;
         #endif
-        L1x = tex1.xyz * L0;
-        L1y = tex2.xyz * L0;
-        L1z = tex3.xyz * L0;
+        L1x = tex1.xyz * L0 * 2;
+        L1y = tex2.xyz * L0 * 2;
+        L1z = tex3.xyz * L0 * 2;
     #else
         float4 tex0, tex1, tex2;
         float3 L0, L1x, L1y, L1z;
@@ -1142,7 +1322,11 @@ void bakeryFragDeferred(
         half roughness = PerceptualRoughnessToRoughness(perceptualRoughness);
         half spec = GGXTerm(nh, roughness);
         float3 sh = L0 + dominantDir.x * L1x + dominantDir.y * L1y + dominantDir.z * L1z;
-        gi.indirect.specular += max(spec * sh, 0.0);
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular *= saturate(dot(spec * sh, BAKERY_LMSPECOCCLUSION_MUL));
+        #else
+            gi.indirect.specular += max(spec * sh, 0.0);
+        #endif
     #endif
 
 #elif BAKERY_PROBESHNONLINEAR
@@ -1154,10 +1338,17 @@ void bakeryFragDeferred(
 
 #ifdef DIRLIGHTMAP_COMBINED
 #ifdef BAKERY_LMSPEC
+#ifndef BAKERY_MONOSH
     if (bakeryLightmapMode == BAKERYMODE_DEFAULT)
     {
-        gi.indirect.specular += BakeryDirectionalLightmapSpecular(i.ambientOrLightmapUV.xy, s.normalWorld, s.eyeVec, s.smoothness) * gi.indirect.diffuse;
+        float3 spec = BakeryDirectionalLightmapSpecular(i.ambientOrLightmapUV.xy, s.normalWorld, s.eyeVec, s.smoothness) * gi.indirect.diffuse;
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular *= saturate(dot(spec, BAKERY_LMSPECOCCLUSION_MUL));
+        #else
+            gi.indirect.specular += spec;
+        #endif
     }
+#endif
 #endif
 #endif
 
@@ -1168,11 +1359,23 @@ void bakeryFragDeferred(
         float3 prevSpec = gi.indirect.specular;
 
         #if defined(BAKERY_VERTEXLMDIR)
-            BakeryVertexLMDirection(gi.indirect.diffuse, gi.indirect.specular, i.lightDirection, i.tangentToWorldAndPackedData[2].xyz, s.normalWorld, s.eyeVec, s.smoothness);
-            gi.indirect.specular += prevSpec;
+            #ifdef BAKERY_MONOSH
+                BakeryVertexLMMonoSH(gi.indirect.diffuse, gi.indirect.specular, i.lightDirection, s.normalWorld, s.eyeVec, s.smoothness);
+            #else
+                BakeryVertexLMDirection(gi.indirect.diffuse, gi.indirect.specular, i.lightDirection, i.tangentToWorldAndPackedData[2].xyz, s.normalWorld, s.eyeVec, s.smoothness);
+            #endif
+            #ifdef BAKERY_LMSPECOCCLUSION
+                gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+            #else
+                gi.indirect.specular += prevSpec;
+            #endif
         #elif defined (BAKERY_VERTEXLMSH)
             BakeryVertexLMSH(gi.indirect.diffuse, gi.indirect.specular, i.shL1x, i.shL1y, i.shL1z, s.normalWorld, s.eyeVec, s.smoothness);
-            gi.indirect.specular += prevSpec;
+            #ifdef BAKERY_LMSPECOCCLUSION
+                gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+            #else
+                gi.indirect.specular += prevSpec;
+            #endif
         #endif
     }
 #endif
@@ -1193,7 +1396,11 @@ void bakeryFragDeferred(
 
         float3 prevSpec = gi.indirect.specular;
         BakeryRNM(gi.indirect.diffuse, gi.indirect.specular, i.ambientOrLightmapUV.xy, normalMap, s.smoothness, eyeVecT);
-        gi.indirect.specular += prevSpec;
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+        #else
+            gi.indirect.specular += prevSpec;
+        #endif
     }
 #endif
 
@@ -1204,8 +1411,27 @@ void bakeryFragDeferred(
     {
         float3 prevSpec = gi.indirect.specular;
         BakerySH(gi.indirect.diffuse, gi.indirect.specular, i.ambientOrLightmapUV.xy, s.normalWorld, s.eyeVec, s.smoothness);
-        gi.indirect.specular += prevSpec;
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+        #else
+            gi.indirect.specular += prevSpec;
+        #endif
     }
+#endif
+
+#ifdef DIRLIGHTMAP_COMBINED
+#ifdef BAKERY_MONOSH
+    if (bakeryLightmapMode != BAKERYMODE_VERTEXLM)
+    {
+        float3 prevSpec = gi.indirect.specular;
+        BakeryMonoSH(gi.indirect.diffuse, gi.indirect.specular, i.ambientOrLightmapUV.xy, s.normalWorld, s.eyeVec, s.smoothness);
+        #ifdef BAKERY_LMSPECOCCLUSION
+            gi.indirect.specular = saturate(dot(gi.indirect.specular, BAKERY_LMSPECOCCLUSION_MUL)) * prevSpec;
+        #else
+            gi.indirect.specular += prevSpec;
+        #endif
+    }
+#endif
 #endif
 
     half3 color = UNITY_BRDF_PBS(s.diffColor, s.specColor, s.oneMinusReflectivity, s.smoothness, s.normalWorld, -s.eyeVec, gi.light, gi.indirect).rgb;

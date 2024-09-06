@@ -38,32 +38,48 @@ public class CarSpawner : MonoBehaviour
     public Slider slider1;
     public Image sliderFill;
 
+    public bool _isStart;
+    public AudioSource _ButtonSound;
+
     private void Start()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
+    public void _StartGame()
+    {
+        _isStart = true;
+        GetComponent<ScoreManager>()._CallStarter();
         StartCoroutine(SpawnCarsContinuously());
+
+
     }
 
     private void Update()
     {
-        elapsedTime += Time.deltaTime;
-
-        if (elapsedTime >= 90f)
+        if (_isStart)
         {
-            spawnInterval = 0.5f;
-        }
-        else if (elapsedTime >= 60f)
-        {
-            spawnInterval = 1f;
-        }
+            elapsedTime += Time.deltaTime;
 
-        UpdateUI();
+            if (elapsedTime >= 90f)
+            {
+                spawnInterval = 0.5f;
+            }
+            else if (elapsedTime >= 60f)
+            {
+                spawnInterval = 1f;
+            }
 
-        if (spawnedCars.Count >= 21 && !isGameOverChecked)
-        {
-            GameOver();
+            UpdateUI();
+
+            if (spawnedCars.Count >= 21 && !isGameOverChecked)
+            {
+                GameOver();
+            }
+            
         }
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        
     }
 
     private void UpdateUI()
@@ -167,6 +183,7 @@ public class CarSpawner : MonoBehaviour
             ScoreManager.Instance.CorrectAnswer();
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("suscess");
+            _ButtonSound.Play();
         }
         else
         {
@@ -175,6 +192,7 @@ public class CarSpawner : MonoBehaviour
             ScoreManager.Instance.WrongAnswer();
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("fail");
+            _ButtonSound.Play();
         }
 
         StartCoroutine(MoveAndDestroyFirstCar(spawnedCars[0]));
@@ -269,6 +287,12 @@ public class CarSpawner : MonoBehaviour
         isGameOverChecked = true;
         time = 0;
         ScoreManager.Instance.OnTimerEnd();
+        _isStart = false;
         Debug.Log("Game Over! Maximum number of cars reached.");
+    }
+
+    public void _BackToMain()
+    {
+        Application.LoadLevel("Game");
     }
 }

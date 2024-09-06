@@ -122,7 +122,7 @@ Version 4.1.6.8 (12. October 2021)
     Removed: Surplus checks if the LoadBalancingPeer is non-null. This is done in CheckIfOpCanBeSent(), too.
 
 Version 4.1.6.7 (27. September 2021)
-    Replaced: Pointer_stringify with UTF8ToString in WebSocket.jslib. It was removed from newer Emscripten versions and is no longer working when exporting from Unity 2021.2. betas. Replaced with UTF8ToString. Tested in 2018.4.x and a current beta.
+    Replaced: UTF8ToString with UTF8ToString in WebSocket.jslib. It was removed from newer Emscripten versions and is no longer working when exporting from Unity 2021.2. betas. Replaced with UTF8ToString. Tested in 2018.4.x and a current beta.
     Fixed: Usage of websocketType for console.
 
 Version 4.1.6.6 (17. September 2021)

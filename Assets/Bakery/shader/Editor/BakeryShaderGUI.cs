@@ -73,8 +73,10 @@ namespace UnityEditor
             public static GUIContent vertexLMMaskLabel = new GUIContent("Enable VertexLM Shadowmask", "Enables per-vertex shadowmasks.");
             public static GUIContent rnmLabel = new GUIContent("Allow RNM Lightmaps", "Allows this material to use RNM lightmaps, if present.");
             public static GUIContent shLabel = new GUIContent("Allow SH Lightmaps", "Allows this material to use SH lightmaps, if present.");
+            public static GUIContent monoshLabel = new GUIContent("Enable MonoSH", "Makes this material treat directional maps as MonoSH.");
             public static GUIContent shnLabel = new GUIContent("Non-linear SH", "This option can enhance contrast (closer to ground truth), but it makes the shader a bit slower.");
             public static GUIContent specLabel = new GUIContent("Enable Lightmap Specular", "Enables baked specular for all directional modes.");
+            public static GUIContent specOcclusionLabel = new GUIContent("Use Lightmap Specular as Reflection Occlusion", "Uses baked specular as a mask for reflection probes.");
             public static GUIContent bicubicLabel = new GUIContent("Force Bicubic Filter", "Enables bicubic filtering for all lightmaps (color/shadowmask/direction/etc) used in the material.");
             public static GUIContent pshnLabel = new GUIContent("Non-linear Light Probe SH", "Prevents negative values in light probes. This is recommended when baking probes in L1 mode. Can slow down the shader a bit.");
             public static GUIContent volLabel = new GUIContent("Enable Volumes", "Enable usages of BakeryVolumes");
@@ -118,9 +120,11 @@ namespace UnityEditor
         MaterialProperty enableVertexLMSH = null;
         MaterialProperty enableVertexLMmask = null;
         MaterialProperty enableSH = null;
+        MaterialProperty enableMonoSH = null;
         MaterialProperty enableSHN = null;
         MaterialProperty enableRNM = null;
         MaterialProperty enableSpec = null;
+        MaterialProperty enableSpecOcclusion = null;
         MaterialProperty enableBicubic = null;
         MaterialProperty enablePSHN = null;
         MaterialProperty enableVolumes = null;
@@ -181,9 +185,11 @@ namespace UnityEditor
             enableVertexLMSH = FindProperty("_BAKERY_VERTEXLMSH", props);
             enableVertexLMmask = FindProperty("_BAKERY_VERTEXLMMASK", props);
             enableSH = FindProperty("_BAKERY_SH", props);
+            enableMonoSH = FindProperty("_BAKERY_MONOSH", props);
             enableSHN = FindProperty("_BAKERY_SHNONLINEAR", props);
             enableRNM = FindProperty("_BAKERY_RNM", props);
             enableSpec = FindProperty("_BAKERY_LMSPEC", props);
+            enableSpecOcclusion = FindProperty("_BAKERY_LMSPECOCCLUSION", props);
             enableBicubic = FindProperty("_BAKERY_BICUBIC", props);
             enablePSHN = FindProperty("_BAKERY_PROBESHNONLINEAR", props);
             try
@@ -284,9 +290,14 @@ namespace UnityEditor
                 }
                 m_MaterialEditor.ShaderProperty(enableRNM, Styles.rnmLabel);
                 m_MaterialEditor.ShaderProperty(enableSH, Styles.shLabel);
-                if (enableSH.floatValue > 0 || enableVertexLMSH.floatValue > 0)
+                m_MaterialEditor.ShaderProperty(enableMonoSH, Styles.monoshLabel);
+                if (enableSH.floatValue > 0 || enableMonoSH.floatValue > 0 || enableVertexLMSH.floatValue > 0)
                     m_MaterialEditor.ShaderProperty(enableSHN, Styles.shnLabel);
                 m_MaterialEditor.ShaderProperty(enableSpec, Styles.specLabel);
+                if (enableSpec.floatValue > 0)
+                {
+                    m_MaterialEditor.ShaderProperty(enableSpecOcclusion, Styles.specOcclusionLabel);
+                }
                 m_MaterialEditor.ShaderProperty(enableBicubic, Styles.bicubicLabel);
                 m_MaterialEditor.ShaderProperty(enablePSHN, Styles.pshnLabel);
 

@@ -1,6 +1,9 @@
+#define USE_TERRAINS
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.SceneManagement;
 
 #if UNITY_EDITOR
@@ -25,6 +28,7 @@ public class ftLightmapsStorage : MonoBehaviour{
             public int projMode;
             public Object cookie;
             public float angle = 30.0f;
+            public int UID;
         }
 
         public class ImplicitLightmapData
@@ -84,8 +88,10 @@ public class ftLightmapsStorage : MonoBehaviour{
         public int renderSettingsRenderDirMode = 0;
         public bool renderSettingsShowCheckerSettings = false;
         public bool renderSettingsSamplesWarning = true;
+        public bool renderSettingsSuppressPopups = false;
         public bool renderSettingsPrefabWarning = true;
         public bool renderSettingsSplitByScene = false;
+        public bool renderSettingsSplitByTag = false;
         public bool renderSettingsUVPaddingMax = false;
         public bool renderSettingsPostPacking = true;
         public bool renderSettingsHoleFilling = false;
@@ -103,9 +109,11 @@ public class ftLightmapsStorage : MonoBehaviour{
         public ftGlobalStorage.AtlasPacker renderSettingsAtlasPacker = ftGlobalStorage.AtlasPacker.xatlas;
         public bool renderSettingsBatchPoints = true;
         public bool renderSettingsCompressVolumes = false;
+        public int renderSettingsBatchAreaLightSampleLimit = 0;
         public UnityEngine.Object renderSettingsSector = null;
         public bool renderSettingsRTPVExport = true;
         public bool renderSettingsRTPVSceneView = false;
+        public bool renderSettingsRTPVHDR = false;
         public int renderSettingsRTPVWidth = 640;
         public int renderSettingsRTPVHeight = 360;
         public int lastBakeTime = 0;
@@ -114,9 +122,9 @@ public class ftLightmapsStorage : MonoBehaviour{
         public bool enlightenWarningShown2 = false;
 
         // Light settings from the last bake
-        public List<int> lightUIDs = new List<int>();
+        public List<GameObject> uniqueLights = new List<GameObject>();
         public List<LightData> lights = new List<LightData>();
-        public Dictionary<int, LightData> lightsDict;
+        public Dictionary<GameObject, LightData> lightsDict;
 
         // List of implicit groups
         //public List<BakeryLightmapGroup> implicitGroups = new List<BakeryLightmapGroup>();
@@ -149,7 +157,7 @@ public class ftLightmapsStorage : MonoBehaviour{
         // Reuired for network bakes
         public List<string> serverGetFileList = new List<string>();
         public List<bool> lightmapHasColor = new List<bool>();
-        public List<bool> lightmapHasMask = new List<bool>();
+        public List<int> lightmapHasMask = new List<int>();
         public List<bool> lightmapHasDir = new List<bool>();
         public List<bool> lightmapHasRNM = new List<bool>();
 
@@ -162,25 +170,42 @@ public class ftLightmapsStorage : MonoBehaviour{
 
         public void Init(bool forceRefresh)
         {
-            lightsDict = new Dictionary<int, LightData>();
+            lightsDict = new Dictionary<GameObject, LightData>();
+            if (uniqueLights == null) uniqueLights = new List<GameObject>();
+            if (lights == null || uniqueLights == null)
+            {
+                forceRefresh = true;
+            }
+            else if (lights.Count != uniqueLights.Count)
+            {
+                forceRefresh = true;
+            }
+
             if (forceRefresh)
             {
                 lights = new List<LightData>();
-                lightUIDs = new List<int>();
+                uniqueLights = new List<GameObject>();
             }
             else
             {
                 for(int i=0; i<lights.Count; i++)
                 {
-                    lightsDict[lightUIDs[i]] = lights[i];
+                    if (uniqueLights[i] != null)
+                    {
+                        lightsDict[uniqueLights[i]] = lights[i];
+                    }
                 }
             }
         }
 
-        public void StoreLight(int uid, LightData light)
+        public void StoreLight(GameObject u, LightData light)
         {
-            lightUIDs.Add(uid);
+            if (uniqueLights == null) uniqueLights = new List<GameObject>();
+            if (lights == null) lights = new List<LightData>();
+            light.UID = uniqueLights.Count + 1;
+            uniqueLights.Add(u);
             lights.Add(light);
+            lightsDict[u] = light;
         }
 
         public static void CopySettings(ftLightmapsStorage src, ftLightmapsStorage dest)
@@ -236,8 +261,10 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsRenderDirMode = src.renderSettingsRenderDirMode;
             dest.renderSettingsShowCheckerSettings = src.renderSettingsShowCheckerSettings;
             dest.renderSettingsSamplesWarning = src.renderSettingsSamplesWarning;
+            dest.renderSettingsSuppressPopups = src.renderSettingsSuppressPopups;
             dest.renderSettingsPrefabWarning = src.renderSettingsPrefabWarning;
             dest.renderSettingsSplitByScene = src.renderSettingsSplitByScene;
+            dest.renderSettingsSplitByTag = src.renderSettingsSplitByTag;
             dest.renderSettingsUVPaddingMax = src.renderSettingsUVPaddingMax;
             dest.renderSettingsPostPacking = src.renderSettingsPostPacking;
             dest.renderSettingsHoleFilling = src.renderSettingsHoleFilling;
@@ -254,8 +281,10 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsAutoAtlas = src.renderSettingsAutoAtlas;
             dest.renderSettingsBatchPoints = src.renderSettingsBatchPoints;
             dest.renderSettingsCompressVolumes = src.renderSettingsCompressVolumes;
+            dest.renderSettingsBatchAreaLightSampleLimit = src.renderSettingsBatchAreaLightSampleLimit;
             dest.renderSettingsRTPVExport = src.renderSettingsRTPVExport;
             dest.renderSettingsRTPVSceneView = src.renderSettingsRTPVSceneView;
+            dest.renderSettingsRTPVHDR = src.renderSettingsRTPVHDR;
             dest.renderSettingsRTPVWidth = src.renderSettingsRTPVWidth;
             dest.renderSettingsRTPVHeight = src.renderSettingsRTPVHeight;
             dest.renderSettingsAtlasPacker = src.renderSettingsAtlasPacker;
@@ -315,8 +344,10 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsRenderDirMode = src.renderSettingsRenderDirMode;
             dest.renderSettingsShowCheckerSettings = src.renderSettingsShowCheckerSettings;
             dest.renderSettingsSamplesWarning = src.renderSettingsSamplesWarning;
+            dest.renderSettingsSuppressPopups = src.renderSettingsSuppressPopups;
             dest.renderSettingsPrefabWarning = src.renderSettingsPrefabWarning;
             dest.renderSettingsSplitByScene = src.renderSettingsSplitByScene;
+            dest.renderSettingsSplitByTag = src.renderSettingsSplitByTag;
             dest.renderSettingsUVPaddingMax = src.renderSettingsUVPaddingMax;
             dest.renderSettingsPostPacking = src.renderSettingsPostPacking;
             dest.renderSettingsHoleFilling = src.renderSettingsHoleFilling;
@@ -333,8 +364,10 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsSampleDiv = src.renderSettingsSampleDiv;
             dest.renderSettingsBatchPoints = src.renderSettingsBatchPoints;
             dest.renderSettingsCompressVolumes = src.renderSettingsCompressVolumes;
+            dest.renderSettingsBatchAreaLightSampleLimit = src.renderSettingsBatchAreaLightSampleLimit;
             dest.renderSettingsRTPVExport = src.renderSettingsRTPVExport;
             dest.renderSettingsRTPVSceneView = src.renderSettingsRTPVSceneView;
+            dest.renderSettingsRTPVHDR = src.renderSettingsRTPVHDR;
             dest.renderSettingsRTPVWidth = src.renderSettingsRTPVWidth;
             dest.renderSettingsRTPVHeight = src.renderSettingsRTPVHeight;
             dest.renderSettingsAtlasPacker = src.renderSettingsAtlasPacker;
@@ -394,8 +427,10 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsRenderDirMode = src.renderSettingsRenderDirMode;
             dest.renderSettingsShowCheckerSettings = src.renderSettingsShowCheckerSettings;
             dest.renderSettingsSamplesWarning = src.renderSettingsSamplesWarning;
+            dest.renderSettingsSuppressPopups = src.renderSettingsSuppressPopups;
             dest.renderSettingsPrefabWarning = src.renderSettingsPrefabWarning;
             dest.renderSettingsSplitByScene = src.renderSettingsSplitByScene;
+            dest.renderSettingsSplitByTag = src.renderSettingsSplitByTag;
             dest.renderSettingsUVPaddingMax = src.renderSettingsUVPaddingMax;
             dest.renderSettingsPostPacking = src.renderSettingsPostPacking;
             dest.renderSettingsHoleFilling = src.renderSettingsHoleFilling;
@@ -412,8 +447,10 @@ public class ftLightmapsStorage : MonoBehaviour{
             dest.renderSettingsSampleDiv = src.renderSettingsSampleDiv;
             dest.renderSettingsBatchPoints = src.renderSettingsBatchPoints;
             dest.renderSettingsCompressVolumes = src.renderSettingsCompressVolumes;
+            dest.renderSettingsBatchAreaLightSampleLimit = src.renderSettingsBatchAreaLightSampleLimit;
             dest.renderSettingsRTPVExport = src.renderSettingsRTPVExport;
             dest.renderSettingsRTPVSceneView = src.renderSettingsRTPVSceneView;
+            dest.renderSettingsRTPVHDR = src.renderSettingsRTPVHDR;
             dest.renderSettingsRTPVWidth = src.renderSettingsRTPVWidth;
             dest.renderSettingsRTPVHeight = src.renderSettingsRTPVHeight;
             dest.renderSettingsAtlasPacker = src.renderSettingsAtlasPacker;
@@ -444,9 +481,11 @@ public class ftLightmapsStorage : MonoBehaviour{
     public List<Light> bakedLights = new List<Light>();
     public List<int> bakedLightChannels = new List<int>();
 
+#if USE_TERRAINS
     public List<Terrain> bakedRenderersTerrain = new List<Terrain>();
     public List<int> bakedIDsTerrain = new List<int>();
     public List<Vector4> bakedScaleOffsetTerrain = new List<Vector4>();
+#endif
 
     public List<string> assetList = new List<string>();
     public List<int> uvOverlapAssetList = new List<int>(); // -1 = no UV1, 0 = no overlap, 1 = overlap
@@ -475,17 +514,146 @@ public class ftLightmapsStorage : MonoBehaviour{
         public List<int> mapsMode = new List<int>();
 
         public List<Renderer> bakedRenderers = new List<Renderer>();
-        public List<Terrain> bakedRenderersTerrain = new List<Terrain>();
         public List<int> bakedIDs = new List<int>();
-        public List<int> bakedIDsTerrain = new List<int>();
         public List<Vector4> bakedScaleOffset = new List<Vector4>();
-        public List<Vector4> bakedScaleOffsetTerrain = new List<Vector4>();
         public List<Mesh> bakedVertexColorMesh = new List<Mesh>();
+
+#if USE_TERRAINS
+        public List<Terrain> bakedRenderersTerrain = new List<Terrain>();
+        public List<int> bakedIDsTerrain = new List<int>();
+        public List<Vector4> bakedScaleOffsetTerrain = new List<Vector4>();
+#endif
 
         public List<Renderer> nonBakedRenderers = new List<Renderer>();
     }
 
     public List<SectorData> sectors = new List<SectorData>();
+
+    // Unity cannot serialize SphericalHarmonicsL2
+    [System.Serializable]
+    public struct L2
+    {
+        public float f00;
+        public float f10;
+        public float f20;
+
+        public float f01;
+        public float f11;
+        public float f21;
+
+        public float f02;
+        public float f12;
+        public float f22;
+
+        public float f03;
+        public float f13;
+        public float f23;
+
+        public float f04;
+        public float f14;
+        public float f24;
+
+        public float f05;
+        public float f15;
+        public float f25;
+
+        public float f06;
+        public float f16;
+        public float f26;
+
+        public float f07;
+        public float f17;
+        public float f27;
+
+        public float f08;
+        public float f18;
+        public float f28;
+
+        public SphericalHarmonicsL2 GetSH()
+        {
+            var sh = new SphericalHarmonicsL2();
+
+            sh[0,0] = f00;
+            sh[1,0] = f10;
+            sh[2,0] = f20;
+
+            sh[0,1] = f01;
+            sh[1,1] = f11;
+            sh[2,1] = f21;
+
+            sh[0,2] = f02;
+            sh[1,2] = f12;
+            sh[2,2] = f22;
+
+            sh[0,3] = f03;
+            sh[1,3] = f13;
+            sh[2,3] = f23;
+
+            sh[0,4] = f04;
+            sh[1,4] = f14;
+            sh[2,4] = f24;
+
+            sh[0,5] = f05;
+            sh[1,5] = f15;
+            sh[2,5] = f25;
+
+            sh[0,6] = f06;
+            sh[1,6] = f16;
+            sh[2,6] = f26;
+
+            sh[0,7] = f07;
+            sh[1,7] = f17;
+            sh[2,7] = f27;
+
+            sh[0,8] = f08;
+            sh[1,8] = f18;
+            sh[2,8] = f28;
+
+            return sh;
+        }
+
+        public void SetSH(SphericalHarmonicsL2 sh)
+        {
+            f00 = sh[0,0];
+            f10 = sh[1,0];
+            f20 = sh[2,0];
+
+            f01 = sh[0,1];
+            f11 = sh[1,1];
+            f21 = sh[2,1];
+
+            f02 = sh[0,2];
+            f12 = sh[1,2];
+            f22 = sh[2,2];
+
+            f03 = sh[0,3];
+            f13 = sh[1,3];
+            f23 = sh[2,3];
+
+            f04 = sh[0,4];
+            f14 = sh[1,4];
+            f24 = sh[2,4];
+
+            f05 = sh[0,5];
+            f15 = sh[1,5];
+            f25 = sh[2,5];
+
+            f06 = sh[0,6];
+            f16 = sh[1,6];
+            f26 = sh[2,6];
+
+            f07 = sh[0,7];
+            f17 = sh[1,7];
+            f27 = sh[2,7];
+            
+            f08 = sh[0,8];
+            f18 = sh[1,8];
+            f28 = sh[2,8];
+        }
+    };
+
+    public L2[] prevBakedProbes;
+    public Vector3[] prevBakedProbePos;
 #endif
 
     void Awake()
@@ -496,6 +664,9 @@ public class ftLightmapsStorage : MonoBehaviour{
     void Start()
     {
         // Unity can for some reason alter lightmapIndex after the scene is loaded in a multi-scene setup, so fix that
+//#if UNITY_2021_1_OR_NEWER
+//         ftLightmaps.RefreshScene(gameObject.scene, this); // new Unity can destroy lightmaps after Awake if the lighting data asset is set
+//#endif
         ftLightmaps.RefreshScene2(gameObject.scene, this);//, appendOffset);
     }
 

@@ -20,14 +20,20 @@ public class BakeryLightMesh : MonoBehaviour
     public float cutoff = 100;
     public int samples = 256;
     public int samples2 = 16;
+    public int samples2_previous = 16;
     public int bitmask = 1;
     public bool selfShadow = true;
     public bool bakeToIndirect = true;
+    public bool shadowmask = false;
     public float indirectIntensity = 1.0f;
+    public bool shadowmaskFalloff = false;
+    public int maskChannel;
 
     public int lmid = -2;
 
     public static int lightsChanged = 0;
+
+    static GameObject objShownError;
 
 #if UNITY_EDITOR
     void OnValidate()
@@ -41,34 +47,24 @@ public class BakeryLightMesh : MonoBehaviour
             gameObject.GetComponent<BakeryPointLight>() != null ||
             gameObject.GetComponent<BakerySkyLight>() != null)
         {
-            EditorUtility.DisplayDialog("Bakery", "Can't have more than one Bakery light on one object", "OK");
+            if (objShownError != gameObject)
+            {
+                EditorUtility.DisplayDialog("Bakery", "Can't have more than one Bakery light on one object", "OK");
+                objShownError = gameObject;
+            }
+            else
+            {
+                Debug.LogError("Can't have more than one Bakery light on one object");
+            }
             DestroyImmediate(this);
             return;
         }
 
         if (EditorApplication.isPlayingOrWillChangePlaymode) return;
 
-        if (UID == 0) UID = Guid.NewGuid().GetHashCode();
-        ftUniqueIDRegistry.Register(UID, gameObject.GetInstanceID());
+        if (UID == 0) UID = Guid.NewGuid().GetHashCode(); // legacy
     }
 
-    void OnDestroy()
-    {
-        if (UID == 0) return;
-        if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-        ftUniqueIDRegistry.Deregister(UID);
-    }
-
-    void Update()
-    {
-        if (EditorApplication.isPlayingOrWillChangePlaymode) return;
-        if (!ftUniqueIDRegistry.Mapping.ContainsKey(UID)) ftUniqueIDRegistry.Register(UID, gameObject.GetInstanceID());
-        if (gameObject.GetInstanceID() != ftUniqueIDRegistry.GetInstanceId(UID))
-        {
-            UID = Guid.NewGuid().GetHashCode();
-            ftUniqueIDRegistry.Register(UID, gameObject.GetInstanceID());
-        }
-    }
 #endif
 
 	void OnDrawGizmosSelected()
