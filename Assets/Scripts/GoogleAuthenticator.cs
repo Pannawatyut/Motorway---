@@ -84,10 +84,14 @@ public class GoogleAuthenticator : MonoBehaviour
 
         UserData userData = JsonUtility.FromJson<UserData>(idToken);
 
-        _Login._GoogleLoginAPI(userData.email, userData.googleID);
+        StartCoroutine(_Login._GoogleLoginAPI(userData.email, userData.googleID));
         // คุณสามารถใช้ idToken นี้เพื่อทำงานอื่นๆ ต่อ เช่น Firebase Authentication ใน Unity
     }
 
+    public void _TestGoogle()
+    {
+        StartCoroutine(_Login._GoogleLoginAPI("panatthakorn.isd@gmail.com", "116505355693568297360"));
+    }
     /// <summary>
     /// Exchanges the Auth Code with the user's Id Token
     /// </summary>
