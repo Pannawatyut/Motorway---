@@ -52,9 +52,11 @@ public class LoginManager : MonoBehaviour
 
     public IEnumerator _GoogleLoginAPI(string _Email, string google_id)
     {
-        _ThirdPartyData_Google Obj = new _ThirdPartyData_Google();
-        Obj.email = _Email;
-        Obj.google_id = google_id;
+        _ThirdPartyData_Google Obj = new _ThirdPartyData_Google
+        {
+            email = _Email,
+            google_id = google_id
+        };
 
         string json = JsonUtility.ToJson(Obj);
 

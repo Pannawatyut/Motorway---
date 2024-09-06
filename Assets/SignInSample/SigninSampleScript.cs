@@ -21,7 +21,11 @@
             WebClientId = webClientId,
             RequestIdToken = true
       };
+          if (_loginManager == null) {
+        _loginManager = FindObjectOfType<LoginManager>();
+      }
     }
+
 
     public void OnSignIn() {
       GoogleSignIn.Configuration = configuration;
