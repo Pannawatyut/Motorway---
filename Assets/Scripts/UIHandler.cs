@@ -9,6 +9,6 @@ public class UIHandler : MonoBehaviour
 {
     public void OnClickGetGoogleCode()
     {
-        GoogleAuthenticator.GetAuthCode();
+        //GoogleAuthenticator.GetAuthCode();
     }
 }

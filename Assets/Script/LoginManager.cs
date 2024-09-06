@@ -52,14 +52,13 @@ public class LoginManager : MonoBehaviour
 
     public IEnumerator _GoogleLoginAPI(string _Email, string google_id)
     {
-        _ThirdPartyData_Google Obj = new _ThirdPartyData_Google
-        {
-            email = _Email,
-            google_id = google_id
-        };
+        _LoadingBar.SetActive(true);
+        _ThirdPartyData_Google Obj = new _ThirdPartyData_Google();
+        Obj.email = _Email;
+        Obj.google_id = google_id;
 
         string json = JsonUtility.ToJson(Obj);
-
+        Debug.Log("SENT GOOGLE API : " + json);
         var request = new UnityWebRequest(
             "https://api-motorway.mxrth.co:1000/api/user/loginGoogle",
             "POST"
@@ -74,18 +73,14 @@ public class LoginManager : MonoBehaviour
         Debug.Log("request responseCode:" + request.responseCode);
         Debug.Log("request responseText:" + request.downloadHandler.text);
 
-        request.SetRequestHeader("Content-Type", "application/json");
 
-        // ส่งคำขอและรอรับการตอบกลับ
-        yield return request.SendWebRequest();
         _LoadingBar.SetActive(false);
         // ตรวจสอบผลลัพธ์ของคำขอ
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
             _LoadingFailed.SetActive(true);
-            yield return new WaitForSeconds(2f);
-            _LoadingFailed.SetActive(false);
+
         }
         else
         {
