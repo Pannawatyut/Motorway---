@@ -2,26 +2,50 @@
 using System.Collections.Generic;
 using Proyecto26;
 using UnityEngine;
-
+//using Vuplex.WebView.Internal;
 /// <summary>
 /// Handles calls to the Google provider for authentication
 /// </summary>
-public static class GoogleAuthenticator
+public class GoogleAuthenticator : MonoBehaviour
 {
     private const string ClientId = "GOOGLE_CLIENT_ID";
     private const string ClientSecret = "GOOGLE_CLIENT_SECRET";
     
     // Use the full URL as the redirect URI
-    private static readonly string RedirectUri = "http://localhost:57847/";
+    private static readonly string RedirectUri = "GETDATA";
 
     private static readonly HttpCodeListener codeListener = new HttpCodeListener();
 
     /// <summary>
     /// Opens a webpage that prompts the user to sign in and copy the auth code 
     /// </summary>
-    public static void GetAuthCode()
+    /// 
+
+    //public Vuplex.WebView.CanvasWebViewPrefab _WebviewObj;
+
+    async void Start()
     {
-        Application.OpenURL($"https://accounts.google.com/o/oauth2/v2/auth?client_id={ClientId}&redirect_uri={RedirectUri}&response_type=code&scope=email");
+        // Get a reference to the WebViewPrefab.
+
+        // Wait until the prefab's initialized before accessing its WebView property.
+        /*await _WebviewObj.WaitUntilInitialized();
+
+        _WebviewObj.WebView.UrlChanged += (sender, eventArgs) => {
+            // Replace myapp:// with your custom scheme
+            if (eventArgs.Url.StartsWith("GETDATA"))
+            {
+                Debug.Log(eventArgs.Url);
+                // TODO: Handle the custom scheme (e.g. parse the OAuth token from eventArgs.Url).
+            }
+        };*/
+    }
+
+    public void GetAuthCode()
+    {
+        /*_WebviewObj.gameObject.SetActive(true);
+        _WebviewObj.InitialUrl = $"https://accounts.google.com/o/oauth2/v2/auth?client_id={ClientId}&redirect_uri={RedirectUri}&response_type=code&scope=email";
+        
+        //Application.OpenURL();
 
         codeListener.StartListening(code =>
         {
@@ -31,7 +55,37 @@ public static class GoogleAuthenticator
             });
             
             codeListener.StopListening();
-        });
+        });*/
+
+        LoginWithGoogle();
+    }
+
+    public void LoginWithGoogle()
+    {
+        // เรียกใช้ JavaScript function จาก Unity WebGL
+        Application.ExternalEval("googleSignIn();");
+    }
+
+    // ฟังก์ชันนี้จะรับ token จาก JavaScript หลังจากล็อกอินสำเร็จ
+
+    public TMPro.TextMeshProUGUI _idToken;
+    public LoginManager _Login;
+
+    [Serializable]
+    public class UserData
+    {
+        public string email;
+        public string googleID;
+    }
+    public void OnGoogleSignInSuccess(string idToken)
+    {
+        Debug.Log("Google Sign-In Success with token: " + idToken);
+        //_idToken.text = idToken;
+
+        UserData userData = JsonUtility.FromJson<UserData>(idToken);
+
+        _Login._GoogleLoginAPI(userData.email, userData.googleID);
+        // คุณสามารถใช้ idToken นี้เพื่อทำงานอื่นๆ ต่อ เช่น Firebase Authentication ใน Unity
     }
 
     /// <summary>

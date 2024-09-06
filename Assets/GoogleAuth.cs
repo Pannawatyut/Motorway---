@@ -217,8 +217,8 @@ public TMP_InputField emailInputField;
                 DisplayError("The code is not running on a WebGL build; as such, the Javascript functions will not be recognized.");
                 return;
             }
-            
-            FirebaseAuth.OnAuthStateChanged(gameObject.name, "DisplayUserInfo", "DisplayInfo");
+
+            //Firebase.Auth.FirebaseAuth auth = Firebase.Auth.FirebaseAuth.DefaultInstance;
 
         }
 
