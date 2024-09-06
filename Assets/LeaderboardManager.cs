@@ -9,7 +9,7 @@ using System;
 public class LeaderboardManager : MonoBehaviour
 {
     public GameObject verticalLayout;
-    private const string url = "http://13.250.106.216:1000/api/leaderboard/getLeaderboard";
+    private const string url = "https://api-motorway.mxrth.co:1000/api/leaderboard/getLeaderboard";
     private const float refreshInterval = 10f; // 5 minutes in seconds
     public LoginManager _loginManager;
 
