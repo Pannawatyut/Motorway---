@@ -12,8 +12,8 @@ public class BasicBehaviour : MonoBehaviourPun
 	public float sprintFOV = 100f;                        // the FOV to use on the camera when player is sprinting.
 	public string sprintButton = "Sprint";                // Default sprint button input name.
 
-	private float h;                                      // Horizontal Axis.
-	private float v;                                      // Vertical Axis.
+	public float h;                                      // Horizontal Axis.
+	public float v;                                      // Vertical Axis.
 	private int currentBehaviour;                         // Reference to the current player behaviour.
 	private int defaultBehaviour;                         // The default behaviour of the player when any other is not active.
 	private int behaviourLocked;                          // Reference to temporary locked behaviour that forbids override.
@@ -73,7 +73,12 @@ public class BasicBehaviour : MonoBehaviourPun
 			enabled = false;
 		}
 	}
-void Update()
+
+    private void OnDisable()
+    {
+        h = 0; v = 0;
+    }
+    void Update()
 	{ 
 		h = Input.GetAxis("Horizontal");
 		v = Input.GetAxis("Vertical");

@@ -140,7 +140,7 @@ public class MoveBehaviour : GenericBehaviour
 	}
 
 	// Remove vertical rigidbody velocity.
-	private void RemoveVerticalVelocity()
+	public void RemoveVerticalVelocity()
 	{
 		Vector3 horizontalVelocity = behaviourManager.GetRigidBody.velocity;
 		horizontalVelocity.y = 0;
