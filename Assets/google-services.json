@@ -1,0 +1,34 @@
+{
+  "project_info": {
+    "project_number": "244382866689",
+    "project_id": "motorway-b0a8b",
+    "storage_bucket": "motorway-b0a8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244382866689:android:40be40158ff4a1baf98f00",
+        "android_client_info": {
+          "package_name": "com.Company.motoway"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnd9_2iMEHzKt6EwNoWxXLHIs88B82E3k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244382866689-oh99255jkhtrebe6f2qk0rehhab0kgp5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

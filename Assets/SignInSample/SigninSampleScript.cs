@@ -1,16 +1,32 @@
-﻿namespace SignInSample {
+﻿// <copyright file="SigninSampleScript.cs" company="Google Inc.">
+// Copyright (C) 2017 Google Inc. All Rights Reserved.
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//  http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations
+
+namespace SignInSample {
   using System;
   using System.Collections.Generic;
   using System.Threading.Tasks;
   using Google;
-  using UnityEngine;
+    using TMPro;
+    using UnityEngine;
   using UnityEngine.UI;
-  using UnityEngine.Networking;
 
   public class SigninSampleScript : MonoBehaviour {
 
-    public LoginManager _loginManager;
-    public string webClientId = "";
+    public TextMeshProUGUI statusText;
+
+    private string webClientId = "819459652226-tth2l06ti5a0317kh2scmlkpv9bkgafg.apps.googleusercontent.com";
 
     private GoogleSignInConfiguration configuration;
 
@@ -19,13 +35,9 @@
     void Awake() {
       configuration = new GoogleSignInConfiguration {
             WebClientId = webClientId,
-            RequestIdToken = true
+            RequestIdToken = false
       };
-          if (_loginManager == null) {
-        _loginManager = FindObjectOfType<LoginManager>();
-      }
     }
-
 
     public void OnSignIn() {
       GoogleSignIn.Configuration = configuration;
@@ -59,17 +71,10 @@
             AddStatusText("Got Unexpected Exception?!?" + task.Exception);
           }
         }
-      } else if (task.IsCanceled) {
+      } else if(task.IsCanceled) {
         AddStatusText("Canceled");
       } else  {
         AddStatusText("Welcome: " + task.Result.DisplayName + "!");
-
-        // Retrieve the email and Google ID from the task result
-        string email = task.Result.Email;
-        string googleId = task.Result.UserId;
-
-        // Call the Google login API method in LoginManager after successful sign-in
-        StartCoroutine(_loginManager._GoogleLoginAPI(email, googleId));
       }
     }
 
@@ -82,6 +87,7 @@
       GoogleSignIn.DefaultInstance.SignInSilently()
             .ContinueWith(OnAuthenticationFinished);
     }
+
 
     public void OnGamesSignIn() {
       GoogleSignIn.Configuration = configuration;
@@ -104,6 +110,7 @@
       foreach (string s in messages) {
         txt += "\n" + s;
       }
+      statusText.text = txt;
     }
   }
 }
