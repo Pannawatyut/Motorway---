@@ -94,3 +94,5 @@ Assets/Editor/x64/Bakery/cudnn64_7.dll
 Assets/Editor/x64/Bakery/cudnn64_7.dll.meta
 
 .fake
+ProjectSettings/ProjectSettings.asset
+/Assets/Firebase/Plugins/x86_64
