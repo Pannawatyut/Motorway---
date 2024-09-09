@@ -41,7 +41,15 @@ public class SoundManager : MonoBehaviour
         NPC9,
         
         // Background Music
-        BGM1
+        BGM1,
+        BGM2,
+
+        // Minigame Sound
+        Correct,
+        Incorrect,
+        SmallCar,
+        MediumCar,
+        LargeCar
     }
 
     public void PlaySoundEffect(SoundName soundName)

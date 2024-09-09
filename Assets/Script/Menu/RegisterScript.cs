@@ -60,7 +60,7 @@ public class RegisterScript : MonoBehaviour
             RegisterPage.SetActive(false);
             _Register.email = email;
             _Register.password = password;
-            Debug.Log("Login Response: " + request.downloadHandler.text);
+            Debug.Log("Register Response: " + request.downloadHandler.text);
             _OKPanel.SetActive(true);
         }
     }
