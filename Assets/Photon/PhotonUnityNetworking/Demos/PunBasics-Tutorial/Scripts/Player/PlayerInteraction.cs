@@ -10,9 +10,10 @@ public class PlayerInteraction : MonoBehaviourPun
     public Canvas Dialog;
     private int number = 0;
     public static bool PressF;
-
+    public BasicBehaviour _MovementScript;
+    public MoveBehaviour _MoveBehaviorScript;
     public ThirdPersonOrbitCamBasic cam;
-    public bool isCursorVisible = true; // Track the cursor state
+    private bool isCursorVisible = false; // Track the cursor state
     private SoundManager _soundManager; // Reference to the SoundManager
 
     private void Start()
@@ -23,7 +24,6 @@ public class PlayerInteraction : MonoBehaviourPun
         number = 0;
         _soundManager = SoundManager.instance; // Ensure SoundManager is correctly referenced
     }
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -90,8 +90,9 @@ public class PlayerInteraction : MonoBehaviourPun
                 {
                     Dialog.gameObject.SetActive(true);
                 }
-                
+
                 //Lock cam
+                SwitchCursor();
                 PressF = true;
                 cam.horizontalAimingSpeed = 0;
                 cam.verticalAimingSpeed = 0;
@@ -151,6 +152,22 @@ public class PlayerInteraction : MonoBehaviourPun
             }
             isCursorVisible = !isCursorVisible; // Toggle cursor visibility state
         }
+
+        if (isCursorVisible == false)
+        {
+            DisableCursor();
+           
+        }
+        else if (isCursorVisible == true)
+        {
+            EnableCursor();
+            
+        }
+    }
+
+    public void SwitchCursor() 
+    {
+        isCursorVisible = !isCursorVisible;
     }
 
     private void ResetCameraSettings()
@@ -162,12 +179,20 @@ public class PlayerInteraction : MonoBehaviourPun
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        _MoveBehaviorScript.RemoveVerticalVelocity();
+        //_MovementScript.enabled = false;
+        //_MoveBehaviorScript.enabled = false;
+
+
     }
 
     private void DisableCursor()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        //_MovementScript.enabled = true;
+        //_MoveBehaviorScript.enabled = true;
+        
     }
 
     IEnumerator WaitForSoundToFinish()
@@ -249,10 +274,6 @@ public class PlayerInteraction : MonoBehaviourPun
 
             // Enable mouse cursor when F is pressed
             EnableCursor();
-        }
-        else
-        {
-            
         }
        
     }

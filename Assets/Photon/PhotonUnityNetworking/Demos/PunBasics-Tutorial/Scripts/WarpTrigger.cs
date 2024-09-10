@@ -4,7 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using UnityEngine.SceneManagement;
 
-public class WarpTrigger : MonoBehaviour
+public class WarpTrigger : MonoBehaviourPunCallbacks
 {
     public Transform warpLocation;
     public GameObject pressF;
@@ -13,7 +13,7 @@ public class WarpTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
         {
             inside = true;
             playerTransform = other.transform; // Store the player's transform
@@ -23,7 +23,7 @@ public class WarpTrigger : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
         {
             inside = false;
             playerTransform = null; // Clear the player's transform

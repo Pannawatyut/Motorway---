@@ -32,6 +32,7 @@ public class ProfileScript : MonoBehaviour
     private void OnEnable()
     {
         OnClickUpdateProfile();
+        UpdateProfileLastest();
         _firstName.text = _loginManager._Account.first_name;
         _lastName.text = _loginManager._Account.last_name;
         _email.text = _loginManager._Account.email;

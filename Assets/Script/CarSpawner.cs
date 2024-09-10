@@ -29,7 +29,7 @@ public class CarSpawner : MonoBehaviour
     public Animator animatorBarrier;
     public Animator animatorNPC;
 
-    private List<GameObject> spawnedCars = new List<GameObject>();
+    public List<GameObject> spawnedCars = new List<GameObject>();
     private float elapsedTime = 0f;
     private float spawnInterval = 2f;
     private bool isCheckingCar = false;
@@ -41,6 +41,7 @@ public class CarSpawner : MonoBehaviour
     public bool _isStart;
     public AudioSource _ButtonSound;
 
+    public MinigameAudioScript _AudioScript;
     private void Start()
     {
         Cursor.lockState = CursorLockMode.None;
@@ -58,6 +59,10 @@ public class CarSpawner : MonoBehaviour
 
     private void Update()
     {
+        if (_AudioScript == null)
+        {
+            _AudioScript = FindAnyObjectByType<MinigameAudioScript>();
+        }
         if (_isStart)
         {
             elapsedTime += Time.deltaTime;
@@ -183,7 +188,7 @@ public class CarSpawner : MonoBehaviour
             ScoreManager.Instance.CorrectAnswer();
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("suscess");
-            _ButtonSound.Play();
+            _AudioScript._CorrectSound.Play();
         }
         else
         {
@@ -192,9 +197,21 @@ public class CarSpawner : MonoBehaviour
             ScoreManager.Instance.WrongAnswer();
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("fail");
-            _ButtonSound.Play();
+            _AudioScript._IncorrectSound.Play();
+            
         }
-
+        if (spawnedCars[0].GetComponentInChildren<playanimation>().CarIndex == 0)
+        {
+            _AudioScript._SmallCarSound.Play();
+        }
+        else if (spawnedCars[0].GetComponentInChildren<playanimation>().CarIndex == 1)
+        {
+            _AudioScript._MediumCarSound.Play();
+        }
+        else if (spawnedCars[0].GetComponentInChildren<playanimation>().CarIndex == 2)
+        {
+            _AudioScript._LargeCarSound.Play();
+        }
         StartCoroutine(MoveAndDestroyFirstCar(spawnedCars[0]));
     }
 

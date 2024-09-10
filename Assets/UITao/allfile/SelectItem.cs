@@ -60,7 +60,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
     public int selectedFaceIndex = 0;
     public int selectedAccessoryIndex = 0;
     public int selectedSkinColor = 0;
-    public int selectedSex = 0;
+    public int selectedSex = 3;
     public string Name;
 
     public int sexcolor; // chang to shirt Men & Women This ID Shrit 4
