@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResponsvieUI : MonoBehaviour
+public class ResponsiveUI : MonoBehaviour
 {
     public CanvasScaler canvasScaler;
-    public Vector2 referenceResolution = new Vector2(1920, 1080); // ???????????????????? Canvas ????????????
+    public Vector2 referenceResolution = new Vector2(1920, 1080); 
+    public float matchWidthOrHeight = 0.5f; 
 
     void Start()
     {
@@ -17,5 +18,6 @@ public class ResponsvieUI : MonoBehaviour
     {
         canvasScaler.referenceResolution = referenceResolution;
         canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        canvasScaler.matchWidthOrHeight = matchWidthOrHeight;
     }
 }
