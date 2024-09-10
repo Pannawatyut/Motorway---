@@ -7,7 +7,6 @@ public class ResponsiveUI : MonoBehaviour
 {
     public CanvasScaler canvasScaler;
     public Vector2 referenceResolution = new Vector2(1920, 1080); 
-    public float matchWidthOrHeight = 0.5f; 
 
     void Start()
     {
@@ -18,6 +17,5 @@ public class ResponsiveUI : MonoBehaviour
     {
         canvasScaler.referenceResolution = referenceResolution;
         canvasScaler.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
-        canvasScaler.matchWidthOrHeight = matchWidthOrHeight;
     }
 }
