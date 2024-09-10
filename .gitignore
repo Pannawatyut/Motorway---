@@ -97,3 +97,8 @@ Assets/Editor/x64/Bakery/cudnn64_7.dll.meta
 ProjectSettings/ProjectSettings.asset
 /Assets/Firebase/Plugins/x86_64
 ProjectSettings/ProjectSettings.asset
+Assets/FirebaseManager.cs
+Assets/FirebaseManager.cs.meta
+Assets/ExternalDependencyManager/Editor/1.2.182/Google.IOSResolver.dll.meta
+Assets/ExternalDependencyManager/Editor/1.2.182/Google.IOSResolver.dll
+ProjectSettings/ProjectSettings.asset
