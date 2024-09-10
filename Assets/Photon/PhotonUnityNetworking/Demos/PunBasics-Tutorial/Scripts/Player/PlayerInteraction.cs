@@ -180,8 +180,8 @@ public class PlayerInteraction : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         _MoveBehaviorScript.RemoveVerticalVelocity();
-        _MovementScript.enabled = false;
-        _MoveBehaviorScript.enabled = false;
+        //_MovementScript.enabled = false;
+        //_MoveBehaviorScript.enabled = false;
 
 
     }
@@ -190,8 +190,8 @@ public class PlayerInteraction : MonoBehaviourPun
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        _MovementScript.enabled = true;
-        _MoveBehaviorScript.enabled = true;
+        //_MovementScript.enabled = true;
+        //_MoveBehaviorScript.enabled = true;
         
     }
 

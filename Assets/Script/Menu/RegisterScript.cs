@@ -10,6 +10,7 @@ public class RegisterScript : MonoBehaviour
 {
     public TMP_InputField Email;
     public TMP_InputField Password;
+    public TMP_InputField ConfirmedPassword;
 
     public GameObject LoginPage;
     public GameObject RegisterPage;
@@ -19,7 +20,13 @@ public class RegisterScript : MonoBehaviour
     public GameObject _OKPanel;
     public void OnClickRegisterButton()
     {
-        StartCoroutine(Register(Email.text, Password.text));
+        if (Password.text == ConfirmedPassword.text)
+        {
+            StartCoroutine(Register(Email.text, Password.text));
+        }
+
+
+
     }
 
     private IEnumerator Register(string email, string password)
