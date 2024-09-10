@@ -18,11 +18,7 @@ public class FirebaseManager : MonoBehaviour
     Firebase.Auth.FirebaseAuth auth;
     Firebase.Auth.FirebaseUser user;
 
-    public Text Username,
-        UserEmail;
 
-    public GameObject LoginScreen,
-        ProfileScreen;
 
     private void Awake()
     {
@@ -71,13 +67,12 @@ public class FirebaseManager : MonoBehaviour
 
     void OnGoogleAuthenticatedFinished(Task<GoogleSignInUser> task)
     {
+        Debug.Log("OnGoogleAuthenticatedFinished called");
         if (task.IsFaulted)
         {
             foreach (var exception in task.Exception.InnerExceptions)
             {
-                GoogleSignIn.SignInException signInException =
-                    exception as GoogleSignIn.SignInException;
-                if (signInException != null)
+                if (exception is GoogleSignIn.SignInException signInException)
                 {
                     Debug.LogError("Google Sign-In failed with status: " + signInException.Status);
                 }
@@ -97,6 +92,7 @@ public class FirebaseManager : MonoBehaviour
                 task.Result.IdToken,
                 null
             );
+            Debug.Log("Sign-in with Google credential succeeded");
 
             auth.SignInWithCredentialAsync(credential)
                 .ContinueWithOnMainThread(authTask =>
@@ -117,29 +113,21 @@ public class FirebaseManager : MonoBehaviour
 
                     user = auth.CurrentUser;
 
-                    Username.text = user.DisplayName;
-                    UserEmail.text = user.Email;
-
-                    LoginScreen.SetActive(false);
-                    ProfileScreen.SetActive(true);
-
-                    // Send email and Google ID to the backend
-                    StartCoroutine(_loginManager._GoogleLoginAPI(user.Email, user.UserId));
+                    if (user != null)
+                    {
+                        Debug.Log(
+                            $"User signed in. DisplayName: {user.DisplayName}, Email: {user.Email}, UserId: {user.UserId}"
+                        );
+                        Debug.Log(
+                            $"Calling _GoogleLoginAPI coroutine with Email: {user.Email}, Google ID: {user.UserId}"
+                        );
+                        StartCoroutine(_loginManager._GoogleLoginAPI(user.Email, user.UserId));
+                    }
+                    else
+                    {
+                        Debug.LogError("User object is null after Google sign-in.");
+                    }
                 });
         }
     }
-
-    // private string CheckImageUrl(string url) {
-    //     if (!string.IsNullOrEmpty(url)) {
-    //         return url;
-    //     }
-    //     return imageUrl;
-    // }
-
-    // IEnumerator LoadImage(string imageUri) {
-    //     WWW www = new WWW(imageUri);
-    //     yield return www;
-
-    //     UserProfilePic.sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
-    // }
 }

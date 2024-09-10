@@ -24,9 +24,8 @@ namespace SignInSample {
 
   public class SigninSampleScript : MonoBehaviour {
 
-    public TextMeshProUGUI statusText;
 
-    private string webClientId = "819459652226-tth2l06ti5a0317kh2scmlkpv9bkgafg.apps.googleusercontent.com";
+    private string webClientId = "244382866689-oh99255jkhtrebe6f2qk0rehhab0kgp5.apps.googleusercontent.com";
 
     private GoogleSignInConfiguration configuration;
 
@@ -110,7 +109,6 @@ namespace SignInSample {
       foreach (string s in messages) {
         txt += "\n" + s;
       }
-      statusText.text = txt;
     }
   }
 }
