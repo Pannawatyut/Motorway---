@@ -3953,3 +3953,306 @@ abort_threads: Failed aborting id: 000000000000BAE4, mono_thread_manage will ign
 
 abort_threads: Failed aborting id: 000000000000BAE4, mono_thread_manage will ignore it
 
+2024-9-10
+Rendering UV GBuffer for Game_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA3 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA4 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA5 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA6 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\palaw\AppData\Local\Temp\frender" "uvpos_Game_LMA2.lz4" 2 0 2 0
+Running ftraceRTX fixpos12 "C:\Users\palaw\AppData\Local\Temp\frender" "uvpos_Game_LMA4.lz4" 2 0 4 0
+Running ftraceRTX fixpos12 "C:\Users\palaw\AppData\Local\Temp\frender" "uvpos_Game_LMA5.lz4" 2 0 5 0
+Running ftraceRTX fixpos12 "C:\Users\palaw\AppData\Local\Temp\frender" "uvpos_Game_LMA3.lz4" 2 0 3 0
+Running ftraceRTX fixpos12 "C:\Users\palaw\AppData\Local\Temp\frender" "uvpos_Game_LMA6.lz4" 2 0 6 0
+Running ftraceRTX fixpos12 "C:\Users\palaw\AppData\Local\Temp\frender" "uvpos_Game_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\palaw\AppData\Local\Temp\frender" "uvpos_Game_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\palaw\AppData\Local\Temp\frender" "PointBatch_7_0_19" 1924 0 7 batchpointlight_7_0_19.bin
+Running ftraceRTX sunprobesh "C:\Users\palaw\AppData\Local\Temp\frender" "light_1_7" 1924 0 7 direct0.bin
+Running ftraceRTX sunprobesh "C:\Users\palaw\AppData\Local\Temp\frender" "light_2_7" 1924 0 7 direct1.bin
+Running ftraceRTX addmul "C:\Users\palaw\AppData\Local\Temp\frender" "probes" 4 0 7 comp_7.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\palaw\AppData\Local\Temp\frender" "PointBatch_2_0_19" 4 0 2 batchpointlight_2_0_19.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_1_2" 4 0 2 direct0.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_2_2" 4 0 2 direct1.bin
+Running ftraceRTX addmul "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\palaw\AppData\Local\Temp\frender" "PointBatch_4_0_19" 4 0 4 batchpointlight_4_0_19.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_1_4" 4 0 4 direct0.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_2_4" 4 0 4 direct1.bin
+Running ftraceRTX addmul "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA4" 4 0 4 comp_4.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\palaw\AppData\Local\Temp\frender" "PointBatch_5_0_19" 4 0 5 batchpointlight_5_0_19.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_1_5" 4 0 5 direct0.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_2_5" 4 0 5 direct1.bin
+Running ftraceRTX addmul "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA5" 4 0 5 comp_5.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\palaw\AppData\Local\Temp\frender" "PointBatch_3_0_19" 4 0 3 batchpointlight_3_0_19.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_1_3" 4 0 3 direct0.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_2_3" 4 0 3 direct1.bin
+Running ftraceRTX addmul "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA3" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\palaw\AppData\Local\Temp\frender" "PointBatch_6_0_19" 4 0 6 batchpointlight_6_0_19.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_1_6" 4 0 6 direct0.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_2_6" 4 0 6 direct1.bin
+Running ftraceRTX addmul "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA6" 4 0 6 comp_6.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\palaw\AppData\Local\Temp\frender" "PointBatch_1_0_19" 4 0 1 batchpointlight_1_0_19.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_1_1" 4 0 1 direct0.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_2_1" 4 0 1 direct1.bin
+Running ftraceRTX addmul "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\palaw\AppData\Local\Temp\frender" "PointBatch_0_0_19" 4 0 0 batchpointlight_0_0_19.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_1_0" 4 0 0 direct0.bin
+Running ftraceRTX sun "C:\Users\palaw\AppData\Local\Temp\frender" "light_2_0" 4 0 0 direct1.bin
+Running ftraceRTX addmul "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA20.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA40.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA50.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA30.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA60.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA10.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM00.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA21.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA41.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA51.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA31.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA61.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA11.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM01.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA22.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA42.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA52.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA32.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA62.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA12.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM02.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA23.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA43.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA53.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA33.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA63.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA13.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM03.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\palaw\AppData\Local\Temp\frender" "probes_final" 1924 16 7 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA2_final" 4 16 2 "gi_Game_LMA24.bin" "Game_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA4_final" 4 16 4 "gi_Game_LMA44.bin" "Game_LMA4_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA5_final" 4 16 5 "gi_Game_LMA54.bin" "Game_LMA5_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA3_final" 4 16 3 "gi_Game_LMA34.bin" "Game_LMA3_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA6_final" 4 16 6 "gi_Game_LMA64.bin" "Game_LMA6_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LMA1_final" 4 16 1 "gi_Game_LMA14.bin" "Game_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\palaw\AppData\Local\Temp\frender" "Game_LM0_final" 4 16 0 "gi_Game_LM04.bin" "Game_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\palaw\AppData\Local\Temp\frender" "probes_final_" 4 0 7 shcomp_7.bin
+Running denoiserOIDN2 c "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\palaw\AppData\Local\Temp\frender" "2" "Game_LMA2_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\palaw\AppData\Local\Temp\frender" "4" "Game_LMA4_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\palaw\AppData\Local\Temp\frender" "5" "Game_LMA5_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\palaw\AppData\Local\Temp\frender" "3" "Game_LMA3_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\palaw\AppData\Local\Temp\frender" "6" "Game_LMA6_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\palaw\AppData\Local\Temp\frender" "1" "Game_LMA1_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\palaw\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "C:\Users\palaw\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\palaw\AppData\Local\Temp\frender" "0" "Game_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "E:/Motorwatbackup/MotorwayRender/Motorway---/Assets/BakeryLightmaps/Game_LMA2_final.hdr" 1024
+Running halffloat2hdr "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "E:/Motorwatbackup/MotorwayRender/Motorway---/Assets/BakeryLightmaps/Game_LMA4_final.hdr" 1024
+Running halffloat2hdr "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "E:/Motorwatbackup/MotorwayRender/Motorway---/Assets/BakeryLightmaps/Game_LMA5_final.hdr" 1024
+Running halffloat2hdr "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "E:/Motorwatbackup/MotorwayRender/Motorway---/Assets/BakeryLightmaps/Game_LMA3_final.hdr" 1024
+Running halffloat2hdr "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "E:/Motorwatbackup/MotorwayRender/Motorway---/Assets/BakeryLightmaps/Game_LMA6_final.hdr" 1024
+Running halffloat2hdr "C:\Users\palaw\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "E:/Motorwatbackup/MotorwayRender/Motorway---/Assets/BakeryLightmaps/Game_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\palaw\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "E:/Motorwatbackup/MotorwayRender/Motorway---/Assets/BakeryLightmaps/Game_LM0_final.hdr" 1024
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 2
+Num alphas of 1024x256: 1
+Num alphas of 1024x512: 4
+Num alphas of 1024x1024: 4
+Done
+Rendering UV GBuffer for Game_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA3 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA4 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA5 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA6 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\palaw\AppData\Local\Temp\frender" "PointBatch_7_0_19" 1924 0 7 batchpointlight_7_0_19.bin
+Running ftraceRTX sunprobesh "C:\Users\palaw\AppData\Local\Temp\frender" "light_1_7" 1924 0 7 direct0.bin
+Running ftraceRTX sunprobesh "C:\Users\palaw\AppData\Local\Temp\frender" "light_2_7" 1924 0 7 direct1.bin
+Running ftraceRTX addmul "C:\Users\palaw\AppData\Local\Temp\frender" "probes" 4 0 7 comp_7.bin
+Running ftraceRTX texgiprobesh "C:\Users\palaw\AppData\Local\Temp\frender" "probes_final" 1924 16 7 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\palaw\AppData\Local\Temp\frender" "probes_final_" 4 0 7 shcomp_7.bin
+[20:58:11] INFO: Umbra 3 Optimizer version 3.3.22  (build: 58bc48d2405823a0d92fca7d7a5dac9d02e0a94b)
+[20:58:11] INFO: T: 20 O: 5 H: 0.25 B: 100
+[20:58:11] INFO: Tile grid 12x40x20 (at -8,-4,-8) created for scene: 46 tiles (0 empties not included) in 0.028 seconds
+[20:58:11] INFO: Using 12 threads to compute 46 tiles, cache 4096 MB
+[20:58:11] INFO: Tile processing complete, computed 46 tiles
+[20:58:11] INFO: Strict view volumes: no
+[20:58:11] INFO: Filtered 33/34 inside clusters
+[20:58:11] INFO: Filtered 45/46 global clusters
+[20:58:11] INFO: 120/165 cells reachable after global analysis
+[20:58:11] INFO: collapsed leaf tiles 46 => 1
+[20:58:11] INFO: Generating LOD tiles using 12 threads
+[20:58:11] INFO: Connecting LOD tiles
+[20:58:11] INFO: Compressing lists
+[20:58:11] INFO: Average index range size: 20.06
+[20:58:11] INFO: object list: 208 B, cluster list: 0 B
+[20:58:11] INFO: created tome with 1 tiles, 111 targets and 0 gates
+[20:58:11] INFO: Checking cache...
+[20:58:11] INFO: Cache check finished
+Total cache size 268145552
+Total cache size after purge 268145552
+Total cache size 268145552
+Total cache size after purge 268145552
+[ 532/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/sharedassets3.resource
+[ 533/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/resources.resource
+[ 535/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/data.unity3d
+[ 536/2269  1s] AddBootConfigGUID Library/Bee/artifacts/Android/boot.config
+[ 537/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/boot.config
+[BUSY       6s] UnityLinker E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/unitylinker_xy1a.traceevents
+[ 538/2269  9s] UnityLinker E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/unitylinker_xy1a.traceevents
+E:\Unity\2022.3.43f1\Editor\Data\il2cpp\build\deploy\UnityLinker.exe @Library\Bee\artifacts\rsp\16737653471924141452.rsp
+[ 725/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/Managed/analytics.json
+[ 745/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/Managed/Newtonsoft.Json.dll
+[ 781/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/Managed/UnityLinkerToEditorData.json
+[ 782/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Il2CppBackup/Managed/Newtonsoft.Json.pdb
+[ 783/2269  0s] ExtractUsedFeatures Library/Bee/artifacts/Android/Features/Newtonsoft.Json-FeaturesChecked.txt
+[ 785/2269  2s] ClassRegistrationGenerator E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/Android/il2cppOutput/UnityClassRegistration.cpp
+[BUSY       8s] IL2CPP_CodeGen E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/il2cpp_conv_rbmd.traceevents
+[ 786/2269 13s] IL2CPP_CodeGen E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/il2cpp_conv_rbmd.traceevents
+E:\Unity\2022.3.43f1\Editor\Data\il2cpp\build\deploy\il2cpp.exe @Library\Bee\artifacts\rsp\17081504626227245435.rsp
+[BUSY      16s] Compile UnityClassRegistration Library/Bee/artifacts/Android/libunity/armeabi-v7a/UnityClassRegistration.o
+[2155/2269  8s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/Android/il2cppOutput/build/armeabi-v7a/Data/Resources/Newtonsoft.Json.dll-resources.dat
+[2156/2269  8s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/Android/il2cppOutput/build/armeabi-v7a/Data/Resources/mscorlib.dll-resources.dat
+[2159/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/Android/il2cppOutput/build/armeabi-v7a/Data/Resources/System.Data.dll-resources.dat
+[2173/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/Android/il2cppOutput/build/armeabi-v7a/Data/Resources/System.Drawing.dll-resources.dat
+[2210/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/Managed/Resources/Newtonsoft.Json.dll-resources.dat
+[2246/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/Managed/Resources/System.Drawing.dll-resources.dat
+[2249/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/Managed/Resources/System.Data.dll-resources.dat
+[2250/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/Managed/Resources/mscorlib.dll-resources.dat
+[2251/2269  0s] GuidGenerator E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/unity_app_guid
+[2252/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/artifacts/Android/il2cppOutput/build/armeabi-v7a/Data/Metadata/global-metadata.dat
+[2253/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/Managed/Metadata/global-metadata.dat
+[BUSY      25s] Compile UnityClassRegistration Library/Bee/artifacts/Android/libunity/arm64-v8a/UnityClassRegistration.o
+[2254/2269 30s] Compile UnityClassRegistration Library/Bee/artifacts/Android/libunity/armeabi-v7a/UnityClassRegistration.o
+[2255/2269 30s] Compile UnityClassRegistration Library/Bee/artifacts/Android/libunity/arm64-v8a/UnityClassRegistration.o
+[BUSY       6s] Link libunity Library/Bee/artifacts/Android/libunity/arm64-v8a/unstripped/libunity.so
+[2256/2269 40s] GenerateNativePluginsForAssemblies Library/Bee/artifacts/Android/AsyncPluginsFromLinker
+[2257/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/arm64-v8a/lib_burst_generated.so
+[2258/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/armeabi-v7a/lib_burst_generated.so
+[BUSY      12s] Link libunity Library/Bee/artifacts/Android/libunity/arm64-v8a/unstripped/libunity.so
+[BUSY      17s] Link libunity Library/Bee/artifacts/Android/libunity/armeabi-v7a/unstripped/libunity.so
+[BUSY      22s] Link libunity Library/Bee/artifacts/Android/libunity/arm64-v8a/unstripped/libunity.so
+[2259/2269 25s] Link libunity Library/Bee/artifacts/Android/libunity/arm64-v8a/unstripped/libunity.so
+[2260/2269 26s] Link libunity Library/Bee/artifacts/Android/libunity/armeabi-v7a/unstripped/libunity.so
+[2261/2269  1s] Generate Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.dbg.so from Library/Bee/artifacts/Android/libunity/arm64-v8a/unstripped/libunity.so Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.dbg.so
+[2262/2269  0s] Stripping Library/Bee/artifacts/Android/libunity/armeabi-v7a/unstripped/libunity.so -> Library/Bee/artifacts/Android/libunity/armeabi-v7a/stripped/libunity.so Library/Bee/artifacts/Android/libunity/armeabi-v7a/stripped/libunity.so
+[2263/2269  1s] Stripping Library/Bee/artifacts/Android/libunity/arm64-v8a/unstripped/libunity.so -> Library/Bee/artifacts/Android/libunity/arm64-v8a/stripped/libunity.so Library/Bee/artifacts/Android/libunity/arm64-v8a/stripped/libunity.so
+[2264/2269  0s] Generate Library/Bee/artifacts/Android/libunity/armeabi-v7a/libunity.dbg.so from Library/Bee/artifacts/Android/libunity/armeabi-v7a/unstripped/libunity.so Library/Bee/artifacts/Android/libunity/armeabi-v7a/libunity.dbg.so
+[2265/2269  0s] Generate Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.sym.so from Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.dbg.so Library/Bee/artifacts/Android/libunity/arm64-v8a/libunity.sym.so
+[2266/2269  0s] Generate Library/Bee/artifacts/Android/libunity/armeabi-v7a/libunity.sym.so from Library/Bee/artifacts/Android/libunity/armeabi-v7a/libunity.dbg.so Library/Bee/artifacts/Android/libunity/armeabi-v7a/libunity.sym.so
+[2267/2269  0s] Adding note Library/Bee/artifacts/Android/libunity/arm64-v8a/stripped/libunity.so -> E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/arm64-v8a/libunity.so E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/arm64-v8a/libunity.so
+[2268/2269  0s] Adding note Library/Bee/artifacts/Android/libunity/armeabi-v7a/stripped/libunity.so -> E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/armeabi-v7a/libunity.so E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/jniLibs/armeabi-v7a/libunity.so
+*** Tundra build success (71.05 seconds - 0:01:11), 39 items updated, 2269 evaluated
+Total cache size 268145552
+Total cache size after purge 268145552
+Total cache size 268145552
+Total cache size after purge 268145552
+Total cache size 268145552
+Total cache size after purge 268145552
+[1021/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/resources.resource
+[1048/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/sharedassets3.resource
+[2265/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/data.unity3d
+[2266/2269  0s] AddBootConfigGUID Library/Bee/artifacts/Android/boot.config
+[2267/2269  0s] CopyFiles E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/boot.config
+[2268/2269  0s] GuidGenerator E:/Motorwatbackup/MotorwayRender/Motorway---/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/src/main/assets/bin/Data/unity_app_guid
+*** Tundra build success (0.31 seconds), 6 items updated, 2269 evaluated
+Total cache size 268145552
+Total cache size after purge 268145552
+[usbmuxd] Stop listen thread
+[usbmuxd] Listen thread exiting
+Done
+Done
+Done
+Done

@@ -111,6 +111,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
                     //selectedSex = _loginManager._Avatar.gender_id; - FIXED BY PREFAB
 
                     // GET NAME
+                    PhotonNetwork.LocalPlayer.NickName = _loginManager._Avatar.name;
                     Name = _loginManager._Avatar.name;
                     BodySelection(selectedSex);
                 }
