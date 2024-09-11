@@ -3953,3 +3953,486 @@ abort_threads: Failed aborting id: 000000000000BAE4, mono_thread_manage will ign
 
 abort_threads: Failed aborting id: 000000000000BAE4, mono_thread_manage will ignore it
 
+2024-9-10
+Rendering UV GBuffer for Game_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA3 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA4 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA5 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA6 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA5.lz4" 2 0 5 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA3.lz4" 2 0 3 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA4.lz4" 2 0 4 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA2.lz4" 2 0 2 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA6.lz4" 2 0 6 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_7_0_19" 1924 0 7 batchpointlight_7_0_19.bin
+Running ftraceRTX sunprobesh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_7" 1924 0 7 direct0.bin
+Running ftraceRTX sunprobesh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_7" 1924 0 7 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "probes" 4 0 7 comp_7.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_5_0_19" 4 0 5 batchpointlight_5_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_5" 4 0 5 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_5" 4 0 5 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5" 4 0 5 comp_5.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_3_0_19" 4 0 3 batchpointlight_3_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_3" 4 0 3 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_3" 4 0 3 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_4_0_19" 4 0 4 batchpointlight_4_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_4" 4 0 4 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_4" 4 0 4 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4" 4 0 4 comp_4.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_2_0_19" 4 0 2 batchpointlight_2_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_2" 4 0 2 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_2" 4 0 2 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_6_0_19" 4 0 6 batchpointlight_6_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_6" 4 0 6 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_6" 4 0 6 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6" 4 0 6 comp_6.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_1_0_19" 4 0 1 batchpointlight_1_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_1" 4 0 1 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_1" 4 0 1 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_0_0_19" 4 0 0 batchpointlight_0_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_0" 4 0 0 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_0" 4 0 0 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA50.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA30.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA40.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA20.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA60.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA10.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM00.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA51.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA31.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA41.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA21.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA61.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA11.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM01.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA52.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA32.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA42.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA22.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA62.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA12.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM02.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA53.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA33.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA43.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA23.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA63.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA13.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM03.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "probes_final" 1924 16 7 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_final" 4 16 5 "gi_Game_LMA54.bin" "Game_LMA5_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_final" 4 16 3 "gi_Game_LMA34.bin" "Game_LMA3_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_final" 4 16 4 "gi_Game_LMA44.bin" "Game_LMA4_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_final" 4 16 2 "gi_Game_LMA24.bin" "Game_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_final" 4 16 6 "gi_Game_LMA64.bin" "Game_LMA6_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_final" 4 16 1 "gi_Game_LMA14.bin" "Game_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_final" 4 16 0 "gi_Game_LM04.bin" "Game_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "probes_final_" 4 0 7 shcomp_7.bin
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "5" "Game_LMA5_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "3" "Game_LMA3_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "4" "Game_LMA4_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "2" "Game_LMA2_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "6" "Game_LMA6_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "1" "Game_LMA1_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "0" "Game_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA5_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA3_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA4_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA2_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA6_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LM0_final.hdr" 1024
+Symbol file LoadedFromMemory is not a mono symbol file
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 2
+Num alphas of 1024x256: 1
+Num alphas of 1024x512: 4
+Num alphas of 1024x1024: 4
+Done
+Rendering UV GBuffer for Game_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA3 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA4 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA5 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA6 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA2.lz4" 2 0 2 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA4.lz4" 2 0 4 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA5.lz4" 2 0 5 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA3.lz4" 2 0 3 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA6.lz4" 2 0 6 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LMA1.lz4" 2 0 1 0
+Running ftraceRTX fixpos12 "C:\Users\METAVE~1\AppData\Local\Temp\frender" "uvpos_Game_LM0.lz4" 2 0 0 0
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_7_0_19" 1924 0 7 batchpointlight_7_0_19.bin
+Running ftraceRTX sunprobesh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_7" 1924 0 7 direct0.bin
+Running ftraceRTX sunprobesh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_7" 1924 0 7 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "probes" 4 0 7 comp_7.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_2_0_19" 4 0 2 batchpointlight_2_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_2" 4 0 2 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_2" 4 0 2 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2" 4 0 2 comp_2.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_4_0_19" 4 0 4 batchpointlight_4_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_4" 4 0 4 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_4" 4 0 4 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4" 4 0 4 comp_4.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_5_0_19" 4 0 5 batchpointlight_5_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_5" 4 0 5 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_5" 4 0 5 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5" 4 0 5 comp_5.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_3_0_19" 4 0 3 batchpointlight_3_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_3" 4 0 3 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_3" 4 0 3 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3" 4 0 3 comp_3.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_6_0_19" 4 0 6 batchpointlight_6_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_6" 4 0 6 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_6" 4 0 6 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6" 4 0 6 comp_6.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_1_0_19" 4 0 1 batchpointlight_1_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_1" 4 0 1 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_1" 4 0 1 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1" 4 0 1 comp_1.bin
+Running ftraceRTX batchpointlightlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_0_0_19" 4 0 0 batchpointlight_0_0_19.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_0" 4 0 0 direct0.bin
+Running ftraceRTX sun "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_0" 4 0 0 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0" 4 0 0 comp_0.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA20.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA40.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA50.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA30.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA60.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA10.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM00.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA21.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA41.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA51.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA31.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA61.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA11.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM01.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA22.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA42.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA52.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA32.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA62.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA12.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM02.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_diffuse" 4 16 2 "gi_Game_LMA23.bin" "Game_LMA2_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_diffuse" 4 16 4 "gi_Game_LMA43.bin" "Game_LMA4_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_diffuse" 4 16 5 "gi_Game_LMA53.bin" "Game_LMA5_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_diffuse" 4 16 3 "gi_Game_LMA33.bin" "Game_LMA3_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_diffuse" 4 16 6 "gi_Game_LMA63.bin" "Game_LMA6_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_diffuse" 4 16 1 "gi_Game_LMA13.bin" "Game_LMA1_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_diffuse" 4 16 0 "gi_Game_LM03.bin" "Game_LM0_diffuse0_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgiprobesh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "probes_final" 1924 16 7 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA2_final" 4 16 2 "gi_Game_LMA24.bin" "Game_LMA2_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA4_final" 4 16 4 "gi_Game_LMA44.bin" "Game_LMA4_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA5_final" 4 16 5 "gi_Game_LMA54.bin" "Game_LMA5_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA3_final" 4 16 3 "gi_Game_LMA34.bin" "Game_LMA3_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA6_final" 4 16 6 "gi_Game_LMA64.bin" "Game_LMA6_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LMA1_final" 4 16 1 "gi_Game_LMA14.bin" "Game_LMA1_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX texgi "C:\Users\METAVE~1\AppData\Local\Temp\frender" "Game_LM0_final" 4 16 0 "gi_Game_LM04.bin" "Game_LM0_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "probes_final_" 4 0 7 shcomp_7.bin
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "2" "Game_LMA2_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "4" "Game_LMA4_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "5" "Game_LMA5_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "3" "Game_LMA3_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "6" "Game_LMA6_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "1" "Game_LMA1_final_HDR.lz4"
+Running denoiserOIDN2 c "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" 1024 0
+Running seamfixer "C:\Users\METAVE~1\AppData\Local\Temp\frender" "0" "Game_LM0_final_HDR.lz4"
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA2_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA2_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA4_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA4_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA5_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA5_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA3_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA3_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA6_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA6_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LMA1_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LMA1_final.hdr" 1024
+Running halffloat2hdr "C:\Users\METAVE~1\AppData\Local\Temp\frender/Game_LM0_final_HDR.lz4" "D:/github/Motorway---/Assets/BakeryLightmaps/Game_LM0_final.hdr" 1024
+Done
+Done
+Done
+Done
+Loaded vertex shader: quad.vso
+Loaded pixel shader: skyOutput.pso
+Loaded pixel shader: cookieOutput.pso
+initShaders done
+initScene done
+Num alphas of 512x512: 2
+Num alphas of 1024x256: 1
+Num alphas of 1024x512: 4
+Num alphas of 1024x1024: 4
+Done
+Rendering UV GBuffer for Game_LM0 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA1 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA2 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA3 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA4 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA5 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for Game_LMA6 51
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Rendering UV normal...
+Rendering faceted UV normal...
+Rendering UV pos...
+Rendering smooth UV pos...
+Rendering UV GBuffer for probes 256
+RGBA32F...RGBA8...RGBA8_SRGB...RGBA16F...states...
+Done
+Done
+Running ftraceRTX batchpointlightprobeshlegacy "C:\Users\METAVE~1\AppData\Local\Temp\frender" "PointBatch_7_0_19" 1924 0 7 batchpointlight_7_0_19.bin
+Running ftraceRTX sunprobesh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_1_7" 1924 0 7 direct0.bin
+Running ftraceRTX sunprobesh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "light_2_7" 1924 0 7 direct1.bin
+Running ftraceRTX addmul "C:\Users\METAVE~1\AppData\Local\Temp\frender" "probes" 4 0 7 comp_7.bin
+Running ftraceRTX texgiprobesh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "probes_final" 1924 16 7 "gi_probes4.bin" "probes_lights_HDR.lz4" vbTraceTex.bin
+Running ftraceRTX addsh "C:\Users\METAVE~1\AppData\Local\Temp\frender" "probes_final_" 4 0 7 shcomp_7.bin
+Symbol file LoadedFromMemory is not a mono symbol file
+Symbol file LoadedFromMemory is not a mono symbol file
+Total cache size 267470264
+Total cache size after purge 267470264
+Total cache size 267470264
+Total cache size after purge 267470264
+[             ] Require frontend run.  Library/Bee/Player5462cb9d.dag couldn't be loaded
+Finished compiling graph: 655 nodes, 1742 flattened edges (1736 ToBuild, 5 ToUse), maximum node priority 452
+[199/653    0s] WriteText Library/Bee/artifacts/csharpactions/boot.config_7kyv.info
+[200/653    0s] WriteText Library/Bee/artifacts/csharpactions/MotorwayVerse_webgl_1_0.data.unityweb_8m53.info
+[201/653    0s] WriteText Library/Bee/artifacts/csharpactions/MotorwayVerse_webgl_1_0.wasm.unityweb_er6j.info
+[202/653    0s] WriteText Library/Bee/artifacts/csharpactions/MotorwayVerse_webgl_1_0.framework.js.unityweb_53hp.info
+[203/653    0s] CopyFiles D:/github/MotorwayVerse_webgl_1_0/StreamingAssets/UnityServicesProjectConfiguration.json
+[204/653    0s] CopyFiles D:/github/MotorwayVerse_webgl_1_0/StreamingAssets/meta-logo.png
+[205/653    0s] CopyFiles D:/github/MotorwayVerse_webgl_1_0/StreamingAssets/google-services-desktop.json
+[206/653    0s] CopyFiles D:/github/MotorwayVerse_webgl_1_0/StreamingAssets/meta.mp4
+[208/653    0s] AddBootConfigGUID Library/Bee/artifacts/WebGL/boot.config
+[209/653    0s] PreprocessJS D:/github/MotorwayVerse_webgl_1_0/index.html
+[210/653    2s] PreprocessJS D:/github/MotorwayVerse_webgl_1_0/Build/MotorwayVerse_webgl_1_0.loader.js
+[BUSY       7s] UnityLinker D:/github/Motorway---/Library/Bee/artifacts/unitylinker_ber2.traceevents
+[211/653   14s] UnityLinker D:/github/Motorway---/Library/Bee/artifacts/unitylinker_ber2.traceevents
+C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\il2cpp\build\deploy\UnityLinker.exe @Library\Bee\artifacts\rsp\103330951060771336.rsp
+[BUSY       6s] IL2CPP_CodeGen D:/github/Motorway---/Library/Bee/artifacts/il2cpp_conv_n2dn.traceevents
+[BUSY      16s] IL2CPP_CodeGen D:/github/Motorway---/Library/Bee/artifacts/il2cpp_conv_n2dn.traceevents
+[217/653   18s] IL2CPP_CodeGen D:/github/Motorway---/Library/Bee/artifacts/il2cpp_conv_n2dn.traceevents
+C:\Program Files\Unity\Hub\Editor\2022.3.15f1\Editor\Data\il2cpp\build\deploy\il2cpp.exe @Library\Bee\artifacts\rsp\4316344986866340916.rsp
+[218/653    0s] CopyFiles D:/github/Motorway---/Library/Bee/artifacts/WebGL/il2cppOutput/build/Data/Resources/System.Data.dll-resources.dat
+[219/653    0s] CopyFiles D:/github/Motorway---/Library/Bee/artifacts/WebGL/il2cppOutput/build/Data/Resources/mscorlib.dll-resources.dat
+[635/653    0s] CopyFiles D:/github/Motorway---/Library/Bee/artifacts/WebGL/il2cppOutput/build/Data/Metadata/global-metadata.dat
+[636/653    0s] CopyFiles Temp/EditorBuildOutput/MethodMap.tsv
+[640/653    1s] Assemble WebGL Data Library/Bee/artifacts/WebGL/webgl.data
+[641/653    6s] C_WebGL_wasm Library/Bee/artifacts/WebGL/GameAssembly/release_WebGL_wasm/76dzwloi2vgg.o
+[642/653    9s] C_WebGL_wasm Library/Bee/artifacts/WebGL/GameAssembly/release_WebGL_wasm/4dt094pyps68.o
+[643/653   10s] 7z Library/Bee/artifacts/WebGL/webgl.data.unmarked
+
+7-Zip (a) 22.01 ZS v1.5.4 R4 (x64) : Copyright (c) 1999-2022 Igor Pavlov, 2016-2023 Tino Reichardt : 2023-02-27
+
+Scanning the drive:
+1 file, 186362806 bytes (178 MiB)
+
+Creating archive: D:/github/Motorway---/Library/Bee/artifacts/WebGL/webgl.data.unmarked
+
+Add new data to archive: 1 file, 186362806 bytes (178 MiB)
+
+
+Files read from disk: 1
+Archive size: 158779655 bytes (152 MiB)
+Everything is Ok
+[644/653    0s] GzipMarker D:/github/MotorwayVerse_webgl_1_0/Build/MotorwayVerse_webgl_1_0.data.unityweb
+[645/653    7s] Lib_WebGL_wasm Library/Bee/artifacts/WebGL/GameAssembly/release_WebGL_wasm/GameAssembly.a
+[646/653    0s] CopyFiles D:/github/Motorway---/Library/Bee/artifacts/WebGL/il2cppOutput/build/GameAssembly.a
+[BUSY       6s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY      16s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY      26s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY      36s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY      46s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY      56s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY      66s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY      76s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY      86s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY      96s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     107s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     117s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     127s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     137s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     147s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     157s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     167s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     177s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     188s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     198s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     208s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     218s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     228s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     238s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     248s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[BUSY     258s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[647/653   266s] Link_WebGL_wasm Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.js (+wasm)
+[648/653    0s] FrameworkAssembler Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.framework.js
+[649/653    0s] 7z Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.framework.js.unmarked
+
+7-Zip (a) 22.01 ZS v1.5.4 R4 (x64) : Copyright (c) 1999-2022 Igor Pavlov, 2016-2023 Tino Reichardt : 2023-02-27
+
+Scanning the drive:
+1 file, 498021 bytes (487 KiB)
+
+Creating archive: D:/github/Motorway---/Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.framework.js.unmarked
+
+Add new data to archive: 1 file, 498021 bytes (487 KiB)
+
+
+Files read from disk: 1
+Archive size: 88555 bytes (87 KiB)
+Everything is Ok
+[650/653    0s] GzipMarker D:/github/MotorwayVerse_webgl_1_0/Build/MotorwayVerse_webgl_1_0.framework.js.unityweb
+[BUSY       6s] 7z Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.wasm.unmarked
+[651/653   10s] 7z Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.wasm.unmarked
+
+7-Zip (a) 22.01 ZS v1.5.4 R4 (x64) : Copyright (c) 1999-2022 Igor Pavlov, 2016-2023 Tino Reichardt : 2023-02-27
+
+Scanning the drive:
+1 file, 98633462 bytes (95 MiB)
+
+Creating archive: D:/github/Motorway---/Library/Bee/artifacts/WebGL/build/debug_WebGL_wasm/build.wasm.unmarked
+
+Add new data to archive: 1 file, 98633462 bytes (95 MiB)
+
+
+Files read from disk: 1
+Archive size: 16558181 bytes (16 MiB)
+Everything is Ok
+[652/653    0s] GzipMarker D:/github/MotorwayVerse_webgl_1_0/Build/MotorwayVerse_webgl_1_0.wasm.unityweb
+*** Tundra build success (329.21 seconds - 0:05:29), 30 items updated, 653 evaluated
+Total cache size 267470264
+Total cache size after purge 267470264

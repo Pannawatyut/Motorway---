@@ -228,7 +228,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
             if (avatarResponse.status)
             {
-                Debug.Log("Login successful!");
+                Debug.Log("Successfully Create Avatar");
                 _loginManager._Avatar.name = avatarResponse.data.avatar.name;
                 _loginManager._Avatar.uid = avatarResponse.data.avatar.uid;
                 _loginManager._Avatar.gender_id = avatarResponse.data.avatar.gender_id;
