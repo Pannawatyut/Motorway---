@@ -413,15 +413,18 @@ public class SelectItem : MonoBehaviourPunCallbacks
             x.SetActive(false);
         }
 
-        if(SelectImagesAccessory.Length!=0){
-             foreach (GameObject x in SelectImagesAccessory)
+        if(SelectImagesAccessory.Length != 0)
         {
-            x.SetActive(false);
+            foreach (GameObject x in SelectImagesAccessory)
+            {
+                if (x)
+                {
+                    x.SetActive(false);
+                }
+               
+            }
         }
-
-        }
-
-
+        
         if (index >= 0 && index < Accessories.Length)
         {
 
@@ -429,12 +432,16 @@ public class SelectItem : MonoBehaviourPunCallbacks
             {
                 bool isActive = Accessories[index].activeSelf;
                 Accessories[index].SetActive(!isActive);
-                SelectImagesAccessory[index].SetActive(!isActive);
+
+                if(SelectImagesAccessory[index])
+                    SelectImagesAccessory[index].SetActive(!isActive);
             }
             else
             {
                 Accessories[index].SetActive(true);
-                SelectImagesAccessory[index].SetActive(true);
+
+                if (SelectImagesAccessory[index])
+                    SelectImagesAccessory[index].SetActive(true);
                 selectedAccessoryIndex = index;
             }
         }
