@@ -120,23 +120,28 @@ public class MoveBehaviour : GenericBehaviour
 		{
 			RemoveVerticalVelocity();
 		}
-
+		//Debug.Log("Character Moving");
 		// Call function that deals with player orientation.
 		Rotating(horizontal, vertical);
 
 		// Set proper speed.
 		Vector2 dir = new Vector2(horizontal, vertical);
 		speed = Vector2.ClampMagnitude(dir, 1f).magnitude;
+		//Debug.Log("Current Speed = " + speed);
 		// This is for PC only, gamepads control speed via analog stick.
 		speedSeeker += Input.GetAxis("Mouse ScrollWheel");
 		speedSeeker = Mathf.Clamp(speedSeeker, walkSpeed, runSpeed);
 		speed *= speedSeeker;
-		if (behaviourManager.IsSprinting())
+        Vector3 movement = transform.forward * speed * Time.deltaTime;
+        behaviourManager.GetRigidBody.MovePosition(behaviourManager.GetRigidBody.position + movement * 3.5f);
+        if (behaviourManager.IsSprinting())
 		{
-			speed = sprintSpeed;
-		}
+			speed = sprintSpeed * 3;
+            behaviourManager.GetRigidBody.MovePosition(behaviourManager.GetRigidBody.position + movement * 6);
+        }
+        
 
-		behaviourManager.GetAnim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
+        behaviourManager.GetAnim.SetFloat(speedFloat, speed, speedDampTime, Time.deltaTime);
 	}
 
 	// Remove vertical rigidbody velocity.

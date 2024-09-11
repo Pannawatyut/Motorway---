@@ -225,7 +225,12 @@ ModelImporter:
     animationScaleError: 0.5
     animationWrapMode: 0
     extraExposedTransformPaths: []
-    extraUserProperties: []
+    extraUserProperties:
+    - '#BAKERY{"meshName":["Wood_Stick","Wood_Mirror","Wood Ceiling","Wall Wood","Tree_V2","Text","Table
+      4","Table 3","Table 2","Table 1","Plant pot.006","Plant pot.005","Plant pot.004","Plant
+      pot.003","Plant pot.002","Plant pot.001","Plant pot","Philodendron.002","Philodendron.001","Philodendron","Mirror","Metallic","Lift","Floor_Wood","Floor","fern03.001","fern03","fern02.012","fern02.011","fern02.010","fern02.009","fern02.008","fern02.007","fern02.006","fern02.005","fern02.004","fern02.003","fern02.002","fern02.001","fern02","fern01","Fern.011","Fern.009","Fern.008","Fern.007","Fern.006","Fern.005","Fern.004","Fern.003","Fern.002","Fern.001","Fern.0","Fern","Counter_Plant","Counter","Chair
+      4","Chair 3","Chair 2","Chair 1","Cement Wall 2","Cement Wall","bush.02","Branch
+      2","Branch","All Floor"],"padding":[5,39,6,15,7,50,68,68,68,68,90,90,168,168,167,126,126,106,106,106,9,12,31,15,14,61,75,68,68,70,68,68,70,58,58,68,75,58,58,75,120,85,85,134,58,58,58,58,146,58,48,154,104,39,20,37,37,29,27,6,5,38,62,22,4],"unwrapper":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]}'
     clipAnimations: []
     isReadable: 0
   meshes:
