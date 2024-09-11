@@ -413,11 +413,13 @@ public class SelectItem : MonoBehaviourPunCallbacks
             x.SetActive(false);
         }
 
-        foreach (GameObject x in SelectImagesAccessory)
+        if(SelectImagesAccessory.Length!=0){
+             foreach (GameObject x in SelectImagesAccessory)
         {
             x.SetActive(false);
         }
 
+        }
 
 
         if (index >= 0 && index < Accessories.Length)
