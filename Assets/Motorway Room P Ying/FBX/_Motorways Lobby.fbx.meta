@@ -7,6 +7,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: All Floor
+    second: {fileID: 2100000, guid: f0b69ecf531326e468937afb9c52eaa1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Alpha
     second: {fileID: 2100000, guid: 3c30d88a71a59cf428fa44a207144fce, type: 2}
   - first:
@@ -27,13 +32,73 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Cement Wall
+    second: {fileID: 2100000, guid: 89ed44672c3cb6d4bb5359b7424691d0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cement Wall 2
+    second: {fileID: 2100000, guid: 9beb7e9b7e1406649a51c12c39f2fb8c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chair 1
+    second: {fileID: 2100000, guid: 68f84472a75432e42b592f2c4a54e073, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chair 2
+    second: {fileID: 2100000, guid: a36e17bbcc36d2e43ad55a7b22426af3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chair 3
+    second: {fileID: 2100000, guid: a6fa503344bd0334897c95fec0c674f6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Chair 4
+    second: {fileID: 2100000, guid: 7c64089298c504b4da52565096151506, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Counter
+    second: {fileID: 2100000, guid: 51637c3942e236c469a499b01689e24c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Counter_Plant
+    second: {fileID: 2100000, guid: e428a3f42adaa3b448b83a96fbc59eb6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Emission
     second: {fileID: 2100000, guid: db59bba0a84a32548a4f5adb94b980e4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Floor
+    second: {fileID: 2100000, guid: de22b8a760dba6b4fadaebc2e9b6609d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Floor_Wood
+    second: {fileID: 2100000, guid: 498db9d836d652246bff1b8c59a42e29, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lift
+    second: {fileID: 2100000, guid: 287e035739ab4e84b9c8f625b0f818fa, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Mat
     second: {fileID: 2100000, guid: 652ed387182b1ee4ebf7cf8a7f8b5af6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Mat_Text
+    second: {fileID: 2100000, guid: 368d3600a684b2148a7fa8616016ded9, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -44,6 +109,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material.001
     second: {fileID: 2100000, guid: 0cd7e5cb2b3f68c45a2d7c72f4d09952, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metallic
+    second: {fileID: 2100000, guid: 21038e8d6a6ea334fa94c8c8f88d7e4a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -59,6 +129,46 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: PlasticABSWorn001_2K
     second: {fileID: 2100000, guid: a8d1b7de9c14f8c44ac5204e5efa50a8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table 1
+    second: {fileID: 2100000, guid: bc411021d657aab4a8f898c3d7488f06, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table 2
+    second: {fileID: 2100000, guid: 623cbd483078f7d42af2570c9e7a48d4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table 3
+    second: {fileID: 2100000, guid: bbf37eb7ba0a2604a87a8952dcffa700, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Table 4
+    second: {fileID: 2100000, guid: 3146e0b7cdec16642971e3e1031aa1fd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall Wood
+    second: {fileID: 2100000, guid: 841eb5234777d334498ad60785e2fe8a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood Ceiling
+    second: {fileID: 2100000, guid: 596b40ad8c348ef4980493385e5bc74d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood_Mirror
+    second: {fileID: 2100000, guid: 38808a26d7e52d04ca2998a6b2663e00, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood_Stick
+    second: {fileID: 2100000, guid: 4c08ee91c29c74546842a7872799cc1f, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -133,7 +243,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
