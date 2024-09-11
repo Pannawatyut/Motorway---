@@ -87,7 +87,7 @@ namespace Google {
     public static GoogleSignIn DefaultInstance {
       get {
         if (theInstance == null) {
-#if UNITY_ANDROID || UNITY_IOS
+#if UNITY_ANDROID || UNITY_IOS || UNITY_IOS|| UNITY_IOS
           theInstance = new GoogleSignIn(new GoogleSignInImpl(Configuration));
 #else
           theInstance = new GoogleSignIn(null);

@@ -21,7 +21,7 @@ namespace Google.Impl {
 
   internal class GoogleSignInImpl : BaseObject, ISignInImpl {
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_IOS || UNITY_IOS
     private const string DllName = "native-googlesignin";
 #else
     private const string DllName = "__Internal";
@@ -174,7 +174,7 @@ namespace Google.Impl {
     // Gets the Unity player activity.
     // For iOS, this returns Zero.
     private static IntPtr GetPlayerActivity() {
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_IOS
       UnityEngine.AndroidJavaClass jc = new UnityEngine.AndroidJavaClass(
         "com.unity3d.player.UnityPlayer");
       return jc.GetStatic<UnityEngine.AndroidJavaObject>("currentActivity")

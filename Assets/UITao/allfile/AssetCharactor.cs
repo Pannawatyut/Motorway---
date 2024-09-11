@@ -86,7 +86,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
              //_Launcher = FindObjectsOfType<LaunCherTest1>()[0];
          }*/
 
-        Cursor.lockState = CursorLockMode.None;
+        //cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
   
     }

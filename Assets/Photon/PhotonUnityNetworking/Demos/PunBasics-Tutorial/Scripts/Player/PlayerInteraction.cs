@@ -177,7 +177,7 @@ public class PlayerInteraction : MonoBehaviourPun
 
     private void EnableCursor()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         _MoveBehaviorScript.RemoveVerticalVelocity();
         //_MovementScript.enabled = false;
@@ -188,7 +188,7 @@ public class PlayerInteraction : MonoBehaviourPun
 
     private void DisableCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         //_MovementScript.enabled = true;
         //_MoveBehaviorScript.enabled = true;

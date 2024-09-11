@@ -13,7 +13,7 @@ public class ControllerMobile : MonoBehaviourPun
 
     private Joystick _joystick;
 
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_IOS
     private void Start()
     {
         // Find the joystick in the scene by name

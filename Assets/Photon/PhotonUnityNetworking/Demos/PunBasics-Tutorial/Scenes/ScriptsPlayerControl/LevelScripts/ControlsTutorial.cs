@@ -33,12 +33,12 @@ public class ControlsTutorial : MonoBehaviour
 	{
 		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 		{
-			Cursor.lockState = CursorLockMode.Locked;
+			//cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
 		if (Input.GetKeyDown("escape"))
 		{
-			Cursor.lockState = CursorLockMode.Locked;
+			//cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = true;
 		}
 		keyboardCommands.SetActive(Input.GetKey(KeyCode.F2));

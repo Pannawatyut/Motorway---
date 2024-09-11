@@ -8,7 +8,7 @@ public class Changplatfromswitscript : MonoBehaviour
 
     void Start()
     {
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_IOS
         // เปิดใช้งานสคริปต์ที่อยู่ใน ScriptChange[1] และปิด ScriptChange[0]
         ScriptChange[1].enabled = true;
         ScriptChange[0].enabled = false;
