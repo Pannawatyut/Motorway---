@@ -89,7 +89,7 @@ namespace Facebook.Unity.Example
             string path = Path.Combine(Application.streamingAssetsPath, filename);
 
             // Android cannot access StreamingAssets directly because they are packaged into an `apk`
-            #if UNITY_ANDROID
+            #if UNITY_ANDROID || UNITY_IOS
             byte[] data = null;
 
             // Retrieve packaged data via `UnityWebRequest`

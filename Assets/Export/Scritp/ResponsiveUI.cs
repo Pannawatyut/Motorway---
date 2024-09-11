@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResponsvieUI : MonoBehaviour
+public class ResponsiveUI : MonoBehaviour
 {
     public CanvasScaler canvasScaler;
-    public Vector2 referenceResolution = new Vector2(1920, 1080); // ???????????????????? Canvas ????????????
+    public Vector2 referenceResolution = new Vector2(1920, 1080); 
 
     void Start()
     {

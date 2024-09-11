@@ -22,12 +22,12 @@ public class CursorManagerScript : MonoBehaviour
 
     public void DisableCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
     public void EnableCursor()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 

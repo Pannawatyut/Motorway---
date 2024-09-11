@@ -44,7 +44,7 @@ public class CarSpawner : MonoBehaviour
     public MinigameAudioScript _AudioScript;
     private void Start()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
 

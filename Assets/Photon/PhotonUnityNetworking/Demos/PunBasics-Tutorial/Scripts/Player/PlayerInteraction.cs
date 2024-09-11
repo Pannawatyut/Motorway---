@@ -173,7 +173,7 @@ public class PlayerInteraction : MonoBehaviourPun
 
     private void EnableCursor()
     {
-        Cursor.lockState = CursorLockMode.None;
+        //cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         cam.horizontalAimingSpeed = 0;
         cam.verticalAimingSpeed = 0;
@@ -186,7 +186,7 @@ public class PlayerInteraction : MonoBehaviourPun
 
     private void DisableCursor()
     {
-        Cursor.lockState = CursorLockMode.Locked;
+        //cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         cam.horizontalAimingSpeed = 6;
         cam.verticalAimingSpeed = 6;

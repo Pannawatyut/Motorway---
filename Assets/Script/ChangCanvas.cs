@@ -8,7 +8,7 @@ public class ChangCanvas : MonoBehaviour
     public GameObject[] ButtonPressF;
 
     // Start is called before the first frame update
-#if UNITY_ANDROID
+#if UNITY_ANDROID || UNITY_IOS
     void Start()
     {
         ButtonPressF[1].SetActive(true);

@@ -81,7 +81,7 @@ public class SurveyManagerScript : MonoBehaviour
             yield return new WaitForSeconds(3f);
             _LoadingOK.SetActive(false);
             _QAPanel.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
+            //cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             ButtonChangePlayerCanMove.Reset = true;
             Debug.LogError("Error: " + request.error);
@@ -95,7 +95,7 @@ public class SurveyManagerScript : MonoBehaviour
             yield return new WaitForSeconds(3f);
             _LoadingOK.SetActive(false);
             _QAPanel.SetActive(false);
-            Cursor.lockState = CursorLockMode.Locked;
+            //cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             ButtonChangePlayerCanMove.Reset = true;
 
