@@ -140,15 +140,13 @@ public class PlayerInteraction : MonoBehaviourPun
         {
             if (isCursorVisible)
             {
-                cam.horizontalAimingSpeed = 6;
-                cam.verticalAimingSpeed = 6;
+
                 DisableCursor();
             }
             else
             {
                 EnableCursor();
-                cam.horizontalAimingSpeed = 0;
-                cam.verticalAimingSpeed = 0;
+                
             }
             isCursorVisible = !isCursorVisible; // Toggle cursor visibility state
         }
@@ -160,8 +158,7 @@ public class PlayerInteraction : MonoBehaviourPun
         }
         else if (isCursorVisible == true)
         {
-            EnableCursor();
-            
+            EnableCursor();         
         }
     }
 
@@ -179,6 +176,8 @@ public class PlayerInteraction : MonoBehaviourPun
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
+        cam.horizontalAimingSpeed = 0;
+        cam.verticalAimingSpeed = 0;
         _MoveBehaviorScript.RemoveVerticalVelocity();
         //_MovementScript.enabled = false;
         //_MoveBehaviorScript.enabled = false;
@@ -190,9 +189,11 @@ public class PlayerInteraction : MonoBehaviourPun
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+        cam.horizontalAimingSpeed = 6;
+        cam.verticalAimingSpeed = 6;
         //_MovementScript.enabled = true;
         //_MoveBehaviorScript.enabled = true;
-        
+
     }
 
     IEnumerator WaitForSoundToFinish()

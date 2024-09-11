@@ -2,6 +2,8 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
+using UnityEngine.UI;
+
 public class ScoreManager : MonoBehaviour
 {
     public float time = 180f; // 3 minutes in seconds
@@ -19,6 +21,8 @@ public class ScoreManager : MonoBehaviour
     public TMP_Text MultiplierScore;
 
     public GameObject[] Combotext;
+
+    public Button[] _ScoreButton;
 
     public GameObject End_Menu;
 
@@ -94,6 +98,12 @@ public class ScoreManager : MonoBehaviour
         time = 0;
         // Implement what should happen when the timer ends
         Debug.Log("Timer ended");
+        int i = 0;
+        while(i < _ScoreButton.Length)
+        {
+            _ScoreButton[i].interactable = false;
+            i++;
+        }
         SendScoreToData();
         End_Menu.SetActive(true);
         end_score.text = _score.ToString();
