@@ -92,7 +92,7 @@ public class PlayerInteraction : MonoBehaviourPun
                 }
 
                 //Lock cam
-                //SwitchCursor();
+                SwitchCursor();
                 PressF = true;
                 cam.horizontalAimingSpeed = 0;
                 cam.verticalAimingSpeed = 0;
@@ -121,7 +121,7 @@ public class PlayerInteraction : MonoBehaviourPun
                 }
 
                 // Enable mouse cursor when F is pressed
-                //EnableCursor();
+                EnableCursor();
             }
         }
         else
