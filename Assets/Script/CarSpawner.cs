@@ -187,7 +187,7 @@ public class CarSpawner : MonoBehaviour
             ScoreManager.Instance.AddScore(10);
             ScoreManager.Instance.CorrectAnswer();
             animatorBarrier.Play("GateOpen");
-            animatorNPC.Play("suscess");
+            animatorNPC.Play("female_nod_stand");
             _AudioScript._CorrectSound.Play();
         }
         else
@@ -196,7 +196,7 @@ public class CarSpawner : MonoBehaviour
             ScoreManager.Instance.SubtractScore(5);
             ScoreManager.Instance.WrongAnswer();
             animatorBarrier.Play("GateOpen");
-            animatorNPC.Play("fail");
+            animatorNPC.Play("female_say_no");
             _AudioScript._IncorrectSound.Play();
             
         }
@@ -294,7 +294,7 @@ public class CarSpawner : MonoBehaviour
                 spawnedCars[i].transform.position = targetPositions[i];
             }
         }
-        animatorNPC.Play("female_nod_stand1");
+        animatorNPC.Play("female_nod_stand");
     }
 
     private void GameOver()
