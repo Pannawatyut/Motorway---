@@ -100,7 +100,7 @@ namespace Photon.Pun.Demo.PunBasics
         {
             if (malePlayerPrefab != null)
             {
-                PhotonNetwork.Instantiate(malePlayerPrefab.name, new Vector3(0f, 0.5f, -0.6f), Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(malePlayerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
                 Debug.Log("Instantiated male player prefab.");
             }
             else
@@ -113,7 +113,7 @@ namespace Photon.Pun.Demo.PunBasics
         {
             if (femalePlayerPrefab != null)
             {
-                PhotonNetwork.Instantiate(femalePlayerPrefab.name, new Vector3(0f, 0.5f, -0.6f), Quaternion.identity, 0);
+                PhotonNetwork.Instantiate(femalePlayerPrefab.name, new Vector3(0f, 0f, 0f), Quaternion.identity, 0);
                 Debug.Log("Instantiated female player prefab.");
             }
             else

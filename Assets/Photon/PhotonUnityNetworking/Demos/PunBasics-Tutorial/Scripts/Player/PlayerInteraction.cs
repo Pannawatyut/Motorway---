@@ -173,6 +173,7 @@ public class PlayerInteraction : MonoBehaviourPun
 
     private void EnableCursor()
     {
+        #if !UNITY_ANDROID || !UNITY_IOS
         //cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         cam.horizontalAimingSpeed = 0;
@@ -180,18 +181,20 @@ public class PlayerInteraction : MonoBehaviourPun
         _MoveBehaviorScript.RemoveVerticalVelocity();
         //_MovementScript.enabled = false;
         //_MoveBehaviorScript.enabled = false;
-
+        #endif
 
     }
 
     private void DisableCursor()
     {
+        #if !UNITY_ANDROID || !UNITY_IOS
         //cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         cam.horizontalAimingSpeed = 6;
         cam.verticalAimingSpeed = 6;
         //_MovementScript.enabled = true;
         //_MoveBehaviorScript.enabled = true;
+        #endif
 
     }
 

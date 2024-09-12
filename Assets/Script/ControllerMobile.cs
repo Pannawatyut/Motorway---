@@ -13,15 +13,11 @@ public class ControllerMobile : MonoBehaviourPun
 
     private Joystick _joystick;
 
-    public void OnEnable()
-    {
-        if (photonView.IsMine)
-        {
-            _rigidbody.isKinematic= false;
+    public void OnEnable(){
+        if(photonView.IsMine){
+            _rigidbody.isKinematic = false;
             _rigidbody.useGravity = true;
-        }
-        else
-        {
+        }else{
             _rigidbody.isKinematic = true;
             _rigidbody.useGravity = false;
         }
