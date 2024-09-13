@@ -13,6 +13,7 @@ public class entername : MonoBehaviour
     public TextMeshProUGUI UserRequir;
     public GameObject feedbackText;
     public LoginManager _loginManager;
+    public GameObject CustomChar;
     // List of forbidden words
     public List<string> profaneWords = new List<string>();
 
@@ -70,6 +71,8 @@ public class entername : MonoBehaviour
         if (_loginManager._Avatar.name != null)
         {
             this.gameObject.SetActive(false);
+            CustomChar.SetActive(true);
+
         }
     }
     public void NameCheck()
