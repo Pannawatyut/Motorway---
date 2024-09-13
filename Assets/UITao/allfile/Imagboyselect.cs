@@ -14,7 +14,7 @@ public class Imagboyselect : MonoBehaviour
     public ImageWomen WomenAssets;
 
     public GameObject[] Imagegendr1;
-
+    public GameObject buttondisable;
     public void ChangeButton_BoyAssets()
     {
         // Check if Imagegendr1 has the elements before accessing them
@@ -111,7 +111,11 @@ public class Imagboyselect : MonoBehaviour
                 }
             }
         }
-
+        // Specifically disable the 6th hair button (index 5)
+        if (Hairbutton.Count > 5 && Hairbutton[5] != null)
+        {
+            Hairbutton[5].gameObject.SetActive(false); // Disable Hairbutton[5]
+        }
         // Update shirt buttons
         for (int i = 0; i < ShirtButton.Count; i++)
         {
@@ -163,13 +167,16 @@ public class Imagboyselect : MonoBehaviour
 
     public void UpdateButtonsBySex(int selectedSex)
     {
+        Debug.Log("<color=green>Start</color>");
         switch (selectedSex)
         {
             case 0:
                 ChangeButton_BoyAssets();
+                buttondisable.SetActive(true);
                 break;
             case 1:
                 ChangeButton_WomenAssets();
+                buttondisable.SetActive(false);
                 break;
         }
     }

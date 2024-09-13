@@ -99,7 +99,7 @@ public class GoogleAuthenticator : MonoBehaviour
         //_idToken.text = idToken;
 
         UserData userData = JsonUtility.FromJson<UserData>(idToken);
-
+        GetPlatform();
         StartCoroutine(
             _Login._GoogleLoginAPI(userData.email, userData.googleID, userData.platform)
         );
