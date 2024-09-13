@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Proyecto26;
 using UnityEngine;
+
 //using Vuplex.WebView.Internal;
 /// <summary>
 /// Handles calls to the Google provider for authentication
@@ -10,16 +11,16 @@ public class GoogleAuthenticator : MonoBehaviour
 {
     private const string ClientId = "GOOGLE_CLIENT_ID";
     private const string ClientSecret = "GOOGLE_CLIENT_SECRET";
-    
+
     // Use the full URL as the redirect URI
     private static readonly string RedirectUri = "GETDATA";
 
     private static readonly HttpCodeListener codeListener = new HttpCodeListener();
 
     /// <summary>
-    /// Opens a webpage that prompts the user to sign in and copy the auth code 
+    /// Opens a webpage that prompts the user to sign in and copy the auth code
     /// </summary>
-    /// 
+    ///
 
     //public Vuplex.WebView.CanvasWebViewPrefab _WebviewObj;
 
@@ -76,7 +77,22 @@ public class GoogleAuthenticator : MonoBehaviour
     {
         public string email;
         public string googleID;
+        public string platform;
     }
+
+    private string GetPlatform()
+    {
+#if UNITY_WEBGL
+        return "WEBGL";
+#elif UNITY_ANDROID
+        return "ANDROID";
+#elif UNITY_IOS
+        return "IOS";
+#else
+        return "UNKNOWN";
+#endif
+    }
+
     public void OnGoogleSignInSuccess(string idToken)
     {
         Debug.Log("Google Sign-In Success with token: " + idToken);
@@ -84,14 +100,19 @@ public class GoogleAuthenticator : MonoBehaviour
 
         UserData userData = JsonUtility.FromJson<UserData>(idToken);
 
-        StartCoroutine(_Login._GoogleLoginAPI(userData.email, userData.googleID));
+        StartCoroutine(
+            _Login._GoogleLoginAPI(userData.email, userData.googleID, userData.platform)
+        );
         // คุณสามารถใช้ idToken นี้เพื่อทำงานอื่นๆ ต่อ เช่น Firebase Authentication ใน Unity
     }
 
-    public void _TestGoogle()
-    {
-        StartCoroutine(_Login._GoogleLoginAPI("panatthakorn.isd@gmail.com", "116505355693568297360"));
-    }
+    // public void _TestGoogle()
+    // {
+    //     StartCoroutine(
+    //         _Login._GoogleLoginAPI("panatthakorn.isd@gmail.com", "116505355693568297360")
+    //     );
+    // }
+
     /// <summary>
     /// Exchanges the Auth Code with the user's Id Token
     /// </summary>
@@ -101,26 +122,32 @@ public class GoogleAuthenticator : MonoBehaviour
     {
         try
         {
-            RestClient.Request(new RequestHelper
-            {
-                Method = "POST",
-                Uri = "https://oauth2.googleapis.com/token",
-                Params = new Dictionary<string, string>
-                {
-                    {"code", code},
-                    {"client_id", ClientId},
-                    {"client_secret", ClientSecret},
-                    {"redirect_uri", RedirectUri},
-                    {"grant_type", "authorization_code"}
-                }
-            }).Then(
-                response =>
+            RestClient
+                .Request(
+                    new RequestHelper
+                    {
+                        Method = "POST",
+                        Uri = "https://oauth2.googleapis.com/token",
+                        Params = new Dictionary<string, string>
+                        {
+                            { "code", code },
+                            { "client_id", ClientId },
+                            { "client_secret", ClientSecret },
+                            { "redirect_uri", RedirectUri },
+                            { "grant_type", "authorization_code" },
+                        },
+                    }
+                )
+                .Then(response =>
                 {
                     var data =
-                        StringSerializationAPI.Deserialize(typeof(GoogleIdTokenResponse), response.Text) as
-                            GoogleIdTokenResponse;
+                        StringSerializationAPI.Deserialize(
+                            typeof(GoogleIdTokenResponse),
+                            response.Text
+                        ) as GoogleIdTokenResponse;
                     callback(data.id_token);
-                }).Catch(Debug.Log);
+                })
+                .Catch(Debug.Log);
         }
         catch (Exception e)
         {

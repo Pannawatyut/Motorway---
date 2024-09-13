@@ -15,6 +15,7 @@ public class FacebookManager : MonoBehaviour
     {
         public string email;
         public string facebook_id;
+        public string platform;
     }
 
     public LoginManager loginManager;
@@ -157,14 +158,34 @@ public class FacebookManager : MonoBehaviour
             Debug.Log("Email: " + email);
         }
 
-        // Start sending email and Facebook ID to backend
+        // Send email, Facebook ID, and platform
         StartCoroutine(SendEmailandFacebookID(email, facebookId));
+    }
+
+    private string GetPlatform()
+    {
+#if UNITY_WEBGL
+        return "WEBGL";
+#elif UNITY_ANDROID
+        return "ANDROID";
+#elif UNITY_IOS
+        return "IOS";
+#else
+        return "UNKNOWN";
+#endif
     }
 
     private IEnumerator SendEmailandFacebookID(string email, string facebookId)
     {
-        // Create an instance of UserData and assign the email and Facebook ID
-        UserData userData = new UserData { email = email, facebook_id = facebookId };
+        string platform = GetPlatform();
+
+        // Create an instance of UserData and assign the email, Facebook ID, and platform
+        UserData userData = new UserData
+        {
+            email = email,
+            facebook_id = facebookId,
+            platform = platform,
+        };
 
         // Convert the UserData object to JSON
         string json = JsonUtility.ToJson(userData);
@@ -182,7 +203,7 @@ public class FacebookManager : MonoBehaviour
 
         yield return request.SendWebRequest();
         loginManager._LoadingBar.SetActive(false);
-        // ตรวจสอบผลลัพธ์ของคำขอ
+
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
@@ -194,7 +215,8 @@ public class FacebookManager : MonoBehaviour
         {
             Debug.Log("Login Response: " + request.downloadHandler.text);
             loginManager._LoadingOK.SetActive(true);
-            // แปลงข้อมูลตอบกลับเป็นอ็อบเจ็กต์
+
+            // Process login response (as done previously)
             var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
 
             if (loginResponse.status)

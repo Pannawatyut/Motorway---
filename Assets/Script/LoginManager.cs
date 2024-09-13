@@ -17,7 +17,7 @@ public class LoginManager : MonoBehaviour
     public GameObject _LoadingBar;
     public GameObject _LoadingFailed;
     public GameObject _LoadingOK;
-
+    public string platform;
     public string _APIURL;
 
     private void Awake()
@@ -43,31 +43,43 @@ public class LoginManager : MonoBehaviour
 
     public void OnClickLoginButton()
     {
-        StartCoroutine(Login(Email.text, Password.actualInput));
+#if UNITY_WEBGL
+        platform = "WEBGL";
+#elif UNITY_ANDROID
+        platform = "ANDROID";
+#elif UNITY_IOS
+        platform = "IOS";
+#else
+        platform = "UNKNOWN";
+#endif
+        StartCoroutine(Login(Email.text, Password.actualInput, platform));
     }
 
     public void _ByPass()
     {
-        StartCoroutine(Login("pongsakorn.pisa@kmutt.ac.th", "123"));
+        StartCoroutine(Login("pongsakorn.pisa@kmutt.ac.th", "123", "TEST"));
     }
 
-    public IEnumerator _GoogleLoginAPI(string _Email, string google_id)
+    public IEnumerator _GoogleLoginAPI(string _Email, string google_id, string platform)
     {
+        Debug.Log(
+            $"_GoogleLoginAPI called with Email: {_Email}, Google ID: {google_id}, Platform: {platform}"
+        );
 
-        Debug.Log($"_GoogleLoginAPI called with email: {_Email} and Google ID: {google_id}");
         // Show loading bar while the request is processed
         _LoadingBar.SetActive(true);
 
-        // Prepare the object to send
+        // Prepare the object to send, now including the platform
         _ThirdPartyData_Google Obj = new _ThirdPartyData_Google
         {
             email = _Email,
             google_id = google_id,
+            platform = platform,
         };
 
         // Serialize object to JSON
         string json = JsonUtility.ToJson(Obj);
-        Debug.Log("SENT GOOGLE API : " + json);
+        Debug.Log("SENT GOOGLE API: " + json);
 
         // Setup the request
         var request = new UnityWebRequest(
@@ -195,11 +207,16 @@ public class LoginManager : MonoBehaviour
         _LoadingBar.SetActive(false);
     }
 
-    private IEnumerator Login(string email, string password)
+    private IEnumerator Login(string email, string password, string platform)
     {
         // สร้างอ็อบเจ็กต์การล็อกอิน
         _LoadingBar.SetActive(true);
-        var loginData = new LoginRequest { email = email, password = password };
+        var loginData = new LoginRequest
+        {
+            email = email,
+            password = password,
+            platform = platform,
+        };
 
         // แปลงอ็อบเจ็กต์การล็อกอินเป็น JSON
         string json = JsonUtility.ToJson(loginData);
@@ -326,6 +343,7 @@ public class LoginManager : MonoBehaviour
     {
         public string email;
         public string password;
+        public string platform;
     }
 
     // โครงสร้างข้อมูลสำหรับผลลัพธ์การล็อกอิน
@@ -363,6 +381,7 @@ public class LoginManager : MonoBehaviour
     {
         public string email;
         public string google_id;
+        public string platform;
     }
 
     [System.Serializable]
