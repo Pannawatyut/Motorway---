@@ -80,12 +80,12 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
     public void dissable()
     {
-        if (gender[1].activeSelf == false)
+        if (gender[1] == true)
         {
             Dissableobj.SetActive(false);
             Dissableobj1.SetActive(false);
         }
-        else if (gender[0].activeSelf == true)
+        else
         {
             Dissableobj.SetActive(true);
             Dissableobj1.SetActive(true);
@@ -346,8 +346,8 @@ public class SelectItem : MonoBehaviourPunCallbacks
 
             if (index >= 0 && index < SelectImagesHair.Length)
             {
-                
-                //Debug.Log("Select Hair = " + index);
+                dissable();
+                Debug.Log("Select Hair = " + index);
                 if (index == selectedHairIndex)
                 {
                     SelectImagesHair[index].SetActive(true);
@@ -356,7 +356,6 @@ public class SelectItem : MonoBehaviourPunCallbacks
                 {
                     SelectImagesHair[index].SetActive(false);
                 }
-                dissable();
             }
         }
     }
