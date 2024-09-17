@@ -10,8 +10,9 @@ using UnityEngine.UI;
 
 public class SelectItem : MonoBehaviourPunCallbacks
 {
-    public GameObject Dissableobj;
-    public GameObject Dissableobj1;
+    //public GameObject Dissableobj;
+    //public GameObject Dissableobj1;
+    public GameObject Dissableobj2;
 
     public Imagboyselect imagboyselect;
     public GameObject[] Hair;
@@ -78,19 +79,19 @@ public class SelectItem : MonoBehaviourPunCallbacks
         public int ColorId;
     }
 
-    public void dissable()
-    {
-        if (gender[1].activeSelf == false)
-        {
-            Dissableobj.SetActive(false);
-            Dissableobj1.SetActive(false);
-        }
-        else if (gender[0].activeSelf == true)
-        {
-            Dissableobj.SetActive(true);
-            Dissableobj1.SetActive(true);
-        }
-    }
+    //public void dissable()
+    //{
+    //    if (selectedSex == 4)
+    //    {
+    //        Dissableobj.SetActive(false);
+    //        Dissableobj1.SetActive(false);
+    //    }
+    //    else if (selectedSex == 3)
+    //    {
+    //        Dissableobj.SetActive(true);
+    //        Dissableobj1.SetActive(true);
+    //    }
+    //}
 
     public List<_AvatarData> avatarData = new List<_AvatarData>();
 
@@ -356,7 +357,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
                 {
                     SelectImagesHair[index].SetActive(false);
                 }
-                dissable();
+                //dissable();
             }
         }
     }
@@ -769,6 +770,10 @@ public class SelectItem : MonoBehaviourPunCallbacks
             if (gender[1])
                 gender[1].SetActive(false);
 
+            //Dissableobj.SetActive(true);
+            //Dissableobj1.SetActive(true);
+            //Dissableobj2.SetActive(true);
+
             if (imagboyselect)
                 imagboyselect.ChangeButton_BoyAssets();
         }
@@ -778,6 +783,10 @@ public class SelectItem : MonoBehaviourPunCallbacks
                 gender[0].SetActive(false);
             if (gender[1])
                 gender[1].SetActive(true);
+
+            //Dissableobj.SetActive(false);
+            //Dissableobj1.SetActive(false);
+            //Dissableobj2.SetActive(true);
 
             if (imagboyselect)
                 imagboyselect.ChangeButton_WomenAssets();
