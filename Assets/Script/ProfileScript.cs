@@ -64,13 +64,13 @@ public class ProfileScript : MonoBehaviour
         _frequency.text = _loginManager._Account.checkpoint;
     }
     public void OnClickUpdateProfile()
-    {
+    {      
         StartCoroutine(UpdateProfiles());
     }
 
     private IEnumerator UpdateProfiles()
     {
-
+        Debug.Log("Click Updated Profile");
         var account = new Account
         {
             first_name = _editfirstName.text,
@@ -119,6 +119,7 @@ public class ProfileScript : MonoBehaviour
                 _loginManager._Account.vehicle = avatarResponse.data.account.vehicle;
                 _loginManager._Account.checkpoint = avatarResponse.data.account.checkpoint;
                 UpdateProfileLastest();
+                this.gameObject.SetActive(false);
             }
             else
             {

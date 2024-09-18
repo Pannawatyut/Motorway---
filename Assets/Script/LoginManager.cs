@@ -298,6 +298,7 @@ public class LoginManager : MonoBehaviour
                 _Account.vehicle = vehicle;
                 _Account.checkpoint = checkpoint;
                 _Account.access_token = accesstoken;
+                _Account.is_questionnaire = loginResponse.data.account.is_questionnaire;
 
                 _Avatar.uid = loginResponse.data.avatar.uid;
                 _Avatar.name = loginResponse.data.avatar.name;
@@ -375,6 +376,7 @@ public class LoginManager : MonoBehaviour
         public string vehicle;
         public string checkpoint;
         public string access_token;
+        public int is_questionnaire;
     }
 
     public class _ThirdPartyData_Google
