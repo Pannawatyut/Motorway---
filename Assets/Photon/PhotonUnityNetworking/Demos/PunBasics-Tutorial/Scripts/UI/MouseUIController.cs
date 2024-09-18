@@ -15,7 +15,7 @@ public class MouseUIController : MonoBehaviour
     private Vector2 dragOffset; // Offset to maintain the relative position of the panel during dragging
     public GameObject isOn; // GameObject to indicate dragging status
 
-private Vector2 defaultPosition; // Default position of the UI element
+    private Vector2 defaultPosition; // Default position of the UI element
     private Vector2 defaultSize; // Default size of the UI element
     private void Start()
     {

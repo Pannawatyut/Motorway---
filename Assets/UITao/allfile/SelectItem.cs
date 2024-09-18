@@ -512,6 +512,7 @@ public class SelectItem : MonoBehaviourPunCallbacks
             }
 
             selectedShirtColorIndex = colorIndex;
+            Debug.Log("current Shirt Color = " + selectedShirtColorIndex);
         }
         if (imagboyselect != null)
         {

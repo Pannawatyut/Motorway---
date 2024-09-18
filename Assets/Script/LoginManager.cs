@@ -13,7 +13,7 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField Email;
     public MaskedPasswordScript Password;
     public LaunCherTest1 _Launcher;
-
+    public LoginButtonScript _LoginButtonScript;
     public GameObject _LoadingBar;
     public GameObject _LoadingFailed;
     public GameObject _LoadingOK;
@@ -36,11 +36,34 @@ public class LoginManager : MonoBehaviour
         //Test();
     }
 
-    public void Start()
+    //public void Start()
+    //{
+    //    //_ByPass();
+    //    if (_LoginButtonScript == null)
+    //    {
+    //        _LoginButtonScript = FindAnyObjectByType<LoginButtonScript>();
+    //        if (_LoginButtonScript != null )
+    //        {
+    //            Email = _LoginButtonScript._Email;
+    //            Password = _LoginButtonScript._Password;
+    //        }
+    //    }
+    //}
+    private void Update()
     {
-        //_ByPass();
+        if (_LoginButtonScript == null)
+        {
+            _LoginButtonScript = FindAnyObjectByType<LoginButtonScript>();
+            if (_LoginButtonScript != null)
+            {
+                Email = _LoginButtonScript._Email;
+                Password = _LoginButtonScript._Password;
+                _LoadingBar = _LoginButtonScript._loading;
+                _LoadingFailed = _LoginButtonScript._loadingFailed;
+                _LoadingOK = _LoginButtonScript._loadingOk;
+            }
+        }
     }
-
     public void OnClickLoginButton()
     {
 #if UNITY_WEBGL
@@ -298,6 +321,7 @@ public class LoginManager : MonoBehaviour
                 _Account.vehicle = vehicle;
                 _Account.checkpoint = checkpoint;
                 _Account.access_token = accesstoken;
+                _Account.is_questionnaire = loginResponse.data.account.is_questionnaire;
 
                 _Avatar.uid = loginResponse.data.avatar.uid;
                 _Avatar.name = loginResponse.data.avatar.name;
@@ -375,6 +399,7 @@ public class LoginManager : MonoBehaviour
         public string vehicle;
         public string checkpoint;
         public string access_token;
+        public int is_questionnaire;
     }
 
     public class _ThirdPartyData_Google
