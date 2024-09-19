@@ -21,4 +21,17 @@ public class ChangCanvas : MonoBehaviour
         ButtonPressF[1].SetActive(false);
     }
 #endif
+#if UNITY_ANDROID || UNITY_IOS
+    public void FixedUpdate()
+    {
+        if (ButtonChangePlayerCanMove.Reset)
+        {
+            ButtonPressF[1].SetActive(false);
+        }
+        else
+        {
+            ButtonPressF[1].SetActive(true);
+        }
+    }
+#endif
 }

@@ -266,7 +266,9 @@ public class PlayerInteraction : MonoBehaviourPun
         {
             //ปิด UI Setting
             SettingUI.turnOff = true;
-                
+
+            ButtonChangePlayerCanMove.Reset = true;
+
             //โชว์ Dialog
             if (Dialog != null)
             {

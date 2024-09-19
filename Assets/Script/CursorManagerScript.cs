@@ -30,8 +30,12 @@ public class CursorManagerScript : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Debug.Log("Enable Cursor");
-        cam.horizontalAimingSpeed = 0;
-        cam.verticalAimingSpeed = 0;
+        if (cam)
+        {
+            cam.horizontalAimingSpeed = 0;
+            cam.verticalAimingSpeed = 0;
+        }
+        
         //_MovementScript.enabled = false;
         //_MoveBehaviorScript.enabled = false;
 #endif
@@ -44,8 +48,13 @@ public class CursorManagerScript : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Debug.Log("Disable Cursor");
-        cam.horizontalAimingSpeed = 6;
-        cam.verticalAimingSpeed = 6;
+
+        if (cam)
+        {
+            cam.horizontalAimingSpeed = 6;
+            cam.verticalAimingSpeed = 6;
+        }
+        
         ButtonChangePlayerCanMove.Reset = false;
         //_MovementScript.enabled = true;
         //_MoveBehaviorScript.enabled = true;
