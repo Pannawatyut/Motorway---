@@ -17,6 +17,7 @@ public class PolicyScript : MonoBehaviour
     public GameObject ProfilePage;
     public Toggle agreeToggle;
     public bool FirstTry = false;
+    public GameObject _ChatBox;
 
     void Start()
     {
@@ -24,7 +25,27 @@ public class PolicyScript : MonoBehaviour
         agreeToggle.onValueChanged.AddListener(delegate {
             AgreeCheck(agreeToggle);
         });
+
+        if (LoginManager.Instance._isStarter)
+        {
+            this.gameObject.SetActive(false);
+            _ChatBox.SetActive(true);
+
+            CursorManagerScript.Instance.DisableCursor();
+        }
+        else
+        {
+            this.gameObject.SetActive(true);
+            _ChatBox.SetActive(false);
+
+            CursorManagerScript.Instance.EnableCursor();
+        }
+        LoginManager.Instance._isStarter = true;
+
+
+
     }
+
     private void Update()
     {
         if (_loginManager == null)
@@ -48,13 +69,14 @@ public class PolicyScript : MonoBehaviour
     {
         if (_loginManager != null) 
         {
-            if (_loginManager._Account.first_name == null || _loginManager._Account.last_name == null)
+            if (_loginManager._Account.first_name == "-" || _loginManager._Account.last_name == "-")
             {
                 PDPA_Profile.SetActive(true);
             }
             else
             {
                 CheckforQuestionaire();
+                _ChatBox.SetActive(true);
                 PDPA_Profile.SetActive(false);
             }
         }
@@ -70,6 +92,7 @@ public class PolicyScript : MonoBehaviour
         else
         {
             Parent.SetActive(false);
+            CursorManagerScript.Instance.DisableCursor();
         }
     }
 

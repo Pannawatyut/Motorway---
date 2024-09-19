@@ -10,14 +10,14 @@ public class TutorialScript : MonoBehaviour
 
     private void OnEnable()
     {
-        StartCoroutine(DelaybeforeAutoClose());
+        //StartCoroutine(DelaybeforeAutoClose());
     }
 
     IEnumerator DelaybeforeAutoClose()
     {
         yield return new WaitForSeconds(3f);
-        TutorialPage.SetActive(false);
-        TutorialGUI.SetActive(true);
+        //TutorialPage.SetActive(false);
+        //TutorialGUI.SetActive(true);
     }
 
 #endif

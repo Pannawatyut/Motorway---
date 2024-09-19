@@ -35,6 +35,11 @@ public class SurveyManagerScript : MonoBehaviour
     public GameObject _LoadingFailed;
     public GameObject _LoadingOK;
 
+    public GameObject _PolicyGameObject;
+    public GameObject _QuesitonaireObject;
+
+    public GameObject _ChatBoxObject;
+
     IEnumerator SubmitQuestionaire()
     {
         _LoadingBar.SetActive(true);
@@ -83,7 +88,7 @@ public class SurveyManagerScript : MonoBehaviour
             _QAPanel.SetActive(false);
             //cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            ButtonChangePlayerCanMove.Reset = true;
+            ButtonChangePlayerCanMove.Reset = false;
             Debug.LogError("Error: " + request.error);
             Debug.LogError("Status Code: " + request.responseCode);
             Debug.LogError("URL: " + request.url);
@@ -97,10 +102,16 @@ public class SurveyManagerScript : MonoBehaviour
             _QAPanel.SetActive(false);
             //cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            ButtonChangePlayerCanMove.Reset = true;
+            ButtonChangePlayerCanMove.Reset = false;
 
             Debug.Log("Login Response: " + request.downloadHandler.text);
         }
+
+        _PolicyGameObject.SetActive(false);
+        _QuesitonaireObject.SetActive(false);
+        _ChatBoxObject.SetActive(true);
+
+        CursorManagerScript.Instance.DisableCursor();
     }
 
     public SurveyData _questionaire;

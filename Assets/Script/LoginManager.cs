@@ -13,12 +13,14 @@ public class LoginManager : MonoBehaviour
     public TMP_InputField Email;
     public MaskedPasswordScript Password;
     public LaunCherTest1 _Launcher;
-
+    public LoginButtonScript _LoginButtonScript;
     public GameObject _LoadingBar;
     public GameObject _LoadingFailed;
     public GameObject _LoadingOK;
     public string platform;
     public string _APIURL;
+
+    public bool _isStarter; // Already Show Welcome Panel once -> true
 
     private void Awake()
     {
@@ -36,11 +38,34 @@ public class LoginManager : MonoBehaviour
         //Test();
     }
 
-    public void Start()
+    //public void Start()
+    //{
+    //    //_ByPass();
+    //    if (_LoginButtonScript == null)
+    //    {
+    //        _LoginButtonScript = FindAnyObjectByType<LoginButtonScript>();
+    //        if (_LoginButtonScript != null )
+    //        {
+    //            Email = _LoginButtonScript._Email;
+    //            Password = _LoginButtonScript._Password;
+    //        }
+    //    }
+    //}
+    private void Update()
     {
-        //_ByPass();
+        if (_LoginButtonScript == null)
+        {
+            _LoginButtonScript = FindAnyObjectByType<LoginButtonScript>();
+            if (_LoginButtonScript != null)
+            {
+                Email = _LoginButtonScript._Email;
+                Password = _LoginButtonScript._Password;
+                _LoadingBar = _LoginButtonScript._loading;
+                _LoadingFailed = _LoginButtonScript._loadingFailed;
+                _LoadingOK = _LoginButtonScript._loadingOk;
+            }
+        }
     }
-
     public void OnClickLoginButton()
     {
 #if UNITY_WEBGL

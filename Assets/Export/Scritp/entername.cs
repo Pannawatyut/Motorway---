@@ -72,8 +72,8 @@ public class entername : MonoBehaviour
         {
             this.gameObject.SetActive(false);
             CustomChar.SetActive(true);
-
         }
+
     }
     public void NameCheck()
     {

@@ -10,6 +10,8 @@ public class ChatAll : MonoBehaviour
     public Transform contentTransform;
     public int maxMessages = 8; // Maximum number of messages to keep in the chat
 
+    public GameObject Notification;
+
     private Queue<GameObject> messageQueue = new Queue<GameObject>();
     private string playerNickname;
 
@@ -82,9 +84,12 @@ public class ChatAll : MonoBehaviour
     [PunRPC]
     public void GetMessage(string receiveMessage, string nickname)
     {
+
         GameObject messageObject = Instantiate(messagePrefab, contentTransform);
         Message messageComponent = messageObject.GetComponent<Message>();
-        
+
+        Notification.SetActive(true);
+
         if (messageComponent != null)
         {
             messageComponent.MyMessage.text = $"{nickname}: {receiveMessage}";

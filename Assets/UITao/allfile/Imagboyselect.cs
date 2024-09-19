@@ -111,11 +111,11 @@ public class Imagboyselect : MonoBehaviour
                 }
             }
         }
-        // Specifically disable the 6th hair button (index 5)
-        if (Hairbutton.Count > 5 && Hairbutton[5] != null)
-        {
-            Hairbutton[5].gameObject.SetActive(false); // Disable Hairbutton[5]
-        }
+        //// Specifically disable the 6th hair button (index 5)
+        //if (Hairbutton.Count > 5 && Hairbutton[5] != null)
+        //{
+        //    Hairbutton[5].gameObject.SetActive(false); // Disable Hairbutton[5]
+        //}
         // Update shirt buttons
         for (int i = 0; i < ShirtButton.Count; i++)
         {

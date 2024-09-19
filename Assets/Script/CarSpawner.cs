@@ -31,7 +31,7 @@ public class CarSpawner : MonoBehaviour
 
     public List<GameObject> spawnedCars = new List<GameObject>();
     private float elapsedTime = 0f;
-    private float spawnInterval = 2f;
+    private float spawnInterval = 1f;
     private bool isCheckingCar = false;
 
     public Slider slider;
@@ -73,7 +73,7 @@ public class CarSpawner : MonoBehaviour
             }
             else if (elapsedTime >= 60f)
             {
-                spawnInterval = 1f;
+                spawnInterval = 0.8f;
             }
 
             UpdateUI();
@@ -184,8 +184,9 @@ public class CarSpawner : MonoBehaviour
         if (buttonValue == prefabIndex)
         {
             SetCheckCurrent1Active(true, false, true, false);
-            ScoreManager.Instance.AddScore(10);
+            ScoreManager.Instance.AddScore(Random.RandomRange(70,101));
             ScoreManager.Instance.CorrectAnswer();
+            GetComponent<ScoreManager>().time += 1f;
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("female_nod_stand");
             _AudioScript._CorrectSound.Play();
@@ -193,7 +194,8 @@ public class CarSpawner : MonoBehaviour
         else
         {
             SetCheckCurrent1Active(true, true, false, true);
-            ScoreManager.Instance.SubtractScore(5);
+            //ScoreManager.Instance.SubtractScore(50);
+            GetComponent<ScoreManager>().time -= 1f;
             ScoreManager.Instance.WrongAnswer();
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("female_say_no");
@@ -237,7 +239,7 @@ public class CarSpawner : MonoBehaviour
 
     private IEnumerator MoveAndDestroyFirstCar(GameObject car)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0f);
         SetCheckCurrent1Active(false, false, false, false);
         Vector3 initialPosition = car.transform.position;
         Vector3 targetPosition = initialPosition + new Vector3(0, 0, -20);
@@ -256,7 +258,7 @@ public class CarSpawner : MonoBehaviour
         animatorBarrier.Play("GateOff");
 
         StartCoroutine(MoveCarsForward());
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0f);
         isCheckingCar = false;
     }
 

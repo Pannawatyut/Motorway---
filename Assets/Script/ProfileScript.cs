@@ -31,9 +31,14 @@ public class ProfileScript : MonoBehaviour
 
     private void OnEnable()
     {
-        OnClickUpdateProfile();
+        if (_loginManager == null)
+        {
+            _loginManager = FindObjectOfType<LoginManager>();
+        }
+
+        //OnClickUpdateProfile();
         UpdateProfileLastest();
-        _firstName.text = _loginManager._Account.first_name;
+        /*_firstName.text = _loginManager._Account.first_name;
         _lastName.text = _loginManager._Account.last_name;
         _email.text = _loginManager._Account.email;
         _gender.text = _loginManager._Account.gender;
@@ -41,14 +46,7 @@ public class ProfileScript : MonoBehaviour
         _education.text = _loginManager._Account.education;
         _occupation.text = _loginManager._Account.occupation;
         _vehicle.text = _loginManager._Account.vehicle;
-        _frequency.text = _loginManager._Account.checkpoint;
-    }
-    private void Update()
-    {
-        if ( _loginManager == null)
-        {
-            _loginManager = FindObjectOfType<LoginManager>();
-        }
+        _frequency.text = _loginManager._Account.checkpoint;*/
     }
 
     public void UpdateProfileLastest()
@@ -92,7 +90,7 @@ public class ProfileScript : MonoBehaviour
         };
 
         request.SetRequestHeader("Content-Type", "application/json");
-        request.SetRequestHeader("Authorization", _loginManager._Account.access_token);
+        request.SetRequestHeader("Authorization", LoginManager.Instance._Account.access_token);
 
         yield return request.SendWebRequest();
 

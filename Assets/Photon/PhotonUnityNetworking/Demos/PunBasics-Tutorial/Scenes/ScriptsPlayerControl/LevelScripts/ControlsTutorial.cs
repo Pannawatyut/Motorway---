@@ -31,8 +31,11 @@ public class ControlsTutorial : MonoBehaviour
 
 	void Update()
 	{
+		
 		if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1))
 		{
+        #if !UNITY_ANDROID || !UNITY_IOS
+
 			//cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = false;
 		}
@@ -41,6 +44,7 @@ public class ControlsTutorial : MonoBehaviour
 			//cursor.lockState = CursorLockMode.Locked;
 			Cursor.visible = true;
 		}
+		#endif
 		keyboardCommands.SetActive(Input.GetKey(KeyCode.F2));
 		gamepadCommands.SetActive(Input.GetKey(KeyCode.F3) || Input.GetKey(KeyCode.Joystick1Button7));
 	}

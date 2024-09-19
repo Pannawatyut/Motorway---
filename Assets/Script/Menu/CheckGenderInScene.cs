@@ -4,8 +4,8 @@ using System.Collections.Generic;
 using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.Events;
+using UnityEngine.Networking;
 
 public class CheckGenderInScene : MonoBehaviour
 {
@@ -28,9 +28,17 @@ public class CheckGenderInScene : MonoBehaviour
     public UnityEvent _Event_Male;
     public UnityEvent _Event_FeMale;
 
+    private void Update()
+    {
+#if !UNITY_ANDROID || !UNITY_IOS
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+#endif
+    }
+
     public void _SetupUI()
     {
-
         _loginManager = FindObjectOfType<LoginManager>();
 
         if (_loginManager._Avatar.gender_id == 3) // MALE
@@ -48,27 +56,81 @@ public class CheckGenderInScene : MonoBehaviour
     /////////// Save Avatar ////////////////
     public void SaveAvatarData(SelectItem selectItem)
     {
-
-
         AvatarData.Clear();
 
         // Add avatar data from SelectItem
-        AvatarData.Add(new SelectItem._AvatarData { Type = "Hair", Id = selectItem.selectedHairIndex, ColorId = selectItem.selectedHairColorIndex });
-        AvatarData.Add(new SelectItem._AvatarData { Type = "Shirt", Id = selectItem.selectedShirtIndex, ColorId = selectItem.selectedShirtColorIndex });
-        AvatarData.Add(new SelectItem._AvatarData { Type = "Pants", Id = selectItem.selectedPantsIndex, ColorId = selectItem.selectedPantsColorIndex });
-        AvatarData.Add(new SelectItem._AvatarData { Type = "Shoes", Id = selectItem.selectedShoesIndex, ColorId = selectItem.selectedShoesColorIndex });
-        AvatarData.Add(new SelectItem._AvatarData { Type = "Face", Id = selectItem.selectedFaceIndex, ColorId = 0 });
-        AvatarData.Add(new SelectItem._AvatarData { Type = "SkinColor", Id = selectItem.selectedSkinColor, ColorId = 0 });
+        AvatarData.Add(
+            new SelectItem._AvatarData
+            {
+                Type = "Hair",
+                Id = selectItem.selectedHairIndex,
+                ColorId = selectItem.selectedHairColorIndex,
+            }
+        );
+        AvatarData.Add(
+            new SelectItem._AvatarData
+            {
+                Type = "Shirt",
+                Id = selectItem.selectedShirtIndex,
+                ColorId = selectItem.selectedShirtColorIndex,
+            }
+        );
+        AvatarData.Add(
+            new SelectItem._AvatarData
+            {
+                Type = "Pants",
+                Id = selectItem.selectedPantsIndex,
+                ColorId = selectItem.selectedPantsColorIndex,
+            }
+        );
+        AvatarData.Add(
+            new SelectItem._AvatarData
+            {
+                Type = "Shoes",
+                Id = selectItem.selectedShoesIndex,
+                ColorId = selectItem.selectedShoesColorIndex,
+            }
+        );
+        AvatarData.Add(
+            new SelectItem._AvatarData
+            {
+                Type = "Face",
+                Id = selectItem.selectedFaceIndex,
+                ColorId = 0,
+            }
+        );
+        AvatarData.Add(
+            new SelectItem._AvatarData
+            {
+                Type = "SkinColor",
+                Id = selectItem.selectedSkinColor,
+                ColorId = 0,
+            }
+        );
 
         for (int i = 0; i < selectItem.Accessories.Length; i++)
         {
             if (selectItem.Accessories[i].activeSelf)
             {
-                AvatarData.Add(new SelectItem._AvatarData { Type = "Accessory", Id = i, ColorId = 0 });
+                AvatarData.Add(
+                    new SelectItem._AvatarData
+                    {
+                        Type = "Accessory",
+                        Id = i,
+                        ColorId = 0,
+                    }
+                );
             }
         }
 
-        AvatarData.Add(new SelectItem._AvatarData { Type = "Sex", Id = selectItem.selectedSex, ColorId = 0 });
+        AvatarData.Add(
+            new SelectItem._AvatarData
+            {
+                Type = "Sex",
+                Id = selectItem.selectedSex,
+                ColorId = 0,
+            }
+        );
     }
 
     public GameObject _LoadingBar;
@@ -120,15 +182,17 @@ public class CheckGenderInScene : MonoBehaviour
             shoe_id = selectItem.selectedShoesIndex.ToString(),
             shoe_color_id = selectItem.selectedShoesColorIndex.ToString(),
             accessory_id = selectItem.selectedAccessoryIndex.ToString(),
-
         };
 
         string json = JsonUtility.ToJson(Avatar);
         Debug.Log(json);
-        using var request = new UnityWebRequest(LoginManager.Instance._APIURL + "/api/avatar/updateAvatar", "POST")
+        using var request = new UnityWebRequest(
+            LoginManager.Instance._APIURL + "/api/avatar/updateAvatar",
+            "POST"
+        )
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
-            downloadHandler = new DownloadHandlerBuffer()
+            downloadHandler = new DownloadHandlerBuffer(),
         };
 
         request.SetRequestHeader("Content-Type", "application/json");
@@ -156,14 +220,24 @@ public class CheckGenderInScene : MonoBehaviour
                 _loginManager._Avatar.skin_id = int.Parse(avatarResponse.data.avatar.skin_id);
                 _loginManager._Avatar.face_id = int.Parse(avatarResponse.data.avatar.face_id);
                 _loginManager._Avatar.hair_id = int.Parse(avatarResponse.data.avatar.hair_id);
-                _loginManager._Avatar.hair_color_id = int.Parse(avatarResponse.data.avatar.hair_color_id);
+                _loginManager._Avatar.hair_color_id = int.Parse(
+                    avatarResponse.data.avatar.hair_color_id
+                );
                 _loginManager._Avatar.shirt_id = int.Parse(avatarResponse.data.avatar.shirt_id);
-                _loginManager._Avatar.shirt_color_id = int.Parse(avatarResponse.data.avatar.shirt_color_id);
+                _loginManager._Avatar.shirt_color_id = int.Parse(
+                    avatarResponse.data.avatar.shirt_color_id
+                );
                 _loginManager._Avatar.pant_id = int.Parse(avatarResponse.data.avatar.pant_id);
-                _loginManager._Avatar.pant_color_id = int.Parse(avatarResponse.data.avatar.pant_color_id);
+                _loginManager._Avatar.pant_color_id = int.Parse(
+                    avatarResponse.data.avatar.pant_color_id
+                );
                 _loginManager._Avatar.shoe_id = int.Parse(avatarResponse.data.avatar.shoe_id);
-                _loginManager._Avatar.shoe_color_id = int.Parse(avatarResponse.data.avatar.shoe_color_id);
-                _loginManager._Avatar.accessory_id = int.Parse(avatarResponse.data.avatar.accessory_id);
+                _loginManager._Avatar.shoe_color_id = int.Parse(
+                    avatarResponse.data.avatar.shoe_color_id
+                );
+                _loginManager._Avatar.accessory_id = int.Parse(
+                    avatarResponse.data.avatar.accessory_id
+                );
 
                 _LoadingOK.SetActive(true);
                 yield return new WaitForSeconds(3);
@@ -177,7 +251,6 @@ public class CheckGenderInScene : MonoBehaviour
             }
         }
     }
-
 
     public Avatar _avatar;
 
@@ -209,7 +282,6 @@ public class CheckGenderInScene : MonoBehaviour
         public string pant_color_id;
         public string shoe_id;
         public string shoe_color_id;
-        public string accessory_id; 
+        public string accessory_id;
     }
-
 }
