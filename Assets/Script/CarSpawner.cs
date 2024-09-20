@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class CarSpawner : MonoBehaviour
 {
@@ -31,12 +32,12 @@ public class CarSpawner : MonoBehaviour
 
     public List<GameObject> spawnedCars = new List<GameObject>();
     private float elapsedTime = 0f;
-    private float spawnInterval = 2f;
+    private float spawnInterval = 1f;
     private bool isCheckingCar = false;
 
-    public Slider slider;
-    public Slider slider1;
-    public Image sliderFill;
+    public UnityEngine.UI.Slider slider;
+    public UnityEngine.UI.Slider slider1;
+    public UnityEngine.UI.Image sliderFill;
 
     public bool _isStart;
     public AudioSource _ButtonSound;
@@ -45,7 +46,7 @@ public class CarSpawner : MonoBehaviour
     private void Start()
     {
         //cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        UnityEngine.Cursor.visible = true;
     }
 
     public void _StartGame()
@@ -73,7 +74,7 @@ public class CarSpawner : MonoBehaviour
             }
             else if (elapsedTime >= 60f)
             {
-                spawnInterval = 1f;
+                spawnInterval = 0.8f;
             }
 
             UpdateUI();
@@ -128,12 +129,14 @@ public class CarSpawner : MonoBehaviour
         }
     }
 
+    public GameObject _Effect;
     public void SpawnCar()
     {
         Vector3 position = spawnPosition;
         int randomIndex = Random.Range(0, carPrefabs.Length);
         Quaternion rotation = Quaternion.Euler(0, 180, 0);
         GameObject spawnedCar = Instantiate(carPrefabs[randomIndex], position, rotation);
+        
         spawnedCars.Add(spawnedCar);
 
         Vector3 targetPosition = targetStartPosition + new Vector3(0, 0, spawnedCars.Count * spacing);
@@ -166,6 +169,7 @@ public class CarSpawner : MonoBehaviour
         // Add lobby navigation logic
     }
 
+    public Transform _EffectPos;
     public void CheckAndDestroyFirstCar(int buttonValue)
     {
         if (isCheckingCar) return;
@@ -184,8 +188,12 @@ public class CarSpawner : MonoBehaviour
         if (buttonValue == prefabIndex)
         {
             SetCheckCurrent1Active(true, false, true, false);
-            ScoreManager.Instance.AddScore(10);
+            ScoreManager.Instance.AddScore(Random.RandomRange(70,101));
             ScoreManager.Instance.CorrectAnswer();
+
+            GameObject Effect = Instantiate(_Effect, _EffectPos.transform.position, Quaternion.identity);
+            Destroy(Effect, 3f);
+            //GetComponent<ScoreManager>().time += 1f;
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("female_nod_stand");
             _AudioScript._CorrectSound.Play();
@@ -193,7 +201,8 @@ public class CarSpawner : MonoBehaviour
         else
         {
             SetCheckCurrent1Active(true, true, false, true);
-            ScoreManager.Instance.SubtractScore(5);
+            //ScoreManager.Instance.SubtractScore(50);
+            GetComponent<ScoreManager>().time -= 1f;
             ScoreManager.Instance.WrongAnswer();
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("female_say_no");
@@ -237,7 +246,7 @@ public class CarSpawner : MonoBehaviour
 
     private IEnumerator MoveAndDestroyFirstCar(GameObject car)
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0f);
         SetCheckCurrent1Active(false, false, false, false);
         Vector3 initialPosition = car.transform.position;
         Vector3 targetPosition = initialPosition + new Vector3(0, 0, -20);
@@ -256,7 +265,7 @@ public class CarSpawner : MonoBehaviour
         animatorBarrier.Play("GateOff");
 
         StartCoroutine(MoveCarsForward());
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0f);
         isCheckingCar = false;
     }
 

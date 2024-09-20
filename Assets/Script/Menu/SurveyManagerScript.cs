@@ -35,11 +35,30 @@ public class SurveyManagerScript : MonoBehaviour
     public GameObject _LoadingFailed;
     public GameObject _LoadingOK;
 
+    public GameObject _PolicyGameObject;
+    public GameObject _QuesitonaireObject;
+
+    public GameObject _ChatBoxObject;
+
+    public TextMeshProUGUI _gender;
+    public TextMeshProUGUI _age;
+    public TextMeshProUGUI _education;
+    public TextMeshProUGUI _occupation;
+    public TextMeshProUGUI _social_media;
+    public TextMeshProUGUI _vehicle_type;
+
     IEnumerator SubmitQuestionaire()
     {
         _LoadingBar.SetActive(true);
         // Initialize SurveyData object
         _questionaire = new SurveyData();
+        _questionaire.gender = _gender.text;
+        _questionaire.age = _age.text;
+        _questionaire.education = _education.text;
+        _questionaire.occupation = _occupation.text;
+        _questionaire.social_media = _social_media.text;
+        _questionaire.vehicle_type = _vehicle_type.text;
+
         _questionaire.suggestion = _suggestion.text;
 
         // Initialize the questions list to avoid NullReferenceException
@@ -64,7 +83,7 @@ public class SurveyManagerScript : MonoBehaviour
 
         string json = JsonUtility.ToJson(_questionaire);
         Debug.Log(json);
-        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/questionnaire/createQuestionnaire", "POST")
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+ "/api/questionnaire/createQuestionnaire", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()
@@ -81,9 +100,10 @@ public class SurveyManagerScript : MonoBehaviour
             yield return new WaitForSeconds(3f);
             _LoadingOK.SetActive(false);
             _QAPanel.SetActive(false);
+            
             //cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            ButtonChangePlayerCanMove.Reset = true;
+            ButtonChangePlayerCanMove.Reset = false;
             Debug.LogError("Error: " + request.error);
             Debug.LogError("Status Code: " + request.responseCode);
             Debug.LogError("URL: " + request.url);
@@ -97,16 +117,32 @@ public class SurveyManagerScript : MonoBehaviour
             _QAPanel.SetActive(false);
             //cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            ButtonChangePlayerCanMove.Reset = true;
+            ButtonChangePlayerCanMove.Reset = false;
 
-            Debug.Log("Login Response: " + request.downloadHandler.text);
+            LoginManager.Instance._Account.is_questionnaire = 1;
+            Debug.Log("SubmitQuestionaire Response: " + request.downloadHandler.text);
         }
+
+        if(_PolicyGameObject)
+            _PolicyGameObject.SetActive(false);
+        if (_QuesitonaireObject)
+            _QuesitonaireObject.SetActive(false);
+        if (_ChatBoxObject)
+            _ChatBoxObject.SetActive(true);
+
+        CursorManagerScript.Instance.DisableCursor();
     }
 
     public SurveyData _questionaire;
     [System.Serializable]
     public class SurveyData
     {
+        public string gender;
+        public string age;
+        public string education;
+        public string occupation;
+        public string social_media;
+        public string vehicle_type;
         public List<Question> questions;
         public string suggestion;
     }

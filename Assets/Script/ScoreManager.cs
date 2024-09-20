@@ -40,6 +40,17 @@ public class ScoreManager : MonoBehaviour
     public int consecutiveCorrectAnswers = 0;
     public int scoreMultiplier = 1;
 
+    public void OnEnable()
+    {
+#if !UNITY_ANDROID || !UNITY_IOS
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        Debug.Log("Enable Cursor");
+#endif
+    }
+
+
+
     private void Awake()
     {
         // Ensure that there is only one instance of ScoreManager
@@ -118,10 +129,12 @@ public class ScoreManager : MonoBehaviour
     public void SubtractScore(int amount)
     {
         _score -= amount;
+
         if (_score < 0)
         {
             _score = 0;
         }
+
         UpdateScoreDisplay(); // Update the score display
     }
 

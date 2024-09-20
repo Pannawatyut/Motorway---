@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Networking;
+using UnityEngine.UI;
+using System;
+using Unity.VisualScripting;
+using UnityEngine.Analytics;
+
 public class ProfileScript : MonoBehaviour
 {
     public LoginManager _loginManager;
@@ -31,9 +36,14 @@ public class ProfileScript : MonoBehaviour
 
     private void OnEnable()
     {
-        OnClickUpdateProfile();
+        if (_loginManager == null)
+        {
+            _loginManager = FindObjectOfType<LoginManager>();
+        }
+
+        //OnClickUpdateProfile();
         UpdateProfileLastest();
-        _firstName.text = _loginManager._Account.first_name;
+        /*_firstName.text = _loginManager._Account.first_name;
         _lastName.text = _loginManager._Account.last_name;
         _email.text = _loginManager._Account.email;
         _gender.text = _loginManager._Account.gender;
@@ -41,14 +51,22 @@ public class ProfileScript : MonoBehaviour
         _education.text = _loginManager._Account.education;
         _occupation.text = _loginManager._Account.occupation;
         _vehicle.text = _loginManager._Account.vehicle;
-        _frequency.text = _loginManager._Account.checkpoint;
+        _frequency.text = _loginManager._Account.checkpoint;*/
     }
-    private void Update()
+
+    public GameObject _ProfileBtm;
+
+    public void FixedUpdate()
     {
-        if ( _loginManager == null)
+        if (_editfirstName.text.Length !=1&& _editlastName.text.Length !=1 && _editgender.text.Length != 1 && _editage.text.Length != 1 && _editeducation.text.Length != 1 && _editedoccupation.text.Length !=1)
         {
-            _loginManager = FindObjectOfType<LoginManager>();
+            _ProfileBtm.GetComponent<Button>().interactable = true;
         }
+        else
+        {
+            _ProfileBtm.GetComponent<Button>().interactable = false;
+        }
+
     }
 
     public void UpdateProfileLastest()
@@ -64,48 +82,82 @@ public class ProfileScript : MonoBehaviour
         _frequency.text = _loginManager._Account.checkpoint;
     }
     public void OnClickUpdateProfile()
-    {
+    {      
         StartCoroutine(UpdateProfiles());
     }
 
+    public GameObject _LoadingPanel;
+    public GameObject _OKPanel;
+    public GameObject _FailedPanel;
+
+    public GameObject _Edit_ProfileBTM;
+    public GameObject _ProfilePanel;
+
+    public PolicyScript _PolicyScript;
+
+    [System.Serializable]
+    public class _UpdateProfile
+    {
+        public string first_name;
+        public string last_name;
+        public string gender;
+        public string age;
+        public string education;
+        public string occupation;
+        public string vehicle;
+        public string checkpoint;
+    }
+
+    public _UpdateProfile _Account;
+
     private IEnumerator UpdateProfiles()
     {
+        Debug.Log("Click Updated Profile");
 
-        var account = new Account
-        {
-            first_name = _editfirstName.text,
-            last_name = _editlastName.text,
-            gender = _editgender.text,
-            age = _editage.text,
-            education = _editeducation.text,
-            occupation = _editedoccupation.text,
-            vehicle = _editvehicle.text,
-            checkpoint = _editfrequency.text
-        };
+        _LoadingPanel.SetActive(true);
 
-        string json = JsonUtility.ToJson(account);
+        _Account = new _UpdateProfile();
 
-        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/user/updateProfile", "POST")
+        _Account.first_name = _editfirstName.text;
+        _Account.last_name = _editlastName.text;
+        _Account.gender = _editgender.text;
+        _Account.age = _editage.text;
+        _Account.education = _editeducation.text;
+        _Account.occupation = _editedoccupation.text;
+        _Account.vehicle = _editvehicle.text;
+        _Account.checkpoint = _editfrequency.text;
+
+        string json = JsonUtility.ToJson(_Account);
+
+        Debug.Log("BEFORE SENT : " + json);
+
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+ "/api/user/updateProfile", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
             downloadHandler = new DownloadHandlerBuffer()
         };
 
         request.SetRequestHeader("Content-Type", "application/json");
-        request.SetRequestHeader("Authorization", _loginManager._Account.access_token);
+        request.SetRequestHeader("Authorization", LoginManager.Instance._Account.access_token);
 
         yield return request.SendWebRequest();
+
+        _LoadingPanel.SetActive(false);
 
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
             Debug.LogError("Status Code: " + request.responseCode);
             Debug.LogError("URL: " + request.url);
+
+            _FailedPanel.SetActive(true);
+
         }
         else
         {
             Debug.Log("Update Response: " + request.downloadHandler.text);
-            var avatarResponse = JsonUtility.FromJson<ProfileResponse>(request.downloadHandler.text);
+
+            avatarResponse = JsonUtility.FromJson<ProfileResponse>(request.downloadHandler.text);
 
             if (avatarResponse.status)
             {
@@ -119,18 +171,47 @@ public class ProfileScript : MonoBehaviour
                 _loginManager._Account.vehicle = avatarResponse.data.account.vehicle;
                 _loginManager._Account.checkpoint = avatarResponse.data.account.checkpoint;
                 UpdateProfileLastest();
+                //
             }
             else
             {
                 Debug.LogError("Update failed!");
             }
+
+            _OKPanel.SetActive(true);
+            yield return new WaitForSeconds(3f);
+            _OKPanel.SetActive(false);
+            _Edit_ProfileBTM.SetActive(false);
+           
+
+            if (_PolicyScript._isForPdpa)
+            {
+                _PolicyScript.CheckforQuestionaire();
+                _PolicyScript._isForPdpa = false;
+            }
+            else
+            {
+                _ProfilePanel.SetActive(true);
+            }
+
+            this.gameObject.SetActive(false);
+
         }
+
+
     }
+
+    public ProfileResponse avatarResponse;
+
+
     [System.Serializable]
     public class Account
     {
         public string uid;
         public string email;
+        public string password;
+        public string facebook_id;
+        public string google_id;
         public string first_name;
         public string last_name;
         public string gender;
@@ -139,6 +220,11 @@ public class ProfileScript : MonoBehaviour
         public string occupation;
         public string vehicle;
         public string checkpoint;
+        public string platform;
+        public string access_token;
+        public int is_online;
+        public string login_time;
+        public string created_at;
     }
     [System.Serializable]
     public class ProfileResponse

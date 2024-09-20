@@ -10,7 +10,6 @@ public class PlayerInteraction : MonoBehaviourPun
     private GameObject currentNPC;
     public Canvas Dialog;
     private int number = 0;
-    public static bool PressF;
     public BasicBehaviour _MovementScript;
     public MoveBehaviour _MoveBehaviorScript;
     public ThirdPersonOrbitCamBasic cam;
@@ -25,6 +24,15 @@ public class PlayerInteraction : MonoBehaviourPun
         number = 0;
         _soundManager = SoundManager.instance; // Ensure SoundManager is correctly referenced
         _CursorManager = CursorManagerScript.Instance;
+
+        if(photonView.IsMine)
+        {
+            cam.tag = "MainCamera";
+        }
+        else
+        {
+            cam.tag = "Untagged";
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -72,7 +80,7 @@ public class PlayerInteraction : MonoBehaviourPun
                 canvasPressF.gameObject.SetActive(false);
                 currentNPC = null;
                 Dialog = null; // Reset 'canvas' when exiting trigger
-                PressF = false;
+                //PressF = false;
                 ResetCameraSettings();
             }
         }
@@ -80,95 +88,90 @@ public class PlayerInteraction : MonoBehaviourPun
 
     void Update()
     {
-        if (_CursorManager == null)
+        if (photonView.IsMine)
         {
-            _CursorManager = FindObjectOfType<CursorManagerScript>();
-        }
-        if (playerInside)
-        {
-            if (Input.GetKeyDown(KeyCode.F) && ButtonChangePlayerCanMove.Reset == false && PressF == false)
+            if (_CursorManager == null)
             {
-                //ปิด UI Setting
-                SettingUI.turnOff = true;
-                
-                //โชว์ Dialog
-                if (Dialog != null)
+                _CursorManager = FindObjectOfType<CursorManagerScript>();
+                if (_CursorManager != null)
                 {
-                    Dialog.gameObject.SetActive(true);
+                    EnableCursor();
+                    _CursorManager.EnableCursor();
                 }
 
-                //Lock cam
-                SwitchCursor();
-                _CursorManager.EnableCursor();
-                PressF = true;
-                cam.horizontalAimingSpeed = 0;
-                cam.verticalAimingSpeed = 0;
-                Debug.Log("F key pressed while player is inside trigger zone!");
+            }
 
-                canvasPressF.gameObject.SetActive(false);
-
-                // Play NPC talk sound effect using SoundManager
-                if (_soundManager != null)
+            if (playerInside)
+            {
+                if (Input.GetKeyDown(KeyCode.F) && ButtonChangePlayerCanMove.Reset == false)
                 {
-                    _soundManager.PlaySoundEffect(_soundManager.GetCurrentNPCSound());
-                    StartCoroutine(WaitForSoundToFinish());
+                    //ปิด UI Setting
+                    SettingUI.turnOff = true;
 
+                    //โชว์ Dialog
                     if (Dialog != null)
                     {
                         Dialog.gameObject.SetActive(true);
                     }
-                    else
-                    {
-                        Debug.LogWarning("No valid 'canvas' GameObject found for NPC.");
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning("SoundManager instance is not assigned.");
-                }
 
-                // Enable mouse cursor when F is pressed
-                EnableCursor();
-            }
-        }
-        else
-        {
-            SettingUI.turnOff = false;           
-        }
+                    //Lock cam
+                    SwitchCursor();
+                    _CursorManager.EnableCursor();
+                    //PressF = true;
+                    cam.horizontalAimingSpeed = 0;
+                    cam.verticalAimingSpeed = 0;
+                    Debug.Log("F key pressed while player is inside trigger zone!");
 
-        if (ButtonChangePlayerCanMove.Reset)
-        {
-            ResetCameraSettings();
-        }
-        
-        
-        //ปุ่ม Enable และ Disable mouse 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isCursorVisible)
-            {
-                _CursorManager.DisableCursor();
-                DisableCursor();
+                    canvasPressF.gameObject.SetActive(false);
+
+                    Dialog.gameObject.SetActive(true);
+
+                    // Enable mouse cursor when F is pressed
+                    EnableCursor();
+
+                    ButtonChangePlayerCanMove.Reset = true;
+                }
             }
             else
             {
-                _CursorManager.EnableCursor();
-                EnableCursor();
-                
+                SettingUI.turnOff = false;
             }
-            isCursorVisible = !isCursorVisible; // Toggle cursor visibility state
+      
+
+            //ปุ่ม Enable และ Disable mouse 
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                if (isCursorVisible)
+                {
+                    _CursorManager.DisableCursor();
+
+                    /*if (Dialog != null)
+                    {
+                        Dialog.gameObject.SetActive(false);
+                    }*/
+                    //DisableCursor();
+                }
+                else
+                {
+                    _CursorManager.EnableCursor();
+                    //EnableCursor();
+
+                }
+                isCursorVisible = !isCursorVisible; // Toggle cursor visibility state
+            }
+
+            //if (isCursorVisible == false)
+            //{
+            //    _CursorManager.DisableCursor();
+            //    DisableCursor();
+            //}
+            //else if (isCursorVisible == true)
+            //{
+            //    _CursorManager.EnableCursor();
+            //    EnableCursor();         
+            //}
         }
 
-        //if (isCursorVisible == false)
-        //{
-        //    _CursorManager.DisableCursor();
-        //    DisableCursor();
-        //}
-        //else if (isCursorVisible == true)
-        //{
-        //    _CursorManager.EnableCursor();
-        //    EnableCursor();         
-        //}
     }
 
     public void SwitchCursor() 
@@ -178,7 +181,7 @@ public class PlayerInteraction : MonoBehaviourPun
 
     private void ResetCameraSettings()
     {
-        PressF = false;
+        //PressF = false;
     }
 
     private void EnableCursor()
@@ -263,7 +266,9 @@ public class PlayerInteraction : MonoBehaviourPun
         {
             //ปิด UI Setting
             SettingUI.turnOff = true;
-                
+
+            ButtonChangePlayerCanMove.Reset = true;
+
             //โชว์ Dialog
             if (Dialog != null)
             {
@@ -271,7 +276,7 @@ public class PlayerInteraction : MonoBehaviourPun
             }
                 
             //Lock cam
-            PressF = true;
+            //PressF = true;
             cam.horizontalAimingSpeed = 0;
             cam.verticalAimingSpeed = 0;
             Debug.Log("F key pressed while player is inside trigger zone!");

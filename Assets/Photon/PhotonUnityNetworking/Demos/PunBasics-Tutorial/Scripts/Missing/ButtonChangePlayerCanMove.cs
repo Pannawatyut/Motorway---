@@ -6,6 +6,6 @@ public class ButtonChangePlayerCanMove : MonoBehaviour
 
     public void SetCameraSettings()
     {
-        Reset = true;
+        //Reset = true;
     }
 }

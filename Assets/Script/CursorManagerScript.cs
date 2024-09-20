@@ -27,11 +27,15 @@ public class CursorManagerScript : MonoBehaviourPun
     public void EnableCursor()
     {
 #if !UNITY_ANDROID || !UNITY_IOS
-        //cursor.lockState = CursorLockMode.None;
+        Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Debug.Log("Enable Cursor");
-        cam.horizontalAimingSpeed = 0;
-        cam.verticalAimingSpeed = 0;
+
+        if (cam != null)
+        {
+            cam.horizontalAimingSpeed = 0;
+            cam.verticalAimingSpeed = 0;
+        }
         //_MovementScript.enabled = false;
         //_MoveBehaviorScript.enabled = false;
 #endif
@@ -41,11 +45,17 @@ public class CursorManagerScript : MonoBehaviourPun
     public void DisableCursor()
     {
 #if !UNITY_ANDROID || !UNITY_IOS
-        //cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Debug.Log("Disable Cursor");
-        cam.horizontalAimingSpeed = 6;
-        cam.verticalAimingSpeed = 6;
+
+        if(cam != null)
+        {
+            cam.horizontalAimingSpeed = 6;
+            cam.verticalAimingSpeed = 6;
+        }
+        
+        ButtonChangePlayerCanMove.Reset = false;
         //_MovementScript.enabled = true;
         //_MoveBehaviorScript.enabled = true;
 #endif

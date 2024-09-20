@@ -20,6 +20,8 @@ public class LoginManager : MonoBehaviour
     public string platform;
     public string _APIURL;
 
+    public bool _isStarter; // Already Show Welcome Panel once -> true
+
     private void Awake()
     {
         if (Instance == null)

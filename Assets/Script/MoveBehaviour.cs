@@ -36,18 +36,20 @@ public class MoveBehaviour : GenericBehaviour
 	// Update is used to set features regardless the active behaviour.
 	void Update()
 	{
-		// Get jump input.
-		//if (!jump && Input.GetButtonDown(jumpButton) && behaviourManager.IsCurrentBehaviour(this.behaviourCode) && !behaviourManager.IsOverriding())
-		//{
-		//	jump = true;
-	}
+        // Get jump input.
+        //if (!jump && Input.GetButtonDown(jumpButton) && behaviourManager.IsCurrentBehaviour(this.behaviourCode) && !behaviourManager.IsOverriding())
+        //{
+        //	jump = true;
+
+        behaviourManager.GetAnim.SetBool(groundedBool, true);
+    }
 
 	// LocalFixedUpdate overrides the virtual function of the base class.
 	public override void LocalFixedUpdate()
 	{
 		MovementManagement(behaviourManager.GetH, behaviourManager.GetV);
 		// Call the basic movement manager.
-		if (PlayerInteraction.PressF == false)
+		if (!ButtonChangePlayerCanMove.Reset)
 		{ 
 			walkSpeed = 0.59f;                 // Default walk speed.
 			runSpeed = 0.6f;                   // Default run speed.

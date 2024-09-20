@@ -28,6 +28,12 @@ public class CheckGenderInScene : MonoBehaviour
     public UnityEvent _Event_Male;
     public UnityEvent _Event_FeMale;
 
+    private void Update()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     public void _SetupUI()
     {
 
