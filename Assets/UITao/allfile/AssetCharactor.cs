@@ -5,7 +5,6 @@ using Photon.Pun;
 using Photon.Pun.Demo.PunBasics;
 using UnityEngine;
 using UnityEngine.Networking;
-
 public class AssetCharactor : MonoBehaviourPunCallbacks
 {
     public static AssetCharactor Instance { get; private set; }
@@ -39,89 +38,37 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
         SelectItem selectItem = FindObjectOfType<SelectItem>();
         selectItem.selectedSex = 3;
+
     }
 
-    /////////// Save Avatar ////////////////
+
+                          /////////// Save Avatar ////////////////
     public void SaveAvatarData(SelectItem selectItem)
     {
+
+
         AvatarData.Clear();
 
         // Add avatar data from SelectItem
-        AvatarData.Add(
-            new SelectItem._AvatarData
-            {
-                Type = "Hair",
-                Id = selectItem.selectedHairIndex,
-                ColorId = selectItem.selectedHairColorIndex,
-            }
-        );
-        AvatarData.Add(
-            new SelectItem._AvatarData
-            {
-                Type = "Shirt",
-                Id = selectItem.selectedShirtIndex,
-                ColorId = selectItem.selectedShirtColorIndex,
-            }
-        );
-        AvatarData.Add(
-            new SelectItem._AvatarData
-            {
-                Type = "Pants",
-                Id = selectItem.selectedPantsIndex,
-                ColorId = selectItem.selectedPantsColorIndex,
-            }
-        );
-        AvatarData.Add(
-            new SelectItem._AvatarData
-            {
-                Type = "Shoes",
-                Id = selectItem.selectedShoesIndex,
-                ColorId = selectItem.selectedShoesColorIndex,
-            }
-        );
-        AvatarData.Add(
-            new SelectItem._AvatarData
-            {
-                Type = "Face",
-                Id = selectItem.selectedFaceIndex,
-                ColorId = 0,
-            }
-        );
-        AvatarData.Add(
-            new SelectItem._AvatarData
-            {
-                Type = "SkinColor",
-                Id = selectItem.selectedSkinColor,
-                ColorId = 0,
-            }
-        );
+        AvatarData.Add(new SelectItem._AvatarData { Type = "Hair", Id = selectItem.selectedHairIndex, ColorId = selectItem.selectedHairColorIndex });
+        AvatarData.Add(new SelectItem._AvatarData { Type = "Shirt", Id = selectItem.selectedShirtIndex, ColorId = selectItem.selectedShirtColorIndex });
+        AvatarData.Add(new SelectItem._AvatarData { Type = "Pants", Id = selectItem.selectedPantsIndex, ColorId = selectItem.selectedPantsColorIndex });
+        AvatarData.Add(new SelectItem._AvatarData { Type = "Shoes", Id = selectItem.selectedShoesIndex, ColorId = selectItem.selectedShoesColorIndex });
+        AvatarData.Add(new SelectItem._AvatarData { Type = "Face", Id = selectItem.selectedFaceIndex, ColorId = 0 });
+        AvatarData.Add(new SelectItem._AvatarData { Type = "SkinColor", Id = selectItem.selectedSkinColor, ColorId = 0 });
         for (int i = 0; i < selectItem.Accessories.Length; i++)
         {
             if (selectItem.Accessories[i].activeSelf)
             {
-                AvatarData.Add(
-                    new SelectItem._AvatarData
-                    {
-                        Type = "Accessory",
-                        Id = i,
-                        ColorId = 0,
-                    }
-                );
+                AvatarData.Add(new SelectItem._AvatarData { Type = "Accessory", Id = i, ColorId = 0 });
             }
         }
 
-        AvatarData.Add(
-            new SelectItem._AvatarData
-            {
-                Type = "Sex",
-                Id = selectItem.selectedSex,
-                ColorId = 0,
-            }
-        );
+        AvatarData.Add(new SelectItem._AvatarData { Type = "Sex", Id = selectItem.selectedSex, ColorId = 0 });
+
 
         SaveAvatarDataToStorage();
     }
-
     private void Update()
     {
         if (_loginManager == null)
@@ -140,10 +87,8 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
          }*/
 
         //cursor.lockState = CursorLockMode.None;
-#if !UNITY_ANDROID || !UNITY_IOS
-
         Cursor.visible = true;
-#endif
+  
     }
 
     ///Not Use///
@@ -204,10 +149,12 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         }
     }
 
+
     private List<SelectItem._AvatarData> LoadSavedAvatarData()
     {
-        return new List<SelectItem._AvatarData>();
+        return new List<SelectItem._AvatarData>(); 
     }
+
 
     private void SaveAvatarDataToStorage()
     {
@@ -221,6 +168,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
 
     private IEnumerator CreateAvatar()
     {
+
         // Add LOADING POPUP HERE
         _LoadingBar.SetActive(true);
 
@@ -247,18 +195,16 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
             shoe_id = selectItem.selectedShoesIndex.ToString(),
             shoe_color_id = selectItem.selectedShoesColorIndex.ToString(),
             accessory_id = selectItem.selectedAccessoryIndex.ToString(),
+
         };
 
         string json = JsonUtility.ToJson(Avatar);
         Debug.Log("SENT THIS CREATE AVATAR-> " + json);
 
-        using var request = new UnityWebRequest(
-            LoginManager.Instance._APIURL + "/api/avatar/createAvatar",
-            "POST"
-        )
+        using var request = new UnityWebRequest(LoginManager.Instance._APIURL+"/api/avatar/createAvatar", "POST")
         {
             uploadHandler = new UploadHandlerRaw(System.Text.Encoding.UTF8.GetBytes(json)),
-            downloadHandler = new DownloadHandlerBuffer(),
+            downloadHandler = new DownloadHandlerBuffer()
         };
 
         request.SetRequestHeader("Content-Type", "application/json");
@@ -278,9 +224,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         else
         {
             Debug.Log("Login Response: " + request.downloadHandler.text);
-            var avatarResponse = JsonUtility.FromJson<LoginManager.LoginResponse>(
-                request.downloadHandler.text
-            );
+            var avatarResponse = JsonUtility.FromJson<LoginManager.LoginResponse>(request.downloadHandler.text);
 
             if (avatarResponse.status)
             {
@@ -297,7 +241,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
                 _loginManager._Avatar.pant_id = avatarResponse.data.avatar.pant_id;
                 _loginManager._Avatar.pant_color_id = avatarResponse.data.avatar.pant_color_id;
                 _loginManager._Avatar.shoe_id = avatarResponse.data.avatar.shoe_id;
-                _loginManager._Avatar.shoe_color_id = avatarResponse.data.avatar.shoe_color_id;
+                _loginManager._Avatar.shoe_color_id =avatarResponse.data.avatar.shoe_color_id;
                 _loginManager._Avatar.accessory_id = avatarResponse.data.avatar.accessory_id;
 
                 //_Launcher.Connect();
@@ -316,6 +260,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
             }
         }
     }
+
 
     public Avatar _avatar;
 
@@ -349,4 +294,7 @@ public class AssetCharactor : MonoBehaviourPunCallbacks
         public string shoe_color_id;
         public string accessory_id; // Allow multiple accessories
     }
+
 }
+
+

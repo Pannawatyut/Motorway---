@@ -25,16 +25,6 @@ public class NPC_APICounter : MonoBehaviour
         // NPC_APICounter.Instance._API_Caller_NPC(_id)
     }
 
-    
-
-    public void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            _API_Caller_NPC(1);
-        }
-    }
-
     public void _API_Caller_NPC(int _id)
     {
         StartCoroutine(_NPC_Interactive(_id));

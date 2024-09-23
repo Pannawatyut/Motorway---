@@ -19,6 +19,8 @@ public class PolicyScript : MonoBehaviour
     public bool FirstTry = false;
     public GameObject _ChatBox;
 
+    public bool _isForPdpa;
+
     void Start()
     {
         // Add listener to the toggle event
@@ -31,7 +33,7 @@ public class PolicyScript : MonoBehaviour
             this.gameObject.SetActive(false);
             _ChatBox.SetActive(true);
 
-            CursorManagerScript.Instance.DisableCursor();
+            // CursorManagerScript.Instance.DisableCursor();
         }
         else
         {
@@ -42,12 +44,6 @@ public class PolicyScript : MonoBehaviour
         }
         LoginManager.Instance._isStarter = true;
 
-
-
-    }
-
-    private void Update()
-    {
         if (_loginManager == null)
         {
             _loginManager = FindAnyObjectByType<LoginManager>();
@@ -58,26 +54,37 @@ public class PolicyScript : MonoBehaviour
             Parent.SetActive(true);
         }
 
+        CheckforProfile();
+
     }
+
+
+    public GameObject _PolicyBTM;
     public void AgreeCheck(Toggle toggle)
     {
         isAgree = toggle.isOn;
+        _isForPdpa = toggle.isOn;
+        _PolicyBTM.GetComponent<Button>().interactable = toggle.isOn;
         Debug.Log("Agreement status: " + isAgree);
     }
 
     public void CheckforProfile()
     {
+        Debug.Log("CHECK PROFILE");
+
         if (_loginManager != null) 
         {
             if (_loginManager._Account.first_name == "-" || _loginManager._Account.last_name == "-")
             {
                 PDPA_Profile.SetActive(true);
+                Debug.Log("CHECK PROFILE - A");
             }
             else
             {
                 CheckforQuestionaire();
-                _ChatBox.SetActive(true);
                 PDPA_Profile.SetActive(false);
+                Debug.Log("CHECK PROFILE - B");
+
             }
         }
 
@@ -88,11 +95,15 @@ public class PolicyScript : MonoBehaviour
         if (_loginManager._Account.is_questionnaire == 0)
         {       
             QuestionairePage.SetActive(true);
+            Debug.Log("CHECK -> Q/A -> OK");
         }
         else
         {
             Parent.SetActive(false);
-            CursorManagerScript.Instance.DisableCursor();
+            _ChatBox.SetActive(true);
+            // CursorManagerScript.Instance.DisableCursor();
+
+            Debug.Log("CHECK -> Q/A -> fAILED");
         }
     }
 
@@ -102,6 +113,8 @@ public class PolicyScript : MonoBehaviour
         {
             PolicyPage.SetActive(false);
             ProfilePage.SetActive(true);
+            _CloseInfoBtm.SetActive(false);
+            _CloseEditBtm.SetActive(false);
         }
     }
 
@@ -145,4 +158,7 @@ public class PolicyScript : MonoBehaviour
 
         }
     }
+
+    public GameObject _CloseInfoBtm;
+    public GameObject _CloseEditBtm;
 }

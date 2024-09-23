@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using Photon.Pun;
+using UnityEngine;
+
 public class CursorManagerScript : MonoBehaviourPun
 {
     public static CursorManagerScript Instance;
     public ThirdPersonOrbitCamBasic cam;
+
     private void Awake()
     {
         // Ensure that there is only one instance of ScoreManager
@@ -30,12 +32,15 @@ public class CursorManagerScript : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Debug.Log("Enable Cursor");
-        cam.horizontalAimingSpeed = 0;
-        cam.verticalAimingSpeed = 0;
+
+        if (cam != null)
+        {
+            cam.horizontalAimingSpeed = 0;
+            cam.verticalAimingSpeed = 0;
+        }
         //_MovementScript.enabled = false;
         //_MoveBehaviorScript.enabled = false;
 #endif
-
     }
 
     public void DisableCursor()
@@ -44,15 +49,24 @@ public class CursorManagerScript : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Debug.Log("Disable Cursor");
-        cam.horizontalAimingSpeed = 6;
-        cam.verticalAimingSpeed = 6;
+
+        if (cam != null)
+        {
+            cam.horizontalAimingSpeed = 6;
+            cam.verticalAimingSpeed = 6;
+        }
+
         ButtonChangePlayerCanMove.Reset = false;
         //_MovementScript.enabled = true;
-        //_MoveBehaviorScript.enabled = true;
+        //_MoveBehaviorScript.enabled = true;#else
+        // Cursor.lockState = CursorLockMode.Locked;
+#else
+        if (cam != null)
+        {
+            cam.horizontalAimingSpeed = 6;
+            cam.verticalAimingSpeed = 6;
+        }
+        ButtonChangePlayerCanMove.Reset = false;
 #endif
-
     }
-
-
-
 }

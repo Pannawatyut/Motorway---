@@ -144,24 +144,64 @@ public class LeaderboardManager : MonoBehaviour
             JObject responseJson = JObject.Parse(request.downloadHandler.text);
             JArray leaderboards = (JArray)responseJson["data"]["leaderboards"];
 
-            // Update existing Rank objects
-            for (int i = 0; i < leaderboards.Count && i < verticalLayout.transform.childCount; i++)
+           if(leaderboards.Count == 0)
             {
-                JObject entry = (JObject)leaderboards[i];
-                Transform rankTransform = verticalLayout.transform.GetChild(i);
+                for (int i = 0; i < 5 && i < verticalLayout.transform.childCount; i++)
+                {
 
-                // Get references to the Num, Name, and Score components
-                TextMeshProUGUI numText = rankTransform.Find("Num").GetComponent<TextMeshProUGUI>();
-                TextMeshProUGUI nameText = rankTransform.Find("Name").GetComponent<TextMeshProUGUI>();
-                TextMeshProUGUI scoreText = rankTransform.Find("Score").GetComponent<TextMeshProUGUI>();
+                    Transform rankTransform = verticalLayout.transform.GetChild(i);
 
-                // Set the text values based on the leaderboard data
-                numText.text = entry["rank"].ToString();
-                nameText.text = entry["avatar_name"].ToString();
-                scoreText.text = entry["score"].ToString();
+                    TextMeshProUGUI numText = rankTransform.Find("Num").GetComponent<TextMeshProUGUI>();
+                    TextMeshProUGUI nameText = rankTransform.Find("Name").GetComponent<TextMeshProUGUI>();
+                    TextMeshProUGUI scoreText = rankTransform.Find("Score").GetComponent<TextMeshProUGUI>();
 
-                Debug.Log($"Updated Rank: {entry["rank"]}, Name: {entry["first_name"]}, Score: {entry["score"]}");
+                    // Set the text values based on the leaderboard data
+                    numText.text = "";
+                    nameText.text = "";
+                    scoreText.text = "";
+
+                }
             }
+            else
+            {
+                for (int i = 0; i < leaderboards.Count && i < verticalLayout.transform.childCount; i++)
+                {
+                    JObject entry = (JObject)leaderboards[i];
+                    if (entry != null)
+                    {
+                        Transform rankTransform = verticalLayout.transform.GetChild(i);
+
+                        // Get references to the Num, Name, and Score components
+                        TextMeshProUGUI numText = rankTransform.Find("Num").GetComponent<TextMeshProUGUI>();
+                        TextMeshProUGUI nameText = rankTransform.Find("Name").GetComponent<TextMeshProUGUI>();
+                        TextMeshProUGUI scoreText = rankTransform.Find("Score").GetComponent<TextMeshProUGUI>();
+
+                        // Set the text values based on the leaderboard data
+                        numText.text = entry["rank"].ToString();
+                        nameText.text = entry["avatar_name"].ToString();
+                        scoreText.text = entry["score"].ToString();
+
+                        Debug.Log($"Updated Rank: {entry["rank"]}, Name: {entry["first_name"]}, Score: {entry["score"]}");
+                    }
+                    else
+                    {
+                        Transform rankTransform = verticalLayout.transform.GetChild(i);
+
+                        TextMeshProUGUI numText = rankTransform.Find("Num").GetComponent<TextMeshProUGUI>();
+                        TextMeshProUGUI nameText = rankTransform.Find("Name").GetComponent<TextMeshProUGUI>();
+                        TextMeshProUGUI scoreText = rankTransform.Find("Score").GetComponent<TextMeshProUGUI>();
+
+                        // Set the text values based on the leaderboard data
+                        numText.text = "";
+                        nameText.text = "";
+                        scoreText.text = "";
+                    }
+
+                }
+            }
+
+            
+
         }
     }
 

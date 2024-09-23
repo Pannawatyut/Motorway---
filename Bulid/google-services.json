@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "244382866689",
+    "project_id": "motorway-b0a8b",
+    "storage_bucket": "motorway-b0a8b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244382866689:android:40be40158ff4a1baf98f00",
+        "android_client_info": {
+          "package_name": "com.Company.motoway"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244382866689-oh99255jkhtrebe6f2qk0rehhab0kgp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHO9XZ6U4CjLXa6R1_acOeZfVUsDtem3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244382866689-oh99255jkhtrebe6f2qk0rehhab0kgp5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244382866689:android:6dbf81ff5c19100cf98f00",
+        "android_client_info": {
+          "package_name": "com.MetaverseXR.MotorwayVerse"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244382866689-oh99255jkhtrebe6f2qk0rehhab0kgp5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHO9XZ6U4CjLXa6R1_acOeZfVUsDtem3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244382866689-oh99255jkhtrebe6f2qk0rehhab0kgp5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

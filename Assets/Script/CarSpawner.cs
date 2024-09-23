@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class CarSpawner : MonoBehaviour
 {
@@ -34,9 +35,9 @@ public class CarSpawner : MonoBehaviour
     private float spawnInterval = 1f;
     private bool isCheckingCar = false;
 
-    public Slider slider;
-    public Slider slider1;
-    public Image sliderFill;
+    public UnityEngine.UI.Slider slider;
+    public UnityEngine.UI.Slider slider1;
+    public UnityEngine.UI.Image sliderFill;
 
     public bool _isStart;
     public AudioSource _ButtonSound;
@@ -45,7 +46,7 @@ public class CarSpawner : MonoBehaviour
     private void Start()
     {
         //cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        UnityEngine.Cursor.visible = true;
     }
 
     public void _StartGame()
@@ -128,12 +129,14 @@ public class CarSpawner : MonoBehaviour
         }
     }
 
+    public GameObject _Effect;
     public void SpawnCar()
     {
         Vector3 position = spawnPosition;
         int randomIndex = Random.Range(0, carPrefabs.Length);
         Quaternion rotation = Quaternion.Euler(0, 180, 0);
         GameObject spawnedCar = Instantiate(carPrefabs[randomIndex], position, rotation);
+        
         spawnedCars.Add(spawnedCar);
 
         Vector3 targetPosition = targetStartPosition + new Vector3(0, 0, spawnedCars.Count * spacing);
@@ -166,6 +169,7 @@ public class CarSpawner : MonoBehaviour
         // Add lobby navigation logic
     }
 
+    public Transform _EffectPos;
     public void CheckAndDestroyFirstCar(int buttonValue)
     {
         if (isCheckingCar) return;
@@ -186,7 +190,10 @@ public class CarSpawner : MonoBehaviour
             SetCheckCurrent1Active(true, false, true, false);
             ScoreManager.Instance.AddScore(Random.RandomRange(70,101));
             ScoreManager.Instance.CorrectAnswer();
-            GetComponent<ScoreManager>().time += 1f;
+
+            GameObject Effect = Instantiate(_Effect, _EffectPos.transform.position, Quaternion.identity);
+            Destroy(Effect, 3f);
+            //GetComponent<ScoreManager>().time += 1f;
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("female_nod_stand");
             _AudioScript._CorrectSound.Play();

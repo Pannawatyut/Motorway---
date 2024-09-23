@@ -6,12 +6,13 @@ public class HideOnDisable : MonoBehaviour
 {
     public void OnDisable()
     {
-#if !UNITY_ANDROID || !UNITY_IOS
-        Cursor.lockState = CursorLockMode.Locked;
+        // Platform-specific behavior for Android
+#if UNITY_ANDROID
+        ButtonChangePlayerCanMove.Reset = false;
+#else
+        // Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         ButtonChangePlayerCanMove.Reset = false;
 #endif
-        Cursor.visible = false;
-        ButtonChangePlayerCanMove.Reset = false;
     }
 }

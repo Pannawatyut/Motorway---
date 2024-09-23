@@ -154,4 +154,9 @@ public class GoogleAuthenticator : MonoBehaviour
             Debug.Log(e);
         }
     }
+
+    public void _GoogleLogout()
+    {
+        
+    }
 }

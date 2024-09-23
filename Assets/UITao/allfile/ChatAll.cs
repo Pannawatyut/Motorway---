@@ -98,14 +98,8 @@ public class ChatAll : MonoBehaviour
             messageQueue.Enqueue(messageObject);
 
             // Remove the oldest message if the number of messages exceeds maxMessages
-            if (messageQueue.Count > maxMessages)
-            {
-                GameObject oldestMessage = messageQueue.Dequeue();
-                Destroy(oldestMessage); // Remove oldest message from the chat
-            }
 
             // Optional: Scroll content to bottom if you are using a ScrollRect
-            ScrollToBottom();
         }
         else
         {
@@ -113,13 +107,5 @@ public class ChatAll : MonoBehaviour
         }
     }
 
-    private void ScrollToBottom()
-    {
-        // Implement scrolling logic if using ScrollRect
-        // ScrollRect scrollRect = contentTransform.GetComponent<ScrollRect>();
-        // if (scrollRect != null)
-        // {
-        //     scrollRect.verticalNormalizedPosition = 0f;
-        // }
-    }
+
 }

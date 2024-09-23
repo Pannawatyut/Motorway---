@@ -1,7 +1,7 @@
-using UnityEngine;
-using Photon.Pun;
 using System.Collections;
+using Photon.Pun;
 using Unity.VisualScripting;
+using UnityEngine;
 
 public class PlayerInteraction : MonoBehaviourPun
 {
@@ -16,16 +16,17 @@ public class PlayerInteraction : MonoBehaviourPun
     private bool isCursorVisible = false; // Track the cursor state
     private SoundManager _soundManager; // Reference to the SoundManager
     public CursorManagerScript _CursorManager;
+
     private void Start()
     {
-    #if !UNITY_ANDROID
+#if !UNITY_ANDROID
         //DisableCursor();
-    #endif
+#endif
         number = 0;
         _soundManager = SoundManager.instance; // Ensure SoundManager is correctly referenced
         _CursorManager = CursorManagerScript.Instance;
 
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
             cam.tag = "MainCamera";
         }
@@ -55,7 +56,7 @@ public class PlayerInteraction : MonoBehaviourPun
                 // Fetch or assign the sound name based on the NPC
                 string npcName = currentNPC.name; // Or any other unique identifier
                 SoundManager.SoundName npcSound = GetSoundNameForNPC(npcName);
-                
+
                 // Update the SoundManager's current NPC sound
                 if (_soundManager != null)
                 {
@@ -95,10 +96,9 @@ public class PlayerInteraction : MonoBehaviourPun
                 _CursorManager = FindObjectOfType<CursorManagerScript>();
                 if (_CursorManager != null)
                 {
-                    EnableCursor();
+                    // EnableCursor();
                     _CursorManager.EnableCursor();
                 }
-
             }
 
             if (playerInside)
@@ -127,7 +127,7 @@ public class PlayerInteraction : MonoBehaviourPun
                     Dialog.gameObject.SetActive(true);
 
                     // Enable mouse cursor when F is pressed
-                    EnableCursor();
+                    // EnableCursor();
 
                     ButtonChangePlayerCanMove.Reset = true;
                 }
@@ -136,14 +136,13 @@ public class PlayerInteraction : MonoBehaviourPun
             {
                 SettingUI.turnOff = false;
             }
-      
 
-            //ปุ่ม Enable และ Disable mouse 
+            //ปุ่ม Enable และ Disable mouse
             if (Input.GetKeyDown(KeyCode.Escape))
             {
                 if (isCursorVisible)
                 {
-                    _CursorManager.DisableCursor();
+                    // _CursorManager.DisableCursor();
 
                     /*if (Dialog != null)
                     {
@@ -155,7 +154,6 @@ public class PlayerInteraction : MonoBehaviourPun
                 {
                     _CursorManager.EnableCursor();
                     //EnableCursor();
-
                 }
                 isCursorVisible = !isCursorVisible; // Toggle cursor visibility state
             }
@@ -168,13 +166,12 @@ public class PlayerInteraction : MonoBehaviourPun
             //else if (isCursorVisible == true)
             //{
             //    _CursorManager.EnableCursor();
-            //    EnableCursor();         
+            //    EnableCursor();
             //}
         }
-
     }
 
-    public void SwitchCursor() 
+    public void SwitchCursor()
     {
         isCursorVisible = !isCursorVisible;
     }
@@ -184,31 +181,30 @@ public class PlayerInteraction : MonoBehaviourPun
         //PressF = false;
     }
 
-    private void EnableCursor()
-    {
-        #if !UNITY_ANDROID || !UNITY_IOS
-        //cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-        cam.horizontalAimingSpeed = 0;
-        cam.verticalAimingSpeed = 0;
-        _MoveBehaviorScript.RemoveVerticalVelocity();
-        //_MovementScript.enabled = false;
-        //_MoveBehaviorScript.enabled = false;
-        #endif
+    // private void EnableCursor()
+    // {
+    //     #if !UNITY_ANDROID || !UNITY_IOS
+    //     //cursor.lockState = CursorLockMode.None;
+    //     Cursor.visible = true;
+    //     cam.horizontalAimingSpeed = 0;
+    //     cam.verticalAimingSpeed = 0;
+    //     _MoveBehaviorScript.RemoveVerticalVelocity();
+    //     //_MovementScript.enabled = false;
+    //     //_MoveBehaviorScript.enabled = false;
+    //     #endif
 
-    }
+    // }
 
     private void DisableCursor()
     {
-        #if !UNITY_ANDROID || !UNITY_IOS
+#if !UNITY_ANDROID || !UNITY_IOS
         //cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         cam.horizontalAimingSpeed = 6;
         cam.verticalAimingSpeed = 6;
         //_MovementScript.enabled = true;
         //_MoveBehaviorScript.enabled = true;
-        #endif
-
+#endif
     }
 
     IEnumerator WaitForSoundToFinish()
@@ -257,7 +253,6 @@ public class PlayerInteraction : MonoBehaviourPun
             default:
                 return SoundManager.SoundName.NPC1; // Default sound
         }
-
     }
 
     public void OnButtonPressFMobile()
@@ -266,13 +261,14 @@ public class PlayerInteraction : MonoBehaviourPun
         {
             //ปิด UI Setting
             SettingUI.turnOff = true;
-                
+
+
             //โชว์ Dialog
             if (Dialog != null)
             {
                 Dialog.transform.GetChild(0).gameObject.SetActive(true);
             }
-                
+
             //Lock cam
             //PressF = true;
             cam.horizontalAimingSpeed = 0;
@@ -302,8 +298,7 @@ public class PlayerInteraction : MonoBehaviourPun
             }
 
             // Enable mouse cursor when F is pressed
-            EnableCursor();
+            // EnableCursor();
         }
-       
     }
 }

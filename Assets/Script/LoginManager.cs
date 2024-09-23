@@ -11,7 +11,7 @@ public class LoginManager : MonoBehaviour
 {
     public static LoginManager Instance { get; private set; }
     public TMP_InputField Email;
-    public MaskedPasswordScript Password;
+    public TMP_InputField Password;
     public LaunCherTest1 _Launcher;
     public LoginButtonScript _LoginButtonScript;
     public GameObject _LoadingBar;
@@ -20,52 +20,82 @@ public class LoginManager : MonoBehaviour
     public string platform;
     public string _APIURL;
 
+    public bool rememberPassword = true; // Toggle this based on user selection from the UI
     public bool _isStarter; // Already Show Welcome Panel once -> true
+    public TextMeshProUGUI _ErrorMessage;
 
     private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-            return;
-        }
-        DontDestroyOnLoad(gameObject);
+ {
+     if (Instance == null)
+     {
+         Instance = this;
+     }
+     else
+     {
+         Destroy(gameObject);
+         return;
+     }
+     DontDestroyOnLoad(gameObject);
 
-        //Test();
-    }
+     //Test();
+ }
 
-    //public void Start()
-    //{
-    //    //_ByPass();
-    //    if (_LoginButtonScript == null)
-    //    {
-    //        _LoginButtonScript = FindAnyObjectByType<LoginButtonScript>();
-    //        if (_LoginButtonScript != null )
-    //        {
-    //            Email = _LoginButtonScript._Email;
-    //            Password = _LoginButtonScript._Password;
-    //        }
-    //    }
-    //}
-    private void Update()
-    {
-        if (_LoginButtonScript == null)
-        {
-            _LoginButtonScript = FindAnyObjectByType<LoginButtonScript>();
-            if (_LoginButtonScript != null)
-            {
-                Email = _LoginButtonScript._Email;
-                Password = _LoginButtonScript._Password;
-                _LoadingBar = _LoginButtonScript._loading;
-                _LoadingFailed = _LoginButtonScript._loadingFailed;
-                _LoadingOK = _LoginButtonScript._loadingOk;
-            }
-        }
-    }
+ private void OnEnable()
+ {
+     if (_LoginButtonScript == null)
+     {
+         _LoginButtonScript = FindAnyObjectByType<LoginButtonScript>();
+         if (_LoginButtonScript != null)
+         {
+             Email = _LoginButtonScript._Email;
+             //Password = _LoginButtonScript.pa;
+             _LoadingBar = _LoginButtonScript._loading;
+             _LoadingFailed = _LoginButtonScript._loadingFailed;
+             _LoadingOK = _LoginButtonScript._loadingOk;
+             //_ErrorMessage = _LoginButtonScript._errorMessage;
+         }
+     }
+ }
+ 
+ private void Start()
+ {
+     if (PlayerPrefs.GetInt("RememberPassword") == 1)
+     {
+         rememberPassword = true;
+         _isCheck.isOn = true;
+     }
+     else
+     {
+         rememberPassword = false;
+         _isCheck.isOn = false;
+     }
+
+     if (rememberPassword)
+     {
+         string savedEmail = PlayerPrefs.GetString("SavedEmail", "");
+         string savedPassword = PlayerPrefs.GetString("SavedPassword", "");
+
+         Email.text = savedEmail;
+         Password.GetComponent<TMP_InputField>().text = savedPassword;
+         //Password.actualInput = savedPassword;
+     }
+     
+ }
+
+ public Toggle _isCheck;
+ public void _isRemember()
+ {
+     if (_isCheck.isOn)
+     {
+         PlayerPrefs.SetInt("RememberPassword", 1);
+         rememberPassword = true; // Set the toggle based on saved preference
+     }
+     else
+     {
+         PlayerPrefs.SetInt("RememberPassword", 0);
+         rememberPassword = false;
+     }
+ }
     public void OnClickLoginButton()
     {
 #if UNITY_WEBGL
@@ -77,7 +107,7 @@ public class LoginManager : MonoBehaviour
 #else
         platform = "UNKNOWN";
 #endif
-        StartCoroutine(Login(Email.text, Password.actualInput, platform));
+        StartCoroutine(Login(Email.text, Password.text, platform));
     }
 
     public void _ByPass()
@@ -121,18 +151,23 @@ public class LoginManager : MonoBehaviour
         // Send the request
         yield return request.SendWebRequest();
 
+        _LoadingBar.SetActive(false);
+        
         Debug.Log("Request sent, awaiting response...");
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError($"Error during Google login: {request.error}");
-            Debug.LogError("Response Code: " + request.responseCode);
+            Debug.LogError("Error: " + request.error);
             _LoadingBar.SetActive(false);
             _LoadingFailed.SetActive(true);
+            var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+            Debug.LogError("Error Type: " + loginResponse.error.message);
+            _ErrorMessage.text = loginResponse.error.message;
             yield break;
         }
-
-        // Debug info for response
+        else
+        {
+             // Debug info for response
         Debug.Log("request responseCode: " + request.responseCode);
         Debug.Log("request responseText: " + request.downloadHandler.text);
 
@@ -148,6 +183,7 @@ public class LoginManager : MonoBehaviour
             Debug.LogError("Failed to parse login response: " + e.Message);
             _LoadingBar.SetActive(false);
             _LoadingFailed.SetActive(true);
+            _ErrorMessage.text = e.Message;
             yield break;
         }
         Debug.Log($"Sending JSON to API: {json}");
@@ -228,6 +264,8 @@ public class LoginManager : MonoBehaviour
             _LoadingFailed.SetActive(true);
         }
 
+        }
+
         // Hide loading bar
         _LoadingBar.SetActive(false);
     }
@@ -267,12 +305,30 @@ public class LoginManager : MonoBehaviour
         {
             Debug.LogError("Error: " + request.error);
             _LoadingFailed.SetActive(true);
-            yield return new WaitForSeconds(2f);
-            _LoadingFailed.SetActive(false);
+            var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+            Debug.LogError("Error Type: " + loginResponse.error.message);
+            _ErrorMessage.text = loginResponse.error.message;
+
         }
         else
         {
+
+            if (rememberPassword)
+            {
+                PlayerPrefs.SetString("SavedEmail", email);                   
+                PlayerPrefs.SetString("SavedPassword", password);
+                PlayerPrefs.SetInt("RememberPassword", 1); // Store flag for remembering
+                Debug.Log("Remembered Password: " + password);
+            }
+            else
+            {
+                PlayerPrefs.DeleteKey("SavedEmail");
+                PlayerPrefs.DeleteKey("SavedPassword");
+                PlayerPrefs.SetInt("RememberPassword", 0); // Clear the flag if unchecked
+            }
+            
             Debug.Log("Login Response: " + request.downloadHandler.text);
+
             _LoadingOK.SetActive(true);
             // แปลงข้อมูลตอบกลับเป็นอ็อบเจ็กต์
             var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
@@ -364,69 +420,76 @@ public class LoginManager : MonoBehaviour
     public Avatar _Avatar;
 
     // โครงสร้างข้อมูลสำหรับคำขอล็อกอิน
-    [System.Serializable]
-    public class LoginRequest
-    {
-        public string email;
-        public string password;
-        public string platform;
-    }
+[System.Serializable]
+public class LoginRequest
+{
+    public string email;
+    public string password;
+    public string platform;
+}
 
-    // โครงสร้างข้อมูลสำหรับผลลัพธ์การล็อกอิน
-    [System.Serializable]
-    public class LoginResponse
-    {
-        public bool status;
-        public Data data;
-    }
+// โครงสร้างข้อมูลสำหรับผลลัพธ์การล็อกอิน
+[System.Serializable]
+public class LoginResponse
+{
+    public bool status;
+    public Error error;
+    public Data data;
+}
+[System.Serializable]
+public class Error
+{
+    public int error_code;
+    public string message;
+}
 
-    [System.Serializable]
-    public class Data
-    {
-        public Account account;
-        public Avatar avatar;
-    }
+[System.Serializable]
+public class Data
+{
+    public Account account;
+    public Avatar avatar;
+}
 
-    [System.Serializable]
-    public class Account
-    {
-        public string uid;
-        public string email;
-        public string first_name;
-        public string last_name;
-        public string gender;
-        public string age;
-        public string education;
-        public string occupation;
-        public string vehicle;
-        public string checkpoint;
-        public string access_token;
-        public int is_questionnaire;
-    }
+[System.Serializable]
+public class Account
+{
+    public string uid;
+    public string email;
+    public string first_name;
+    public string last_name;
+    public string gender;
+    public string age;
+    public string education;
+    public string occupation;
+    public string vehicle;
+    public string checkpoint;
+    public string access_token;
+    public int is_questionnaire;
+}
 
-    public class _ThirdPartyData_Google
-    {
-        public string email;
-        public string google_id;
-        public string platform;
-    }
+public class _ThirdPartyData_Google
+{
+    public string email;
+    public string google_id;
+    public string platform;
+}
 
-    [System.Serializable]
-    public class Avatar
-    {
-        public string uid;
-        public string name;
-        public int gender_id;
-        public int skin_id;
-        public int face_id;
-        public int hair_id;
-        public int hair_color_id;
-        public int shirt_id;
-        public int shirt_color_id;
-        public int pant_id;
-        public int pant_color_id;
-        public int shoe_id;
-        public int shoe_color_id;
-        public int accessory_id;
-    }
+[System.Serializable]
+public class Avatar
+{
+    public string uid;
+    public string name;
+    public int gender_id;
+    public int skin_id;
+    public int face_id;
+    public int hair_id;
+    public int hair_color_id;
+    public int shirt_id;
+    public int shirt_color_id;
+    public int pant_id;
+    public int pant_color_id;
+    public int shoe_id;
+    public int shoe_color_id;
+    public int accessory_id;
+}
 }
