@@ -6,6 +6,9 @@ public class CursorManagerScript : MonoBehaviourPun
 {
     public static CursorManagerScript Instance;
     public ThirdPersonOrbitCamBasic cam;
+    public GameObject Open;
+    public GameObject Close;
+
     private void Awake()
     {
         // Ensure that there is only one instance of ScoreManager
@@ -30,7 +33,8 @@ public class CursorManagerScript : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         Debug.Log("Enable Cursor");
-
+        Open.SetActive(true);
+        Close.SetActive(false);
         if (cam != null)
         {
             cam.horizontalAimingSpeed = 0;
@@ -48,8 +52,9 @@ public class CursorManagerScript : MonoBehaviourPun
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Debug.Log("Disable Cursor");
-
-        if(cam != null)
+        Open.SetActive(false);
+        Close.SetActive(true);
+        if (cam != null)
         {
             cam.horizontalAimingSpeed = 6;
             cam.verticalAimingSpeed = 6;
