@@ -12,7 +12,6 @@ public class LoginButtonScript : MonoBehaviour
     public GameObject _loadingOk;
     public GameObject _loadingFailed;
     public GameObject _loading;
-    public TextMeshProUGUI _errorMessage;
 
     private void Update()
     {

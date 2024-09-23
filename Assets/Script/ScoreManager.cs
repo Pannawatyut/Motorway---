@@ -20,8 +20,6 @@ public class ScoreManager : MonoBehaviour
 
     public TMP_Text MultiplierScore;
 
-    public TMP_Text ScoreThatGet;
-
     public GameObject[] Combotext;
 
     public Button[] _ScoreButton;
@@ -125,16 +123,9 @@ public class ScoreManager : MonoBehaviour
     public void AddScore(int amount)
     {
         _score += amount * scoreMultiplier;
-        ScoreThatGet.text = "+ " + amount * scoreMultiplier;
-        StartCoroutine(ScaleText(ScoreThatGet, 1.5f, 0.1f)); // Call the scaling animation
-        StartCoroutine(DelaybeforeRemoveText());
         UpdateScoreDisplay(); // Update the score display
     }
-    IEnumerator DelaybeforeRemoveText()
-    {
-        yield return new WaitForSeconds(0.65f);
-        ScoreThatGet.text = "";
-    }
+
     public void SubtractScore(int amount)
     {
         _score -= amount;

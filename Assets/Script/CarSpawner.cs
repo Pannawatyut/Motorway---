@@ -34,15 +34,13 @@ public class CarSpawner : MonoBehaviour
     private float elapsedTime = 0f;
     private float spawnInterval = 1f;
     private bool isCheckingCar = false;
-    private bool isStart = false;
+
     public UnityEngine.UI.Slider slider;
     public UnityEngine.UI.Slider slider1;
     public UnityEngine.UI.Image sliderFill;
 
     public bool _isStart;
     public AudioSource _ButtonSound;
-
-    private float answerStartTime;
 
     public MinigameAudioScript _AudioScript;
     private void Start()
@@ -54,12 +52,6 @@ public class CarSpawner : MonoBehaviour
     public void _StartGame()
     {
         _isStart = true;
-        if (!isStart)
-        {
-            answerStartTime = Time.time;  // Start the timer
-            isStart = true;        // Set the flag to indicate the timer is running
-            Debug.Log("Timer started.");
-        }
         GetComponent<ScoreManager>()._CallStarter();
         StartCoroutine(SpawnCarsContinuously());
 
@@ -177,11 +169,6 @@ public class CarSpawner : MonoBehaviour
         // Add lobby navigation logic
     }
 
-    public void StartChecking()
-    {
-        answerStartTime = Time.time; // Record the start time when question is presented
-    }
-
     public Transform _EffectPos;
     public void CheckAndDestroyFirstCar(int buttonValue)
     {
@@ -201,16 +188,12 @@ public class CarSpawner : MonoBehaviour
         if (buttonValue == prefabIndex)
         {
             SetCheckCurrent1Active(true, false, true, false);
-
-            // Calculate the time taken to answer
-            float timeTaken = Time.time - answerStartTime;
-            int score = CalculateScore(timeTaken);  // Calculate score based on time
-            ScoreManager.Instance.AddScore(score);  // Add calculated score
+            ScoreManager.Instance.AddScore(Random.RandomRange(70,101));
             ScoreManager.Instance.CorrectAnswer();
 
             GameObject Effect = Instantiate(_Effect, _EffectPos.transform.position, Quaternion.identity);
             Destroy(Effect, 3f);
-
+            //GetComponent<ScoreManager>().time += 1f;
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("female_nod_stand");
             _AudioScript._CorrectSound.Play();
@@ -218,55 +201,27 @@ public class CarSpawner : MonoBehaviour
         else
         {
             SetCheckCurrent1Active(true, true, false, true);
+            //ScoreManager.Instance.SubtractScore(50);
             GetComponent<ScoreManager>().time -= 1f;
             ScoreManager.Instance.WrongAnswer();
             animatorBarrier.Play("GateOpen");
             animatorNPC.Play("female_say_no");
             _AudioScript._IncorrectSound.Play();
+            
         }
-
-        PlayCarSound();
+        if (spawnedCars[0].GetComponentInChildren<playanimation>().CarIndex == 0)
+        {
+            _AudioScript._SmallCarSound.Play();
+        }
+        else if (spawnedCars[0].GetComponentInChildren<playanimation>().CarIndex == 1)
+        {
+            _AudioScript._MediumCarSound.Play();
+        }
+        else if (spawnedCars[0].GetComponentInChildren<playanimation>().CarIndex == 2)
+        {
+            _AudioScript._LargeCarSound.Play();
+        }
         StartCoroutine(MoveAndDestroyFirstCar(spawnedCars[0]));
-    }
-    private void PlayCarSound()
-    {
-        int carIndex = spawnedCars[0].GetComponentInChildren<playanimation>().CarIndex;
-        switch (carIndex)
-        {
-            case 0:
-                _AudioScript._SmallCarSound.Play();
-                break;
-            case 1:
-                _AudioScript._MediumCarSound.Play();
-                break;
-            case 2:
-                _AudioScript._LargeCarSound.Play();
-                break;
-        }
-    }
-
-    private int CalculateScore(float timeTaken)
-    {
-        if (timeTaken <= 1f)
-        {
-            return 110;
-        }
-        else if (timeTaken <= 2f)
-        {
-            return 100;
-        }
-        else if (timeTaken <= 3f)
-        {
-            return 90;
-        }
-        else if (timeTaken <= 4f)
-        {
-            return 80;
-        }
-        else
-        {
-            return 70;
-        }
     }
 
     private int GetCarPrefabIndex(string carName)
@@ -310,9 +265,6 @@ public class CarSpawner : MonoBehaviour
         animatorBarrier.Play("GateOff");
 
         StartCoroutine(MoveCarsForward());
-        yield return new WaitForSeconds(0f);
-        answerStartTime = Time.time;
-
         yield return new WaitForSeconds(0f);
         isCheckingCar = false;
     }

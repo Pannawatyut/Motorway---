@@ -106,8 +106,6 @@ public class FacebookManager : MonoBehaviour
         else
         {
             Debug.LogError("Login failed: " + result.Error);
-            loginManager._ErrorMessage.text = result.Error;
-            loginManager._LoadingFailed.SetActive(true);
         }
     }
 
@@ -209,13 +207,9 @@ public class FacebookManager : MonoBehaviour
         if (request.result != UnityWebRequest.Result.Success)
         {
             Debug.LogError("Error: " + request.error);
-            loginManager._ErrorMessage.text = request.error;
             loginManager._LoadingFailed.SetActive(true);
-
-            var loginResponse = JsonUtility.FromJson<LoginManager.LoginResponse>(request.downloadHandler.text);
-            Debug.LogError("Error Type: " + loginResponse.error.message);
-            loginManager._ErrorMessage.text = loginResponse.error.message;
-
+            yield return new WaitForSeconds(2f);
+            loginManager._LoadingFailed.SetActive(false);
         }
         else
         {
@@ -223,7 +217,7 @@ public class FacebookManager : MonoBehaviour
             loginManager._LoadingOK.SetActive(true);
 
             // Process login response (as done previously)
-            var loginResponse = JsonUtility.FromJson<LoginManager.LoginResponse>(request.downloadHandler.text);
+            var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
 
             if (loginResponse.status)
             {
@@ -334,4 +328,53 @@ public class FacebookManager : MonoBehaviour
     */
 
     #endregion
+}
+
+[Serializable]
+public class LoginResponse
+{
+    public bool status;
+    public Data data;
+
+    [Serializable]
+    public class Data
+    {
+        public Account account;
+        public Avatar avatar;
+
+        [Serializable]
+        public class Account
+        {
+            public string uid;
+            public string first_name;
+            public string last_name;
+            public string email;
+            public string gender;
+            public string age;
+            public string education;
+            public string occupation;
+            public string vehicle;
+            public string checkpoint;
+            public string access_token;
+        }
+
+        [Serializable]
+        public class Avatar
+        {
+            public string uid;
+            public string name;
+            public int gender_id;
+            public int skin_id;
+            public int face_id;
+            public int hair_id;
+            public int hair_color_id;
+            public int shirt_id;
+            public int shirt_color_id;
+            public int pant_id;
+            public int pant_color_id;
+            public int shoe_id;
+            public int shoe_color_id;
+            public int accessory_id;
+        }
+    }
 }
