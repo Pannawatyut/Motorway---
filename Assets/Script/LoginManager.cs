@@ -116,7 +116,6 @@ public class LoginManager : MonoBehaviour
     {
         StartCoroutine(Login("pongsakorn.pisa@kmutt.ac.th", "123", "TEST"));
     }
-
     public IEnumerator _GoogleLoginAPI(string _Email, string google_id, string platform)
     {
         Debug.Log(
@@ -157,109 +156,91 @@ public class LoginManager : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            Debug.LogError($"Error during Google login: {request.error}");
-            Debug.LogError("Response Code: " + request.responseCode);
-            _LoadingBar.SetActive(false);
             _LoadingFailed.SetActive(true);
-            yield break;
-        }
-
-        // Debug info for response
-        Debug.Log("request responseCode: " + request.responseCode);
-        Debug.Log("request responseText: " + request.downloadHandler.text);
-
-        // Deserialize the response
-        LoginResponse loginResponse;
-        try
-        {
-            loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
-            Debug.Log("LoginResponse: " + request.downloadHandler.text);
-        }
-        catch (Exception e)
-        {
-            Debug.LogError("Failed to parse login response: " + e.Message);
-            _LoadingBar.SetActive(false);
-            _LoadingFailed.SetActive(true);
-            _ErrorMessage.text = e.Message;
-            yield break;
-        }
-        Debug.Log($"Sending JSON to API: {json}");
-
-        // Handle successful login
-        if (loginResponse.status)
-        {
-            Debug.Log("Login successful!");
-
-            // Update account data
-            _Account.uid = string.IsNullOrEmpty(loginResponse.data.account.uid)
-                ? "-"
-                : loginResponse.data.account.uid;
-            _Account.first_name = string.IsNullOrEmpty(loginResponse.data.account.first_name)
-                ? "-"
-                : loginResponse.data.account.first_name;
-            _Account.last_name = string.IsNullOrEmpty(loginResponse.data.account.last_name)
-                ? "-"
-                : loginResponse.data.account.last_name;
-            _Account.email = loginResponse.data.account.email;
-            _Account.gender = string.IsNullOrEmpty(loginResponse.data.account.gender)
-                ? "-"
-                : loginResponse.data.account.gender;
-            _Account.age = string.IsNullOrEmpty(loginResponse.data.account.age)
-                ? "-"
-                : loginResponse.data.account.age;
-            _Account.education = string.IsNullOrEmpty(loginResponse.data.account.education)
-                ? "-"
-                : loginResponse.data.account.education;
-            _Account.occupation = string.IsNullOrEmpty(loginResponse.data.account.occupation)
-                ? "-"
-                : loginResponse.data.account.occupation;
-            _Account.vehicle = string.IsNullOrEmpty(loginResponse.data.account.vehicle)
-                ? "-"
-                : loginResponse.data.account.vehicle;
-            _Account.checkpoint = string.IsNullOrEmpty(loginResponse.data.account.checkpoint)
-                ? "-"
-                : loginResponse.data.account.checkpoint;
-            _Account.access_token = string.IsNullOrEmpty(loginResponse.data.account.access_token)
-                ? "-"
-                : loginResponse.data.account.access_token;
-
-            // Update avatar data
-            _Avatar.uid = loginResponse.data.avatar.uid;
-            _Avatar.name = loginResponse.data.avatar.name;
-            _Avatar.gender_id = loginResponse.data.avatar.gender_id;
-            _Avatar.skin_id = loginResponse.data.avatar.skin_id;
-            _Avatar.face_id = loginResponse.data.avatar.face_id;
-            _Avatar.hair_id = loginResponse.data.avatar.hair_id;
-            _Avatar.hair_color_id = loginResponse.data.avatar.hair_color_id;
-            _Avatar.shirt_id = loginResponse.data.avatar.shirt_id;
-            _Avatar.shirt_color_id = loginResponse.data.avatar.shirt_color_id;
-            _Avatar.pant_id = loginResponse.data.avatar.pant_id;
-            _Avatar.pant_color_id = loginResponse.data.avatar.pant_color_id;
-            _Avatar.shoe_id = loginResponse.data.avatar.shoe_id;
-            _Avatar.shoe_color_id = loginResponse.data.avatar.shoe_color_id;
-            _Avatar.accessory_id = loginResponse.data.avatar.accessory_id;
-
-            // Navigate based on avatar existence
-            if (!string.IsNullOrEmpty(_Avatar.name))
-            {
-                Debug.Log("Found Avatar");
-                yield return new WaitForSeconds(3f);
-                SceneManager.LoadScene("Game");
-            }
-            else
-            {
-                Debug.Log("No Avatar");
-                yield return new WaitForSeconds(3f);
-                SceneManager.LoadScene("CharacterCustomizer");
-            }
-
-            _LoadingOK.SetActive(true);
+            var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+            Debug.LogError("Error Type: " + loginResponse.error.message);
+            _ErrorMessage.text = loginResponse.error.message;
         }
         else
         {
-            Debug.LogError("Login failed!");
-            _LoadingFailed.SetActive(true);
+            var loginResponse = JsonUtility.FromJson<LoginResponse>(request.downloadHandler.text);
+
+            if (loginResponse.status)
+            {
+                Debug.Log("Login successful!");
+
+                // Update account data
+                _Account.uid = string.IsNullOrEmpty(loginResponse.data.account.uid)
+                    ? "-"
+                    : loginResponse.data.account.uid;
+                _Account.first_name = string.IsNullOrEmpty(loginResponse.data.account.first_name)
+                    ? "-"
+                    : loginResponse.data.account.first_name;
+                _Account.last_name = string.IsNullOrEmpty(loginResponse.data.account.last_name)
+                    ? "-"
+                    : loginResponse.data.account.last_name;
+                _Account.email = loginResponse.data.account.email;
+                _Account.gender = string.IsNullOrEmpty(loginResponse.data.account.gender)
+                    ? "-"
+                    : loginResponse.data.account.gender;
+                _Account.age = string.IsNullOrEmpty(loginResponse.data.account.age)
+                    ? "-"
+                    : loginResponse.data.account.age;
+                _Account.education = string.IsNullOrEmpty(loginResponse.data.account.education)
+                    ? "-"
+                    : loginResponse.data.account.education;
+                _Account.occupation = string.IsNullOrEmpty(loginResponse.data.account.occupation)
+                    ? "-"
+                    : loginResponse.data.account.occupation;
+                _Account.vehicle = string.IsNullOrEmpty(loginResponse.data.account.vehicle)
+                    ? "-"
+                    : loginResponse.data.account.vehicle;
+                _Account.checkpoint = string.IsNullOrEmpty(loginResponse.data.account.checkpoint)
+                    ? "-"
+                    : loginResponse.data.account.checkpoint;
+                _Account.access_token = string.IsNullOrEmpty(loginResponse.data.account.access_token)
+                    ? "-"
+                    : loginResponse.data.account.access_token;
+
+                // Update avatar data
+                _Avatar.uid = loginResponse.data.avatar.uid;
+                _Avatar.name = loginResponse.data.avatar.name;
+                _Avatar.gender_id = loginResponse.data.avatar.gender_id;
+                _Avatar.skin_id = loginResponse.data.avatar.skin_id;
+                _Avatar.face_id = loginResponse.data.avatar.face_id;
+                _Avatar.hair_id = loginResponse.data.avatar.hair_id;
+                _Avatar.hair_color_id = loginResponse.data.avatar.hair_color_id;
+                _Avatar.shirt_id = loginResponse.data.avatar.shirt_id;
+                _Avatar.shirt_color_id = loginResponse.data.avatar.shirt_color_id;
+                _Avatar.pant_id = loginResponse.data.avatar.pant_id;
+                _Avatar.pant_color_id = loginResponse.data.avatar.pant_color_id;
+                _Avatar.shoe_id = loginResponse.data.avatar.shoe_id;
+                _Avatar.shoe_color_id = loginResponse.data.avatar.shoe_color_id;
+                _Avatar.accessory_id = loginResponse.data.avatar.accessory_id;
+
+                // Navigate based on avatar existence
+                if (!string.IsNullOrEmpty(_Avatar.name))
+                {
+                    Debug.Log("Found Avatar");
+                    yield return new WaitForSeconds(3f);
+                    SceneManager.LoadScene("Game");
+                }
+                else
+                {
+                    Debug.Log("No Avatar");
+                    yield return new WaitForSeconds(3f);
+                    SceneManager.LoadScene("CharacterCustomizer");
+                }
+
+                _LoadingOK.SetActive(true);
+            }
+            else
+            {
+                Debug.LogError("Login failed!");
+                _LoadingFailed.SetActive(true);
+            }
         }
+
 
         // Hide loading bar
         _LoadingBar.SetActive(false);

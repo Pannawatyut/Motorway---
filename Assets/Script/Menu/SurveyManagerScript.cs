@@ -51,15 +51,15 @@ public class SurveyManagerScript : MonoBehaviour
 
     public void CheckQUestionaire()
     {
-       if (LoginManager.Instance._Account.is_questionnaire == 0)
-       {
-            _QAPanel.SetActive(true);
-            _OpenPage.SetActive(false);
-       }
-       else
+       if (LoginManager.Instance._Account.is_questionnaire == 1)
        {
             StartCoroutine(DelaybeforeClosePanel());
        }
+       else if (LoginManager.Instance._Account.is_questionnaire == 0)
+       {
+            _QAPanel.SetActive(true);
+            _OpenPage.SetActive(false);
+        }
     }
 
     IEnumerator DelaybeforeClosePanel()
@@ -121,9 +121,11 @@ public class SurveyManagerScript : MonoBehaviour
             _LoadingFailed.SetActive(true);
             yield return new WaitForSeconds(3f);
             _LoadingFailed.SetActive(false);
-
-            
+            ErrorText.text = "คุณได้ตอบแบบสอบถามไปแล้ว";
             //cursor.lockState = CursorLockMode.Locked;
+            _QAPanel.SetActive(false);
+            _LastPage.SetActive(false);
+            _OpenPage.SetActive(true);
             Cursor.visible = false;
             ButtonChangePlayerCanMove.Reset = false;
             Debug.LogError("Error: " + request.error);
