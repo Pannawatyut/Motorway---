@@ -46,7 +46,7 @@ public class CursorManagerScript : MonoBehaviourPun
     public void DisableCursor()
     {
 #if !UNITY_ANDROID || !UNITY_IOS
-        Cursor.lockState = CursorLockMode.Locked;
+        // Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         Debug.Log("Disable Cursor");
 

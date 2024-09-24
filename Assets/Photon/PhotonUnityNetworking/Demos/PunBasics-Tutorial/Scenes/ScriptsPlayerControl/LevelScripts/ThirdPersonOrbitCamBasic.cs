@@ -66,7 +66,7 @@ void Update()
 
     // Ensure cursor management is handled by PlayerInteraction
     // Comment out the default cursor management if handled elsewhere
-    // //cursor.lockState = CursorLockMode.Locked;
+    //cursor.lockState = CursorLockMode.Locked;
     // Cursor.visible = false;
 
     // Get mouse movement to orbit the camera.

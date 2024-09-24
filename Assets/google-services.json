@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "244382866689-edp7bmjqpkd4vhdmcuk8u181bbcoulu6.apps.googleusercontent.com",
+          "client_id": "244382866689-mg532f5koii5ljaivvkjf3lqtpsb69rk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.MetaverseXR.MotorwayVerse",
+            "certificate_hash": "30cbc4219936bd5e6870727cb15d87f5689cb996"
+          }
+        },
+        {
+          "client_id": "244382866689-t6qglfajiijd2a5ukcal9kvloslf16hi.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.MetaverseXR.MotorwayVerse",
