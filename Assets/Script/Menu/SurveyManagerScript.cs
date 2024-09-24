@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -29,11 +29,13 @@ public class SurveyManagerScript : MonoBehaviour
 
     public string _Test;
 
+    public GameObject _OpenPage;
     public GameObject _QAPanel;
-
+    public GameObject _LastPage;
     public GameObject _LoadingBar;
     public GameObject _LoadingFailed;
     public GameObject _LoadingOK;
+    public TextMeshProUGUI ErrorText;
 
     public GameObject _PolicyGameObject;
     public GameObject _QuesitonaireObject;
@@ -47,6 +49,26 @@ public class SurveyManagerScript : MonoBehaviour
     public TextMeshProUGUI _social_media;
     public TextMeshProUGUI _vehicle_type;
 
+    public void CheckQUestionaire()
+    {
+       if (LoginManager.Instance._Account.is_questionnaire == 0)
+       {
+            _QAPanel.SetActive(true);
+            _OpenPage.SetActive(false);
+       }
+       else
+       {
+            StartCoroutine(DelaybeforeClosePanel());
+       }
+    }
+
+    IEnumerator DelaybeforeClosePanel()
+    {
+        _LoadingFailed.SetActive(true);
+        ErrorText.text = "คุณได้ตอบแบบสอบถามไปแล้ว";
+        yield return new WaitForSeconds(2f);
+        _LoadingFailed.SetActive(false);
+    }
     IEnumerator SubmitQuestionaire()
     {
         _LoadingBar.SetActive(true);
@@ -96,10 +118,10 @@ public class SurveyManagerScript : MonoBehaviour
 
         if (request.result != UnityWebRequest.Result.Success)
         {
-            _LoadingOK.SetActive(true);
+            _LoadingFailed.SetActive(true);
             yield return new WaitForSeconds(3f);
-            _LoadingOK.SetActive(false);
-            _QAPanel.SetActive(false);
+            _LoadingFailed.SetActive(false);
+
             
             //cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -115,6 +137,8 @@ public class SurveyManagerScript : MonoBehaviour
             yield return new WaitForSeconds(3f);
             _LoadingOK.SetActive(false);
             _QAPanel.SetActive(false);
+            _LastPage.SetActive(false);
+            _OpenPage.SetActive(true);
             //cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
             ButtonChangePlayerCanMove.Reset = false;
