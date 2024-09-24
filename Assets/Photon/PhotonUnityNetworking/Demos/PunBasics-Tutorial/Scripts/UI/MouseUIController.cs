@@ -10,8 +10,8 @@ public class MouseUIController : MonoBehaviour
     public RectTransform uiRectTransform;  // Use RectTransform for the panel
     public float zoomSpeed = 0.1f; // Speed factor for zooming, lower means slower zooming
 
-    private bool isFollowingMouse = true; // Flag to control whether the UI follows the mouse
-    private bool isDragging = false; // Flag to control dragging state
+    public bool isFollowingMouse = false; // Flag to control whether the UI follows the mouse
+    public bool isDragging = false; // Flag to control dragging state
     private Vector2 dragOffset; // Offset to maintain the relative position of the panel during dragging
     public GameObject isOn; // GameObject to indicate dragging status
 
@@ -172,6 +172,7 @@ public class MouseUIController : MonoBehaviour
     public void ResetToEvery()
     {
         isFollowingMouse = false;
+        isDragging = false;
         if (uiRectTransform != null)
         {
             // Reset position and size to default values
