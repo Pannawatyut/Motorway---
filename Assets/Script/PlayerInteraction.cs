@@ -9,6 +9,7 @@ public class PlayerInteraction : MonoBehaviourPun
     public bool playerInside;
     private GameObject currentNPC;
     public Canvas Dialog;
+    public MouseUIController _MapInspector;
     private int number = 0;
     public BasicBehaviour _MovementScript;
     public MoveBehaviour _MoveBehaviorScript;
@@ -63,6 +64,33 @@ public class PlayerInteraction : MonoBehaviourPun
                 }
             }
         }
+
+        if (other.CompareTag("UIPopUp"))
+        {
+            if (photonView.IsMine)
+            {
+                number++;
+                playerInside = true;
+                if (photonView.IsMine && playerInside)
+                {
+                    canvasPressF.gameObject.SetActive(true);
+                }
+
+                currentNPC = other.gameObject;
+                ButtonChangePlayerCanMove.Reset = false;
+                Dialog = currentNPC.GetComponentInChildren<Canvas>(true);
+                _MapInspector = currentNPC.GetComponentInChildren<MouseUIController>(true);
+                // Fetch or assign the sound name based on the NPC
+                string npcName = currentNPC.name; // Or any other unique identifier
+                SoundManager.SoundName npcSound = GetSoundNameForNPC(npcName);
+
+                // Update the SoundManager's current NPC sound
+                if (_soundManager != null)
+                {
+                    _soundManager.SetCurrentNPCSound(npcSound);
+                }
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
@@ -80,6 +108,7 @@ public class PlayerInteraction : MonoBehaviourPun
                 canvasPressF.gameObject.SetActive(false);
                 currentNPC = null;
                 Dialog = null; // Reset 'canvas' when exiting trigger
+                _MapInspector = null;
                 //PressF = false;
                 ResetCameraSettings();
             }
@@ -103,7 +132,7 @@ public class PlayerInteraction : MonoBehaviourPun
 
             if (playerInside)
             {
-                if (Input.GetKeyDown(KeyCode.F) && ButtonChangePlayerCanMove.Reset == false)
+                if (Input.GetKeyDown(KeyCode.F) && ButtonChangePlayerCanMove.Reset == false && _MapInspector == null )
                 {
                     //ปิด UI Setting
                     SettingUI.turnOff = true;
@@ -132,6 +161,35 @@ public class PlayerInteraction : MonoBehaviourPun
                     ButtonChangePlayerCanMove.Reset = true;
                 }
             }
+            else if (Input.GetKeyDown(KeyCode.F) && ButtonChangePlayerCanMove.Reset == false && _MapInspector != null)
+            {
+                //ปิด UI Setting
+                SettingUI.turnOff = true;
+
+                //โชว์ Dialog
+                if (Dialog != null)
+                {
+                    Dialog.gameObject.SetActive(true);
+                }
+
+                //Lock cam
+                SwitchCursor();
+                _CursorManager.EnableCursor();
+                //PressF = true;
+                cam.horizontalAimingSpeed = 0;
+                cam.verticalAimingSpeed = 0;
+                Debug.Log("F key pressed while player is inside trigger zone!");
+
+                canvasPressF.gameObject.SetActive(false);
+
+                Dialog.gameObject.SetActive(true);
+                _MapInspector.isFollowingMouse = true;
+
+                // Enable mouse cursor when F is pressed
+                EnableCursor();
+
+                ButtonChangePlayerCanMove.Reset = true;
+            }
             else
             {
                 SettingUI.turnOff = false;
@@ -144,32 +202,15 @@ public class PlayerInteraction : MonoBehaviourPun
                 if (isCursorVisible)
                 {
                     _CursorManager.DisableCursor();
-
-                    /*if (Dialog != null)
-                    {
-                        Dialog.gameObject.SetActive(false);
-                    }*/
-                    //DisableCursor();
                 }
                 else
                 {
                     _CursorManager.EnableCursor();
-                    //EnableCursor();
 
                 }
                 isCursorVisible = !isCursorVisible; // Toggle cursor visibility state
             }
 
-            //if (isCursorVisible == false)
-            //{
-            //    _CursorManager.DisableCursor();
-            //    DisableCursor();
-            //}
-            //else if (isCursorVisible == true)
-            //{
-            //    _CursorManager.EnableCursor();
-            //    EnableCursor();         
-            //}
         }
 
     }

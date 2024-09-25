@@ -9,8 +9,13 @@ public class UIpopup : MonoBehaviourPun
     public Canvas canvasPressF;
     private bool playerInside2;
     private GameObject currentNPC;
-    private Canvas map;
+    public Canvas map;
     private MouseUIController MouseUIController;
+    public CursorManagerScript _CursorManager;
+    private void Start()
+    {
+        _CursorManager = CursorManagerScript.Instance;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("UIPopUp"))
@@ -38,6 +43,7 @@ public class UIpopup : MonoBehaviourPun
             if (photonView.IsMine)
             {
                 playerInside2 = false;
+                map.GetComponent<MouseUIController>().isFollowingMouse = false;
                 canvasPressF.gameObject.SetActive(false);
 
                 // เคลียร์ข้อมูลเมื่อผู้เล่นออกจากพื้นที่
@@ -59,9 +65,14 @@ public class UIpopup : MonoBehaviourPun
             Debug.Log("F key pressed while player is inside trigger zone!");
             canvasPressF.gameObject.SetActive(false);
 
-
+            map.GetComponent<MouseUIController>().isFollowingMouse = true;
             map.gameObject.SetActive(true);
-
+            _CursorManager.EnableCursor();
+        }
+        if (map.isActiveAndEnabled == true)
+        {
+            map.GetComponent<MouseUIController>().isFollowingMouse = true;
+            _CursorManager.EnableCursor();
         }
     }
 
