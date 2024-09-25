@@ -65,7 +65,7 @@ public class PlayerInteraction : MonoBehaviourPun
             }
         }
 
-        if (other.CompareTag("UIPopUp"))
+        else if (other.CompareTag("UIPopUp"))
         {
             if (photonView.IsMine)
             {
@@ -96,6 +96,24 @@ public class PlayerInteraction : MonoBehaviourPun
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("NPC"))
+        {
+            if (photonView.IsMine)
+            {
+                if (Dialog != null)
+                {
+                    Dialog.gameObject.SetActive(false);
+                }
+
+                playerInside = false;
+                canvasPressF.gameObject.SetActive(false);
+                currentNPC = null;
+                Dialog = null; // Reset 'canvas' when exiting trigger
+                _MapInspector = null;
+                //PressF = false;
+                ResetCameraSettings();
+            }
+        }
+        else if (other.CompareTag("UIPopUp"))
         {
             if (photonView.IsMine)
             {

@@ -9,7 +9,7 @@ public class UIpopup : MonoBehaviourPun
     public Canvas canvasPressF;
     private bool playerInside2;
     private GameObject currentNPC;
-    public Canvas map;
+    private Canvas map;
     private MouseUIController MouseUIController;
     public CursorManagerScript _CursorManager;
     private void Start()
@@ -67,11 +67,6 @@ public class UIpopup : MonoBehaviourPun
 
             map.GetComponent<MouseUIController>().isFollowingMouse = true;
             map.gameObject.SetActive(true);
-            _CursorManager.EnableCursor();
-        }
-        if (map.isActiveAndEnabled == true)
-        {
-            map.GetComponent<MouseUIController>().isFollowingMouse = true;
             _CursorManager.EnableCursor();
         }
     }
