@@ -24,14 +24,17 @@ public class CursorManagerScript : MonoBehaviourPun
 
     private void Update()
     {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
         cam = FindAnyObjectByType<ThirdPersonOrbitCamBasic>();
     }
 
     public void EnableCursor()
     {
 #if !UNITY_ANDROID || !UNITY_IOS
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
+        //Cursor.lockState = CursorLockMode.None;
+        //Cursor.visible = true;
         Debug.Log("Enable Cursor");
         Open.SetActive(true);
         Close.SetActive(false);
@@ -40,6 +43,7 @@ public class CursorManagerScript : MonoBehaviourPun
             cam.horizontalAimingSpeed = 0;
             cam.verticalAimingSpeed = 0;
         }
+        //ButtonChangePlayerCanMove.Reset = true;
         //_MovementScript.enabled = false;
         //_MoveBehaviorScript.enabled = false;
 #endif
@@ -49,8 +53,8 @@ public class CursorManagerScript : MonoBehaviourPun
     public void DisableCursor()
     {
 #if !UNITY_ANDROID || !UNITY_IOS
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.visible = false;
         Debug.Log("Disable Cursor");
         Open.SetActive(false);
         Close.SetActive(true);
@@ -60,7 +64,7 @@ public class CursorManagerScript : MonoBehaviourPun
             cam.verticalAimingSpeed = 6;
         }
         
-        ButtonChangePlayerCanMove.Reset = false;
+       // ButtonChangePlayerCanMove.Reset = false;
         //_MovementScript.enabled = true;
         //_MoveBehaviorScript.enabled = true;
 #endif

@@ -40,16 +40,8 @@ public class ControllerMobile : MonoBehaviourPun
         if (photonView.IsMine && _joystick != null)
         {
 
-            if (ButtonChangePlayerCanMove.Reset)
-            {
-                _moveSpeed=0;
-                _rotationSpeed=0;
-            }
-            else
-            {
-                _moveSpeed=5f;
-                _rotationSpeed=5f;
-            }
+            _moveSpeed = 5f;
+            _rotationSpeed = 5f;
 
             Vector3 cameraForward = _cameraTransform.forward;
             Vector3 cameraRight = _cameraTransform.right;

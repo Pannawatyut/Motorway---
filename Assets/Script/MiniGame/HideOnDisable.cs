@@ -6,8 +6,8 @@ public class HideOnDisable : MonoBehaviour
 {
     public void OnDisable()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        ButtonChangePlayerCanMove.Reset = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //ButtonChangePlayerCanMove.Reset = false;
     }
 }

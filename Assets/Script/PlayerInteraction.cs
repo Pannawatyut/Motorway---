@@ -49,7 +49,7 @@ public class PlayerInteraction : MonoBehaviourPun
                 }
 
                 currentNPC = other.gameObject;
-                ButtonChangePlayerCanMove.Reset = false;
+                //ButtonChangePlayerCanMove.Reset = false;
                 Dialog = currentNPC.GetComponentInChildren<Canvas>(true);
 
                 // Fetch or assign the sound name based on the NPC
@@ -103,7 +103,7 @@ public class PlayerInteraction : MonoBehaviourPun
 
             if (playerInside)
             {
-                if (Input.GetKeyDown(KeyCode.F) && ButtonChangePlayerCanMove.Reset == false)
+                if (Input.GetKeyDown(KeyCode.F))
                 {
                     //ปิด UI Setting
                     SettingUI.turnOff = true;
@@ -129,7 +129,7 @@ public class PlayerInteraction : MonoBehaviourPun
                     // Enable mouse cursor when F is pressed
                     EnableCursor();
 
-                    ButtonChangePlayerCanMove.Reset = true;
+                    //ButtonChangePlayerCanMove.Reset = true;
                 }
             }
             else
@@ -267,7 +267,7 @@ public class PlayerInteraction : MonoBehaviourPun
             //ปิด UI Setting
             SettingUI.turnOff = true;
 
-            ButtonChangePlayerCanMove.Reset = true;
+            //ButtonChangePlayerCanMove.Reset = true;
 
             //โชว์ Dialog
             if (Dialog != null)
@@ -283,24 +283,9 @@ public class PlayerInteraction : MonoBehaviourPun
 
             canvasPressF.gameObject.SetActive(false);
 
-            // Play NPC talk sound effect using SoundManager
-            if (_soundManager != null)
+            if (Dialog != null)
             {
-                _soundManager.PlaySoundEffect(_soundManager.GetCurrentNPCSound());
-                StartCoroutine(WaitForSoundToFinish());
-
-                if (Dialog != null)
-                {
-                    Dialog.gameObject.SetActive(true);
-                }
-                else
-                {
-                    Debug.LogWarning("No valid 'canvas' GameObject found for NPC.");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("SoundManager instance is not assigned.");
+                Dialog.gameObject.SetActive(true);
             }
 
             // Enable mouse cursor when F is pressed

@@ -127,7 +127,7 @@ public class SurveyManagerScript : MonoBehaviour
             _LastPage.SetActive(false);
             _OpenPage.SetActive(true);
             Cursor.visible = false;
-            ButtonChangePlayerCanMove.Reset = false;
+            //ButtonChangePlayerCanMove.Reset = false;
             Debug.LogError("Error: " + request.error);
             Debug.LogError("Status Code: " + request.responseCode);
             Debug.LogError("URL: " + request.url);
@@ -143,7 +143,7 @@ public class SurveyManagerScript : MonoBehaviour
             _OpenPage.SetActive(true);
             //cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
-            ButtonChangePlayerCanMove.Reset = false;
+            //ButtonChangePlayerCanMove.Reset = false;
 
             LoginManager.Instance._Account.is_questionnaire = 1;
             Debug.Log("SubmitQuestionaire Response: " + request.downloadHandler.text);

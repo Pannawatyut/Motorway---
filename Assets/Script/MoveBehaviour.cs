@@ -49,18 +49,7 @@ public class MoveBehaviour : GenericBehaviour
 	{
 		MovementManagement(behaviourManager.GetH, behaviourManager.GetV);
 		// Call the basic movement manager.
-		if (!ButtonChangePlayerCanMove.Reset)
-		{ 
-			walkSpeed = 0.59f;                 // Default walk speed.
-			runSpeed = 0.6f;                   // Default run speed.
-			sprintSpeed = 0.8f;
-		}
-		else
-		{
-			walkSpeed = 0;                 // Default walk speed.
-			runSpeed = 0;                   // Default run speed.
-			sprintSpeed = 0;
-		}
+		
 		
 	}
 

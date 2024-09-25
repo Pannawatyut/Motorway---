@@ -25,14 +25,14 @@ public class ChangCanvas : MonoBehaviour
 #if UNITY_ANDROID || UNITY_IOS
     void FixedUpdate()
     {
-        if (ButtonChangePlayerCanMove.Reset)
+        /*if (ButtonChangePlayerCanMove.Reset)
         {
             ButtonPressF[1].SetActive(false);
         }
         else
         {
             ButtonPressF[1].SetActive(true);
-        }
+        }*/
     }
 #endif
 }
