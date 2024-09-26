@@ -81,6 +81,8 @@ public class UIpopup : MonoBehaviourPun
             if (map != null)
             {
                 map.gameObject.SetActive(true);
+                MouseUIController = map.GetComponentInChildren<MouseUIController>();
+                MouseUIController.ToggleMouseFollow();
             }
         }
     }
